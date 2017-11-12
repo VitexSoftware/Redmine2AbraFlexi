@@ -1,0 +1,26 @@
+{
+    "name": "vitexsoftware/redmine-to-flexibee",
+    "description": "Ve FlexiBee vytvoří fakturu z Hodn odpracovaných ve FlexiBee",
+    "authors": [
+        {
+            "name": "Vitex",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Redmine2FlexiBee\\": "src/Redmine2FlexiBee/",
+            "Redmine2FlexiBee\\ui\\": "src/Redmine2FlexiBee/ui/",
+            "Test\\Redmine2FlexiBee\\": "testing/src/Redmine2FlexiBee/"
+        }
+    },
+
+    "require": {
+        "spoje.net/flexipeehp": "dev-master",
+        "vitexsoftware/flexipeehp-bricks": "dev-master"
+    },
+    "require-dev": {
+        "vitexsoftware/ease-bricks": "dev-master"
+    }
+}

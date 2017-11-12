@@ -34,11 +34,11 @@ Potřebujeme Redmine s povoleným api a [config.json](config.json) s patřičně
 Použití
 -------
 
-Na stránce [redmineprojects.php](redmineprojects.php) se zvolí ze kterých projektů se budou exportovat odpracované časy
+Na stránce [redmineprojects.php](src/redmineprojects.php) se zvolí ze kterých projektů se budou exportovat odpracované časy
 
 ![Výběr projektů](https://github.com/VitexSoftware/Redmine2FlexiBee/raw/master/vyber-projektu.png "Volba projektů")
 
-Po odeslání formuláře se na další stránce zobrazí vygenerovaná faktura.
+Po odeslání formuláře se na další [stránce](src/redminetimeentries.php) zobrazí vygenerovaná faktura.
 
 ![Vygenerovaná faktura](https://github.com/VitexSoftware/Redmine2FlexiBee/raw/master/hotovo.png "Výsledná faktura")
 

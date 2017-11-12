@@ -1,4 +1,7 @@
 <?php
+/**
+ * Vyrobí Fakturu z CSV exportu Redmine Tiesheet Pluginu
+ */
 
 namespace Redmine2FlexiBee;
 

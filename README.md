@@ -35,13 +35,24 @@ Použití
 -------
 
 Na stránce [redmineprojects.php](redmineprojects.php) se zvolí ze kterých projektů se budou exportovat odpracované časy
+
+![Výběr projektů](https://github.com/VitexSoftware/Redmine2FlexiBee/raw/master/vyber-projektu.png "Volba projektů")
+
 Po odeslání formuláře se na další stránce zobrazí vygenerovaná faktura.
+
+![Vygenerovaná faktura](https://github.com/VitexSoftware/Redmine2FlexiBee/raw/master/hotovo.png "Výsledná faktura")
 
 Instalace
 ---------
 
 Složka **src** je kořen webu který má být dostupný webserveru. 
 ve složce projektu je třeba spustit **composer install** který doinstaluje potřebné závislosti.
+
+
+Požadavky
+---------
+
+Kód je primárně psaný pro Debian, pro provoz na jiném systému, např windows je třeba doplnit požadované css a skripty.
 
 [Statistiky práce na projektu](https://wakatime.com/@5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/projects/zgctsnwibv)
 

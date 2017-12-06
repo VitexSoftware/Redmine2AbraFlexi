@@ -85,10 +85,10 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $responseDecoded;
     }
 
-    public function getTimeEntries($projectID)
+    public function getTimeEntries($projectID,$start,$end)
     {
         $result   = null;
-        $response = $this->performRequest('time_entries.json?project_id='.$projectID,
+        $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='. urlencode('><'.$start.'|'.$end),
             'GET');
         if ($this->lastResponseCode == 200) {
             $response = $this->addIssueNames(self::reindexArrayBy($response['time_entries'],
@@ -108,7 +108,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
             $result[$timeEntryID] = [
                 'project' => $timeEntry['project']['name'],
                 'hours' => $timeEntry['hours'],
-                'issue' => $timeEntry['issue']['id'],
+                'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id'] : 0,
                 'comments' => $timeEntry['comments']
             ];
         }

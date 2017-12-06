@@ -16,13 +16,6 @@ if (empty($projects)) {
     $projectsForm = new \Ease\TWB\Label('warning', _('No projects found'));
 } else {
     $projectsForm = new \Ease\TWB\Form('Projects', 'redminetimeentries.php');
-
-    $projectsForm->addInput(new \Ease\Html\InputDateTag('startdate',
-            new \DateTime("first day of last month")), _('From'));
-    $projectsForm->addInput(new \Ease\Html\InputDateTag('enddate',
-            new \DateTime("last day of last month")), _('To'));
-
-
     foreach ($projects as $projectID => $projectData) {
         $projectRow = new \Ease\TWB\Row();
         $projectRow->addColumn(2, $projectData['name']);

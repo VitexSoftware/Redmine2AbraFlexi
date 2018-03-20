@@ -97,6 +97,10 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
         return $this->lastResponseCode == 201;
     }
 
+    /**
+     * 
+     * @param type $timeEntriesRaw
+     */
     public function takeItemsFromArray($timeEntriesRaw)
     {
         $itemsData = [];
@@ -113,8 +117,8 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
                 } else {
                     $itemsData[$projectName][$nazev] = [
                         'typPolozkyK' => 'typPolozky.katalog',
-                        'poznam' => $timeEntry['comments'],
-                        'nazev' => $nazev,
+                        'poznam' => $nazev,
+                        'nazev' =>  $timeEntry['comments'],
                         'mnozMj' => floatval($timeEntry['hours']),
                         'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_CENIK'))];
                 }

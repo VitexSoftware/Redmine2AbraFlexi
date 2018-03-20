@@ -65,14 +65,29 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $evidenceUrl;
     }
 
-    public function getProjects()
+    public function getProjects($params = null)
     {
         $result   = null;
-        $response = $this->performRequest('projects.json', 'GET');
+        $response = $this->performRequest($this->addUrlParams('projects.json',
+                $params), 'GET');
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['projects'], 'id');
         }
         return $response;
+    }
+
+    /**
+     * Obtain Project Info
+     * 
+     * @param int    $projectID
+     * @param string $params     
+     * 
+     * @return array
+     */
+    public function getProjectInfo($projectID, $params = null)
+    {
+        return $this->performRequest($this->addUrlParams('projects/'.$projectID.'.json',
+                    $params), 'GET')['project'];
     }
 
     public function rawResponseToArray($responseRaw, $format)
@@ -85,10 +100,10 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $responseDecoded;
     }
 
-    public function getTimeEntries($projectID,$start,$end)
+    public function getTimeEntries($projectID, $start, $end)
     {
         $result   = null;
-        $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='. urlencode('><'.$start.'|'.$end),
+        $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end),
             'GET');
         if ($this->lastResponseCode == 200) {
             $response = $this->addIssueNames(self::reindexArrayBy($response['time_entries'],
@@ -108,7 +123,8 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
             $result[$timeEntryID] = [
                 'project' => $timeEntry['project']['name'],
                 'hours' => $timeEntry['hours'],
-                'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id'] : 0,
+                'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id']
+                    : 0,
                 'comments' => $timeEntry['comments']
             ];
         }

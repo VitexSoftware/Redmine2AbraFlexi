@@ -1,7 +1,7 @@
 Redmine to FlexiBee importer
 ============================
 
-![FlexiPeeHP Logo](https://github.com/VitexSoftware/Redmine2FlexiBee/raw/master/project-logo.png "Project Logo")
+![Logo](https://github.com/VitexSoftware/Redmine2FlexiBee/raw/master/project-logo.png "Project Logo")
 
 Ze zvolených projektů v Redmine vygeneruje fakturu ve FlexiBee.
 

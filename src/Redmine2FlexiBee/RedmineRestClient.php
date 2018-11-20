@@ -15,6 +15,11 @@ namespace Redmine2FlexiBee;
 class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
 {
 
+    /**
+     * 
+     * @param type $init
+     * @param type $options
+     */
     public function __construct($init = null, $options = array())
     {
         parent::__construct($init, $options);
@@ -40,6 +45,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * Set evidence for communication
      *
      * @param string $evidence evidence pathName to use
+     * 
      * @return boolean evidence switching status
      */
     public function setEvidence($evidence)
@@ -68,7 +74,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
     public function getProjects($params = null)
     {
         $result   = null;
-        $response = $this->performRequest($this->addUrlParams('projects.json',
+        $response = $this->performRequest(\Ease\Shared::addUrlParams('projects.json',
                 $params), 'GET');
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['projects'], 'id');
@@ -86,20 +92,42 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      */
     public function getProjectInfo($projectID, $params = null)
     {
-        return $this->performRequest($this->addUrlParams('projects/'.$projectID.'.json',
+        return $this->performRequest(\Ease\Shared::addUrlParams('projects/'.$projectID.'.json',
                     $params), 'GET')['project'];
     }
 
+    /**
+     * 
+     * @param type $responseRaw
+     * @param type $format
+     * 
+     * @return type
+     */
     public function rawResponseToArray($responseRaw, $format)
     {
         return parent::rawResponseToArray($responseRaw, 'json');
     }
 
+    /**
+     * 
+     * @param type $responseDecoded
+     * @param type $responseCode
+     * 
+     * @return type
+     */
     public function parseResponse($responseDecoded, $responseCode)
     {
         return $responseDecoded;
     }
 
+    /**
+     * 
+     * @param type $projectID
+     * @param type $start
+     * @param type $end
+     * 
+     * @return type
+     */
     public function getTimeEntries($projectID, $start, $end)
     {
         $result   = null;
@@ -112,6 +140,12 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $response;
     }
 
+    /**
+     * 
+     * @param type $timeEntries
+     * 
+     * @return type
+     */
     public function addIssueNames($timeEntries)
     {
         $result = [];
@@ -145,6 +179,12 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $result;
     }
 
+    /**
+     * 
+     * @param type $issuesID
+     * 
+     * @return type
+     */
     public function getNameForIssues($issuesID)
     {
         $result   = null;

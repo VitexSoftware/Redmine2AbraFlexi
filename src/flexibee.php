@@ -17,8 +17,6 @@ $invoicer->takeItemsFromCSV(new CSVReader('../timesheet.csv'));
 
 $created = $invoicer->refresh();
 
-
-
 $invoiceTabs = new \Ease\TWB\Tabs('Invoices');
 
 $invoiceTabs->addTab(_('Html'),
@@ -27,7 +25,7 @@ $invoiceTabs->addTab(_('PDF'),
     new \FlexiPeeHP\Bricks\EmbedResponsivePDF($invoicer));
 
 $oPage->addItem(new \Ease\TWB\Panel('Doklad '.$invoicer->getDataValue('kod').' '.($created
-                ? 'byl' : 'nebyl').' vystaven', $created ? 'success' : 'danger',
-        $invoiceTabs, $oPage->getStatusMessagesAsHtml()));
+            ? 'byl' : 'nebyl').' vystaven', $created ? 'success' : 'danger',
+    $invoiceTabs, $oPage->getStatusMessagesAsHtml()));
 
 $oPage->draw();

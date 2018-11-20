@@ -3,9 +3,18 @@
 namespace Redmine2FlexiBee;
 
 require_once '../vendor/autoload.php';
+session_start();
+
+define('REDMINE_URL', $_SESSION['REDMINE_URL']);
+define('REDMINE_USERNAME', $_SESSION['REDMINE_USERNAME']);
 
 $oPage = new ui\WebPage('Redmine2FlexiBee: Obtain Time Entries');
 
+
+$typFak = $oPage->getRequestValue('typ-faktury-vydane');
+if (empty($typFak)) {
+    $oPage->redirect('redmineprojects.php');
+}
 
 $projects = $oPage->getRequestValue('project');
 $start    = $oPage->getRequestValue('startdate');
@@ -15,9 +24,9 @@ if (empty($projects)) {
     $oPage->addStatusMessage(_('Please Select some projects to import'));
     $oPage->redirect('redmineprojects.php');
 } else {
-    \Ease\Shared::instanced()->loadConfig('../config.json');
+    \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
-    $invoicer = new FakturaVydana();
+    $invoicer = new FakturaVydana(['typDokl' => 'code:'.$typFak]);
     $redminer = new RedmineRestClient();
     if (count($projects) == 1) {
         $projectInfo = $redminer->getProjectInfo(key($projects),
@@ -61,9 +70,9 @@ if (empty($projects)) {
         new \FlexiPeeHP\ui\EmbedResponsivePDF($invoicer));
 
     $oPage->addItem(new \Ease\TWB\Container(new \Ease\TWB\Panel('Doklad '.new \Ease\Html\ATag($invoicer->getApiUrl(),
-                    $invoicer->getDataValue('kod')).' '.($created ? 'byl' : 'nebyl').' vystaven',
-                $created ? 'success' : 'danger', $invoiceTabs,
-                $oPage->getStatusMessagesAsHtml())));
+        $invoicer->getDataValue('kod')).' '.($created ? 'byl' : 'nebyl').' vystaven',
+        $created ? 'success' : 'danger', $invoiceTabs,
+        $oPage->getStatusMessagesAsHtml())));
     $oPage->draw();
 }
 

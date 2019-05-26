@@ -71,6 +71,13 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $evidenceUrl;
     }
 
+    /**
+     * Obtaing Redmine Projects listing
+     * 
+     * @param array $params conditions
+     * 
+     * @return array
+     */
     public function getProjects($params = null)
     {
         $result   = null;
@@ -78,6 +85,24 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
                 $params), 'GET');
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['projects'], 'id');
+        }
+        return $response;
+    }
+
+    /**
+     * Obtain Redmine  Users List
+     * 
+     * @param array $params conditions
+     * 
+     * @return array
+     */
+    public function getUsers($params = null)
+    {
+        $result   = null;
+        $response = $this->performRequest(\Ease\Shared::addUrlParams('users.json',
+                $params), 'GET');
+        if ($this->lastResponseCode == 200) {
+            $response = self::reindexArrayBy($response['users'], 'id');
         }
         return $response;
     }
@@ -128,10 +153,10 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return type
      */
-    public function getTimeEntries($projectID, $start, $end)
+    public function getTimeEntries($projectID, $start, $end, $userId = null)
     {
         $result   = null;
-        $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end),
+        $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end).'&user_id='.$userId,
             'GET');
         if ($this->lastResponseCode == 200) {
             $response = $this->addIssueNames(self::reindexArrayBy($response['time_entries'],
@@ -159,7 +184,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
                 'hours' => $timeEntry['hours'],
                 'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id']
                     : 0,
-                'comments' => $timeEntry['comments']
+                'comments' => array_key_exists('comments',$timeEntry) ? $timeEntry['comments'] : ''
             ];
         }
         if (count($issues)) {

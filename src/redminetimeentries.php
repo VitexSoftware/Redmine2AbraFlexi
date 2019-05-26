@@ -5,11 +5,8 @@ namespace Redmine2FlexiBee;
 require_once '../vendor/autoload.php';
 session_start();
 
-define('REDMINE_URL', $_SESSION['REDMINE_URL']);
-define('REDMINE_USERNAME', $_SESSION['REDMINE_USERNAME']);
-
-$oPage = new ui\WebPage('Redmine2FlexiBee: Obtain Time Entries');
-
+$oPage  = new ui\WebPage('Redmine2FlexiBee: Obtain Time Entries');
+$userID = $oPage->getRequestValue('userid','int');
 
 $typFak = $oPage->getRequestValue('typ-faktury-vydane');
 if (empty($typFak)) {
@@ -26,7 +23,7 @@ if (empty($projects)) {
 } else {
     \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
-    $invoicer = new FakturaVydana(['typDokl' => 'code:'.$typFak]);
+    $invoicer = new FakturaVydana(['typDokl' => \FlexiPeeHP\FlexiBeeRO::code($typFak)]);
     $redminer = new RedmineRestClient();
     if (count($projects) == 1) {
         $projectInfo = $redminer->getProjectInfo(key($projects),
@@ -41,7 +38,7 @@ if (empty($projects)) {
         }
     }
 
-    $pricelister = new \FlexiPeeHP\Cenik('code:'.constant('FLEXIBEE_CENIK'));
+    $pricelister = new \FlexiPeeHP\Cenik(\FlexiPeeHP\FlexiBeeRO::code(constant('FLEXIBEE_CENIK')));
     if ($pricelister->lastResponseCode == 404) {
         $pricelister->insertToFlexiBee(['code' => constant('FLEXIBEE_CENIK'), 'nazev' => constant('FLEXIBEE_CENIK'),
             'typZasobyK' => 'typZasoby.sluzba', 'skladove' => false, 'cenaZakl' => 1,
@@ -52,7 +49,7 @@ if (empty($projects)) {
 //        if (array_key_exists('time_entry_activities', $projectInfo)) {
 //            $items = $projectInfo['time_entry_activities'];
 //        } else {
-        $items = $redminer->getTimeEntries($projectID, $start, $end);
+        $items  = $redminer->getTimeEntries($projectID, $start, $end,$userID);
 //        }
 
         if (!empty($items)) {

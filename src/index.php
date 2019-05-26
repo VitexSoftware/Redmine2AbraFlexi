@@ -13,24 +13,31 @@ $oPage = new ui\WebPage('Redmine2FlexiBee');
 $rdmurl = $oPage->getRequestValue('rdmurl');
 $apikey = $oPage->getRequestValue('apikey');
 
-if ($rdmurl) {
-    $_SESSION['REDMINE_URL'] = $rdmurl;
+if (defined('REDMINE_URL')) {
+    $_SESSION['REDMINE_URL'] = constant('REDMINE_URL');
 } else {
-    if (!isset($_SESSION['REDMINE_URL'])) {
-        $_SESSION['REDMINE_URL'] = '';
+    if ($rdmurl) {
+        $_SESSION['REDMINE_URL'] = $rdmurl;
+    } else {
+        if (!isset($_SESSION['REDMINE_URL'])) {
+            $_SESSION['REDMINE_URL'] = '';
+        }
     }
+    define('REDMINE_URL', $_SESSION['REDMINE_URL']);
 }
-define('REDMINE_URL', $_SESSION['REDMINE_URL']);
 
-if ($apikey) {
-    $_SESSION['REDMINE_USERNAME'] = $apikey;
+if (defined('REDMINE_USERNAME')) {
+    $_SESSION['REDMINE_USERNAME'] = constant('REDMINE_USERNAME');
 } else {
-    if (!isset($_SESSION['REDMINE_USERNAME'])) {
-        $_SESSION['REDMINE_USERNAME'] = '';
+    if ($apikey) {
+        $_SESSION['REDMINE_USERNAME'] = $apikey;
+    } else {
+        if (!isset($_SESSION['REDMINE_USERNAME'])) {
+            $_SESSION['REDMINE_USERNAME'] = '';
+        }
     }
+    define('REDMINE_USERNAME', $_SESSION['REDMINE_USERNAME']);
 }
-define('REDMINE_USERNAME', $_SESSION['REDMINE_USERNAME']);
-
 
 $setupForm = new \Ease\TWB\Form('setupForm', 'index.php');
 
@@ -45,6 +52,8 @@ $setupForm->addItem(new \Ease\TWB\SubmitButton(_('Check'), 'success'));
 
 $setupForm->addItem(new \Ease\TWB\LinkButton('redmineprojects.php',
     _('Choose project')));
+//$setupForm->addItem(new \Ease\TWB\LinkButton('redmineusers.php',
+//    _('Choose workers')));
 
 
 $oPage->addItem(new \Ease\TWB\Container($setupForm));

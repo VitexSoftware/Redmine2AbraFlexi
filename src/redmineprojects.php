@@ -10,9 +10,6 @@ session_start();
 
 $oPage = new ui\WebPage('Redmine2FlexiBee: Choose redmine projects');
 
-define('REDMINE_URL', $_SESSION['REDMINE_URL']);
-define('REDMINE_USERNAME', $_SESSION['REDMINE_USERNAME']);
-
 $oPage->addCSS('.row:hover{
     color:red ;
     background-color: yellow;
@@ -34,6 +31,12 @@ if (empty($projects)) {
     $projectsForm->addInput(new \Ease\Html\InputDateTag('enddate',
         new \DateTime("last day of last month")), _('To'));
 
+    $projectsForm->addInput(new \Ease\Html\InputNumberTag('userid',null), _('Redimine user Id'));
+
+    $projectsForm->addItem(
+        ['<a href="#" class="btn btn-inverse" onClick="$(\'.projectswitch\').bootstrapSwitch(\'toggleState\');">'.str_repeat(new \Ease\TWB\GlyphIcon('refresh'),
+                10).'</a> ']);
+
     foreach ($projects as $projectID => $projectData) {
         if ($projectData['status'] != 1) {
             $redminer->addStatusMessage(sprintf(_('Disabled project %s skipped'),
@@ -41,7 +44,13 @@ if (empty($projects)) {
             continue;
         }
 
-        $fbClient = $projectData['custom_columns'];
+        if (array_key_exists('custom_columns', $projectData)) {
+            $fbClient = $projectData['custom_columns'];
+        } else {
+            $fbClient = null;
+            $redminer->addStatusMessage(sprintf(_('there is no custom column "FIRMA" in project %s'),
+                    $projectData['name']), 'warning');
+        }
 
         $projectInfo = $redminer->getProjectInfo($projectID);
         $projectRow  = new \Ease\TWB\Row();
@@ -49,13 +58,22 @@ if (empty($projects)) {
             new \Ease\Html\ATag(constant('REDMINE_URL').'projects/'.$projectData['identifier'],
             $projectData['name']));
         $projectRow->addColumn(2,
-            new \Ease\ui\TWBSwitch('project['.$projectID.']'));
+            new \Ease\ui\TWBSwitch('project['.$projectID.']', null, 'on',
+            ['class' => 'projectswitch']));
         $projectRow->addColumn(4, $projectData['description']);
 
         if (empty($fbClient)) {
-            $projectRow->addColumn(4,
+            $companyColumn = $projectRow->addColumn(4,
                 new \Ease\TWB\LinkButton('', _('no FlexiBee company set'),
                 'warning'));
+
+            $companyColumn->addItem(new ui\SearchBox('firma['.$projectID.']',
+                $fbClient,
+                ['id' => 'project'.$projectID,
+                'data-remote-list' => 'firmy.php',
+                'data-list-highlight' => 'true',
+                'data-list-value-completion' => 'true'
+            ]));
         } else {
             $projectRow->addColumn(4,
                 new \Ease\TWB\LinkButton($addreser->getApiURL(),
@@ -66,9 +84,7 @@ if (empty($projects)) {
     }
 
     $projectsForm->addInput(new \FlexiPeeHP\ui\RecordTypeSelect(
-        new \FlexiPeeHP\FlexiBeeRO(), 'kod',
-        ['evidence' => 'typ-faktury-vydane']
-        ), _('Create invoice of type'));
+        new \FlexiPeeHP\FlexiBeeRO(null,['evidence' => 'typ-faktury-vydane']), 'kod'), _('Create invoice of type'));
 
     $projectsForm->addItem(new \Ease\TWB\SubmitButton(sprintf(_('Import to %s'),
             constant('FLEXIBEE_URL').'/c/'.constant('FLEXIBEE_COMPANY')),

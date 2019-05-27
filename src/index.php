@@ -42,21 +42,36 @@ if (defined('REDMINE_USERNAME')) {
 $setupForm = new \Ease\TWB\Form('setupForm', 'index.php');
 
 $setupForm->addInput(new \Ease\Html\InputTextTag('rdmurl',
-    $_SESSION['REDMINE_URL']), _('Redmine URL'));
+        $_SESSION['REDMINE_URL']), _('Redmine URL'));
 
 $setupForm->addInput(new \Ease\Html\InputTextTag('apikey',
-    $_SESSION['REDMINE_USERNAME']), _('Redmine API Key'));
-
-$setupForm->addItem(new \Ease\TWB\SubmitButton(_('Check'), 'success'));
+        $_SESSION['REDMINE_USERNAME']), _('Redmine API Key'));
 
 
-$setupForm->addItem(new \Ease\TWB\LinkButton('redmineprojects.php',
-    _('Choose project')));
+$setupForm->addItem(new \Ease\TWB\SubmitButton(_('Recheck'), 'inverse' ));
+
+
+
+
+$cstmrForm = new \Ease\TWB\Form('cstmr', 'redmineprojects.php');
+
+$cstmrForm->addInput(new ui\SearchBox('firma[0]', null,
+        [
+        'data-remote-list' => 'firmy.php',
+        'data-list-highlight' => 'true',
+        'data-list-value-completion' => 'true'
+        ]), _('Default Customer'),
+    _('COMPANY_CODE'),_('Use chosen company as customer if not overrided'));
+
+$cstmrForm->addItem(new \Ease\TWB\SubmitButton(_('Choose project')));
+
+
 //$setupForm->addItem(new \Ease\TWB\LinkButton('redmineusers.php',
 //    _('Choose workers')));
 
 
 $oPage->addItem(new \Ease\TWB\Container($setupForm));
+$oPage->addItem(new \Ease\TWB\Container($cstmrForm));
 
 $oPage->addItem(new ui\HealthCehck());
 

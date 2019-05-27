@@ -18,6 +18,8 @@ $oPage->addCSS('.row:hover{
 $redminer = new RedmineRestClient();
 $addreser = new \FlexiPeeHP\Adresar();
 
+$deffirma = $oPage->getRequestValue('firma') ? current($oPage->getRequestValue('firma')) : null ;
+
 $projects = $redminer->getProjects(); //since redmine 3.4.0
 
 if (empty($projects)) {
@@ -47,7 +49,7 @@ if (empty($projects)) {
         if (array_key_exists('custom_columns', $projectData)) {
             $fbClient = $projectData['custom_columns'];
         } else {
-            $fbClient = null;
+            $fbClient = $deffirma;
             $redminer->addStatusMessage(sprintf(_('there is no custom column "FIRMA" in project %s'),
                     $projectData['name']), 'warning');
         }
@@ -75,6 +77,7 @@ if (empty($projects)) {
                 'data-list-value-completion' => 'true'
             ]));
         } else {
+            $addreser->setDataValue('kod',$fbClient);
             $projectRow->addColumn(4,
                 new \Ease\TWB\LinkButton($addreser->getApiURL(),
                 $addreser->getRecordCode(),

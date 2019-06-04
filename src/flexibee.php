@@ -25,7 +25,7 @@ $invoiceTabs->addTab(_('PDF'),
     new \FlexiPeeHP\Bricks\EmbedResponsivePDF($invoicer));
 
 $oPage->addItem(new \Ease\TWB\Panel('Doklad '.$invoicer->getDataValue('kod').' '.($created
-            ? 'byl' : 'nebyl').' vystaven', $created ? 'success' : 'danger',
-    $invoiceTabs, $oPage->getStatusMessagesAsHtml()));
+                ? 'byl' : 'nebyl').' vystaven', $created ? 'success' : 'danger',
+        $invoiceTabs, $oPage->getStatusMessagesAsHtml()));
 
 $oPage->draw();

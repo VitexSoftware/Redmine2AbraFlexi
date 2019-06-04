@@ -4,7 +4,7 @@ namespace Redmine2FlexiBee;
 
 include_once '../vendor/autoload.php';
 
-\Ease\Shared::instanced()->loadConfig('../config.json');
+\Ease\Shared::instanced()->loadConfig('../config.json',true);
 
 $oPage = new \Ease\TWB\WebPage('PDF');
 

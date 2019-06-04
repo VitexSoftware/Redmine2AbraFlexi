@@ -52,6 +52,8 @@ ve složce projektu je třeba spustit **composer install** který doinstaluje po
 Požadavky
 ---------
 
+https://github.com/ANovitsky/redmine_shared_api
+
 Kód je primárně psaný pro Debian, pro provoz na jiném systému, např windows je třeba doplnit požadované css a skripty.
 
 [Statistiky práce na projektu](https://wakatime.com/@5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/projects/zgctsnwibv)

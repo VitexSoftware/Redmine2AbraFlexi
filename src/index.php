@@ -6,6 +6,8 @@ require_once '../vendor/autoload.php';
 
 \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
+new \Ease\Locale('cs_CZ', '../i18n', 'redmine2flexibee');
+
 session_start();
 
 $oPage = new ui\WebPage('Redmine2FlexiBee');

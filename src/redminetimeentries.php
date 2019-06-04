@@ -3,10 +3,11 @@
 namespace Redmine2FlexiBee;
 
 require_once '../vendor/autoload.php';
+new \Ease\Locale('cs_CZ', '../i18n', 'redmine2flexibee');
 session_start();
 
 $oPage  = new ui\WebPage('Redmine2FlexiBee: Obtain Time Entries');
-$userID = $oPage->getRequestValue('userid','int');
+$userID = $oPage->getRequestValue('userid', 'int');
 
 $typFak = $oPage->getRequestValue('typ-faktury-vydane');
 if (empty($typFak)) {
@@ -23,7 +24,10 @@ if (empty($projects)) {
 } else {
     \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
-    $invoicer = new FakturaVydana(['typDokl' => \FlexiPeeHP\FlexiBeeRO::code($typFak)]);
+    $invoicer = new FakturaVydana([
+        'typDokl' => \FlexiPeeHP\FlexiBeeRO::code($typFak),
+        'popis' => sprintf( _('Work from %s to %s'), $start, $end )
+        ]);
     $redminer = new RedmineRestClient();
     if (count($projects) == 1) {
         $projectInfo = $redminer->getProjectInfo(key($projects),
@@ -49,10 +53,14 @@ if (empty($projects)) {
 //        if (array_key_exists('time_entry_activities', $projectInfo)) {
 //            $items = $projectInfo['time_entry_activities'];
 //        } else {
-        $items  = $redminer->getTimeEntries($projectID, $start, $end,$userID);
+        $items = $redminer->getTimeEntries($projectID, $start, $end, $userID);
+
+
 //        }
 
         if (!empty($items)) {
+
+
             $invoicer->takeItemsFromArray($items);
         }
     }
@@ -67,9 +75,9 @@ if (empty($projects)) {
         new \FlexiPeeHP\ui\EmbedResponsivePDF($invoicer));
 
     $oPage->addItem(new \Ease\TWB\Container(new \Ease\TWB\Panel('Doklad '.new \Ease\Html\ATag($invoicer->getApiUrl(),
-        $invoicer->getDataValue('kod')).' '.($created ? 'byl' : 'nebyl').' vystaven',
-        $created ? 'success' : 'danger', $invoiceTabs,
-        $oPage->getStatusMessagesAsHtml())));
+                    $invoicer->getDataValue('kod')).' '.($created ? 'byl' : 'nebyl').' vystaven',
+                $created ? 'success' : 'danger', $invoiceTabs,
+                $oPage->getStatusMessagesAsHtml())));
     $oPage->draw();
 }
 

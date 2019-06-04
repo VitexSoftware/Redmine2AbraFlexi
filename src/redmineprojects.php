@@ -3,7 +3,7 @@
 namespace Redmine2FlexiBee;
 
 require_once '../vendor/autoload.php';
-
+new \Ease\Locale('cs_CZ', '../i18n', 'redmine2flexibee');
 session_start();
 
 \Ease\Shared::instanced()->loadConfig('../config.json', true);
@@ -20,7 +20,7 @@ $addreser = new \FlexiPeeHP\Adresar();
 
 $deffirma = $oPage->getRequestValue('firma') ? current($oPage->getRequestValue('firma')) : null ;
 
-$projects = $redminer->getProjects(); //since redmine 3.4.0
+$projects = $redminer->getProjects(['limit'=>100]); //since redmine 3.4.0
 
 if (empty($projects)) {
     $projectsForm = new \Ease\Html\ATag('index.php',
@@ -33,8 +33,8 @@ if (empty($projects)) {
     $projectsForm->addInput(new \Ease\Html\InputDateTag('enddate',
         new \DateTime("last day of last month")), _('To'));
 
-    $projectsForm->addInput(new \Ease\Html\InputNumberTag('userid',null), _('Redimine user Id'));
-
+    $projectsForm->addInput(new RedmineUserSelect('userid',null), _('Redimine user Id'));
+    
     $projectsForm->addItem(
         ['<a href="#" class="btn btn-inverse" onClick="$(\'.projectswitch\').bootstrapSwitch(\'toggleState\');">'.str_repeat(new \Ease\TWB\GlyphIcon('refresh'),
                 10).'</a> ']);

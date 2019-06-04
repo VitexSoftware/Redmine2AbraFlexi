@@ -99,7 +99,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
     public function getUsers($params = null)
     {
         $result   = null;
-        $response = $this->performRequest(\Ease\Shared::addUrlParams('users.json',
+        $response = $this->performRequest(\Ease\Shared::addUrlParams('/shared/users.json',
                 $params), 'GET');
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['users'], 'id');

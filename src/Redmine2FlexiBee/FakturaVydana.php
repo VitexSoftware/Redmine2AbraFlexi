@@ -16,15 +16,29 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
     public $myTable = null;
 
     /**
+     *
+     * @var array 
+     */
+    private $itemsIncluded = [];
+
+    /**
+     *
+     * @var array 
+     */
+    private $projectsIncluded = [];
+
+    /**
      * FlexiBee Invoice
      *
      * @param array $options Connection settings override
      */
-    public function __construct($options = [])
+    public function __construct($init = null, $options = [])
     {
-        parent::__construct();
-        $this->setDataValue('typDokl',
-            self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_TYP_FAKTURY')));
+        parent::__construct($init, $options = []);
+        if (!array_key_exists('typDokl', $init)) {
+            $this->setDataValue('typDokl',
+                self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_TYP_FAKTURY')));
+        }
     }
 
     /**
@@ -115,22 +129,28 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
                 if (isset($itemsData[$projectName][$nazev])) {
                     $itemsData[$projectName][$nazev]['mnozMj'] += floatval($timeEntry['hours']);
                 } else {
-                    $itemsData[$projectName][$nazev] = [
-                        'typPolozkyK' => 'typPolozky.katalog',
-                        'poznam' => $nazev,
-                        'nazev' =>  $timeEntry['comments'],
-                        'mnozMj' => floatval($timeEntry['hours']),
-                        'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_CENIK'))];
+                    if (!array_key_exists($rowId, $this->itemsIncluded)) {
+                        $itemsData[$projectName][$nazev] = [
+//                            'id' => 'ext:redmine:'.$rowId,
+                            'typPolozkyK' => 'typPolozky.katalog',
+                            'nazev' => $nazev,
+                            'popis' => $timeEntry['comments'],
+                            'mnozMj' => floatval($timeEntry['hours']),
+                            'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_CENIK'))];
+                        $this->itemsIncluded[$rowId]     = $rowId;
+                    }
                 }
             }
         }
 
         foreach ($itemsData as $projectName => $projectData) {
-            $this->addArrayToBranch(['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
-                'polozkyFaktury');
-
-            foreach ($projectData as $taskName => $taskData) {
-                $this->addArrayToBranch($taskData, 'polozkyFaktury');
+            if (!array_key_exists($projectName, $this->projectsIncluded)) {
+                $this->addArrayToBranch(['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
+                    'polozkyFaktury'); // Task Title as Heading/TextRow
+                $this->projectsIncluded[$projectName] = $projectName;
+                foreach ($projectData as $taskName => $taskData) {
+                    $this->addArrayToBranch($taskData, 'polozkyFaktury');
+                }
             }
         }
     }

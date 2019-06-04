@@ -92,6 +92,8 @@ if (empty($projects)) {
     $projectsForm->addItem(new \Ease\TWB\SubmitButton(sprintf(_('Import to %s'),
             constant('FLEXIBEE_URL').'/c/'.constant('FLEXIBEE_COMPANY')),
         'success'));
+    
+    $projectsForm->addItem( new \Ease\Html\InputHiddenTag('firma', $deffirma)  ) ;
 }
 
 

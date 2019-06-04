@@ -17,6 +17,7 @@ if (empty($typFak)) {
 $projects = $oPage->getRequestValue('project');
 $start    = $oPage->getRequestValue('startdate');
 $end      = $oPage->getRequestValue('enddate');
+$firma    = $oPage->getRequestValue('firma');
 
 if (empty($projects)) {
     $oPage->addStatusMessage(_('Please Select some projects to import'));
@@ -24,10 +25,27 @@ if (empty($projects)) {
 } else {
     \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
+
+    $timesheetParams = [
+        "utf8" => "✓",
+        "timesheet[period]" => "all",
+        "timesheet[period_type]" => "2",
+        "timesheet[date_from]" => $start,
+        "timesheet[date_to]" => $end,
+        "timesheet[sort]" => "project",
+        "timesheet[projects][]" => implode(',', array_keys($projects)),
+        "timesheet[users][]" => $userID,
+        "commit" => "Použít"
+    ];
+
+    $oPage->addItem(new \Ease\TWB\LinkButton(constant('REDMINE_URL').'/timesheet/report/?'.http_build_query($timesheetParams),
+            _('Timesheet'), 'info', ['target' => 'blank']));
+
     $invoicer = new FakturaVydana([
         'typDokl' => \FlexiPeeHP\FlexiBeeRO::code($typFak),
-        'popis' => sprintf( _('Work from %s to %s'), $start, $end )
-        ]);
+        'firma' => \FlexiPeeHP\FlexiBeeRO::code($firma),
+        'popis' => sprintf(_('Work from %s to %s'), $start, $end)
+    ]);
     $redminer = new RedmineRestClient();
     if (count($projects) == 1) {
         $projectInfo = $redminer->getProjectInfo(key($projects),

@@ -65,12 +65,13 @@ $cstmrForm->addInput(new ui\SearchBox('firma[0]', null,
         ]), _('Default Customer'),
     _('COMPANY_CODE'),_('Use chosen company as customer if not overrided'));
 
-$cstmrForm->addItem(new \Ease\TWB\SubmitButton(_('Choose project')));
+$cstmrForm->addItem(new \Ease\TWB\SubmitButton(_('Choose projects')));
 
 
 //$setupForm->addItem(new \Ease\TWB\LinkButton('redmineusers.php',
 //    _('Choose workers')));
 
+$setupForm->addItem(new \Ease\TWB\LinkButton('issuesdone.php', _('Issues Done')));
 
 $oPage->addItem(new \Ease\TWB\Container($setupForm));
 $oPage->addItem(new \Ease\TWB\Container($cstmrForm));

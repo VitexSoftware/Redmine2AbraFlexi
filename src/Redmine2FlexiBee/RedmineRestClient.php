@@ -147,13 +147,14 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
 
     /**
      * 
-     * @param type $projectID
+     * @param int $projectID
      * @param type $start
      * @param type $end
      * 
-     * @return type
+     * @return array
      */
-    public function getTimeEntries($projectID, $start, $end, $userId = null)
+    public function getProjectTimeEntries($projectID, $start, $end,
+                                          $userId = null)
     {
         $result   = null;
         $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end).'&user_id='.$userId,
@@ -161,6 +162,24 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         if ($this->lastResponseCode == 200) {
             $response = $this->addIssueNames(self::reindexArrayBy($response['time_entries'],
                     'id'));
+        }
+        return $response;
+    }
+
+    /**
+     * 
+     * @param array $conditions
+     * 
+     * @return array
+     */
+    public function getTimeEntries(array $conditions)
+    {
+        $result   = null;
+        $response = $this->performRequest(\Ease\Shared::addUrlParams('time_entries.json',
+                $conditions), 'GET');
+
+        if ($this->lastResponseCode == 200) {
+            $response = self::reindexArrayBy($response['time_entries'],'id');
         }
         return $response;
     }
@@ -184,7 +203,8 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
                 'hours' => $timeEntry['hours'],
                 'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id']
                     : 0,
-                'comments' => array_key_exists('comments',$timeEntry) ? $timeEntry['comments'] : ''
+                'comments' => array_key_exists('comments', $timeEntry) ? $timeEntry['comments']
+                    : ''
             ];
         }
         if (count($issues)) {
@@ -215,6 +235,27 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         $result   = null;
         $response = $this->performRequest('issues.json?issue_id='.implode(',',
                 $issuesID), 'GET');
+        if ($this->lastResponseCode == 200) {
+            $response = self::reindexArrayBy($response['issues'], 'id');
+        }
+        foreach ($response as $issuesID => $responseData) {
+            $result[$issuesID] = $responseData['subject'];
+        }
+        return $result;
+    }
+
+    /**
+     * Get Issued
+     * 
+     * @param array $conditions
+     * 
+     * @return array
+     */
+    public function getIssues(array $conditions)
+    {
+        $result   = null;
+        $response = $this->performRequest(\Ease\Shared::addUrlParams('issues.json',
+                $conditions), 'GET');
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['issues'], 'id');
         }

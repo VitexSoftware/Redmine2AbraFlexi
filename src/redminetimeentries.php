@@ -71,7 +71,7 @@ if (empty($projects)) {
 //        if (array_key_exists('time_entry_activities', $projectInfo)) {
 //            $items = $projectInfo['time_entry_activities'];
 //        } else {
-        $items = $redminer->getTimeEntries($projectID, $start, $end, $userID);
+        $items = $redminer->getProjectTimeEntries($projectID, $start, $end, $userID);
 
 
 //        }

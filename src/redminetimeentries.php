@@ -28,7 +28,7 @@ if (empty($projects)) {
 
     $timesheetParams = [
         "utf8" => "✓",
-        "timesheet[period]" => "all",
+        "timesheet[period]" => "last_month",
         "timesheet[period_type]" => "2",
         "timesheet[date_from]" => $start,
         "timesheet[date_to]" => $end,
@@ -71,7 +71,8 @@ if (empty($projects)) {
 //        if (array_key_exists('time_entry_activities', $projectInfo)) {
 //            $items = $projectInfo['time_entry_activities'];
 //        } else {
-        $items = $redminer->getProjectTimeEntries($projectID, $start, $end, $userID);
+        $items = $redminer->getProjectTimeEntries($projectID, $start, $end,
+            $userID);
 
 
 //        }

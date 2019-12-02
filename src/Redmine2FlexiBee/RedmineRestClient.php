@@ -179,7 +179,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
                 $conditions), 'GET');
 
         if ($this->lastResponseCode == 200) {
-            $response = self::reindexArrayBy($response['time_entries'],'id');
+            $response = self::reindexArrayBy($response['time_entries'], 'id');
         }
         return $response;
     }
@@ -233,7 +233,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
     public function getNameForIssues($issuesID)
     {
         $result   = null;
-        $response = $this->performRequest('issues.json?issue_id='.implode(',',
+        $response = $this->performRequest('issues.json?status_id=*&issue_id='.implode(',',
                 $issuesID), 'GET');
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['issues'], 'id');
@@ -263,5 +263,10 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
             $result[$issuesID] = $responseData['subject'];
         }
         return $result;
+    }
+
+    public function getIssueInfo($id)
+    {
+        return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
     }
 }

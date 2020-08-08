@@ -17,10 +17,6 @@
     },
 
     "require": {
-        "spoje.net/flexipeehp": "dev-master",
-        "vitexsoftware/flexipeehp-bricks": "dev-master"
-    },
-    "require-dev": {
-        "vitexsoftware/ease-bricks": "dev-master"
+        "vitexsoftware/flexibee-bricks": "* dev-master"
     }
 }

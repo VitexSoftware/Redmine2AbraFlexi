@@ -113,7 +113,7 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
 
     /**
      * 
-     * @param type $timeEntriesRaw
+     * @param array $timeEntriesRaw
      */
     public function takeItemsFromArray($timeEntriesRaw)
     {

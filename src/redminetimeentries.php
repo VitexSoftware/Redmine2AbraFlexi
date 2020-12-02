@@ -1,12 +1,12 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 require_once '../vendor/autoload.php';
-new \Ease\Locale('cs_CZ', '../i18n', 'redmine2flexibee');
+new \Ease\Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 session_start();
 
-$oPage  = new ui\WebPage('Redmine2FlexiBee: Obtain Time Entries');
+$oPage  = new ui\WebPage('Redmine2AbraFlexi: Obtain Time Entries');
 $userID = $oPage->getRequestValue('userid', 'int');
 
 $typFak = $oPage->getRequestValue('typ-faktury-vydane');
@@ -42,8 +42,8 @@ if (empty($projects)) {
             _('Timesheet'), 'info', ['target' => 'blank']));
 
     $invoicer = new FakturaVydana([
-        'typDokl' => \FlexiPeeHP\FlexiBeeRO::code($typFak),
-        'firma' => \FlexiPeeHP\FlexiBeeRO::code($firma),
+        'typDokl' => \AbraFlexi\RO::code($typFak),
+        'firma' => \AbraFlexi\RO::code($firma),
         'popis' => sprintf(_('Work from %s to %s'), $start, $end)
     ]);
     $redminer = new RedmineRestClient();
@@ -52,17 +52,17 @@ if (empty($projects)) {
             ['include' => 'time_entry_activities']); //since redmine 3.4.0
         if (array_key_exists('custom_fields', $projectInfo)) {
             foreach ($projectInfo['custom_fields'] as $customFieldInfo) {
-                if ($customFieldInfo['name'] == 'FlexiBee Firma') {
+                if ($customFieldInfo['name'] == 'AbraFlexi Firma') {
                     $invoicer->setDataValue('firma',
-                        \FlexiPeeHP\FlexiBeeRO::code($customFieldInfo['value']));
+                        \AbraFlexi\RO::code($customFieldInfo['value']));
                 }
             }
         }
     }
 
-    $pricelister = new \FlexiPeeHP\Cenik(\FlexiPeeHP\FlexiBeeRO::code(constant('FLEXIBEE_CENIK')));
+    $pricelister = new \AbraFlexi\Cenik(\AbraFlexi\RO::code(constant('ABRAFLEXI_CENIK')));
     if ($pricelister->lastResponseCode == 404) {
-        $pricelister->insertToFlexiBee(['code' => constant('FLEXIBEE_CENIK'), 'nazev' => constant('FLEXIBEE_CENIK'),
+        $pricelister->insertToAbraFlexi(['code' => constant('ABRAFLEXI_CENIK'), 'nazev' => constant('ABRAFLEXI_CENIK'),
             'typZasobyK' => 'typZasoby.sluzba', 'skladove' => false, 'cenaZakl' => 1,
             'cenaZaklBezDph' => 1]);
     }
@@ -89,9 +89,9 @@ if (empty($projects)) {
     $invoiceTabs = new \Ease\TWB\Tabs('Invoices');
 
     $invoiceTabs->addTab(_('Html'),
-        new \FlexiPeeHP\ui\EmbedResponsiveHTML($invoicer));
+        new \AbraFlexi\ui\EmbedResponsiveHTML($invoicer));
     $invoiceTabs->addTab(_('PDF'),
-        new \FlexiPeeHP\ui\EmbedResponsivePDF($invoicer));
+        new \AbraFlexi\ui\EmbedResponsivePDF($invoicer));
 
     $oPage->addItem(new \Ease\TWB\Container(new \Ease\TWB\Panel('Doklad '.new \Ease\Html\ATag($invoicer->getApiUrl(),
                     $invoicer->getDataValue('kod')).' '.($created ? 'byl' : 'nebyl').' vystaven',

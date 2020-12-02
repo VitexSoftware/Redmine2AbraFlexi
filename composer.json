@@ -1,6 +1,6 @@
 {
-    "name": "vitexsoftware/redmine-to-flexibee",
-    "description": "Ve FlexiBee vytvoří fakturu z Hodn odpracovaných ve FlexiBee",
+    "name": "vitexsoftware/redmine-to-abraflexi",
+    "description": "Ve AbraFlexi vytvoří fakturu z Hodn odpracovaných ve AbraFlexi",
     "authors": [
         {
             "name": "Vitex",
@@ -10,13 +10,15 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Redmine2FlexiBee\\": "src/Redmine2FlexiBee/",
-            "Redmine2FlexiBee\\ui\\": "src/Redmine2FlexiBee/ui/",
-            "Test\\Redmine2FlexiBee\\": "testing/src/Redmine2FlexiBee/"
+            "Redmine2AbraFlexi\\": "src/Redmine2AbraFlexi/",
+            "Redmine2AbraFlexi\\ui\\": "src/Redmine2AbraFlexi/ui/",
+            "Test\\Redmine2AbraFlexi\\": "testing/src/Redmine2AbraFlexi/"
         }
     },
 
     "require": {
-        "vitexsoftware/flexibee-bricks": "* dev-master"
+        "vitexsoftware/flexibee-bricks": "dev-abraflexi",
+        "vitexsoftware/ease-twbootstrap": "dev-master",
+        "vitexsoftware/ease-twbootstrap-widgets": "9999999-dev"
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 require_once '../vendor/autoload.php';
 
@@ -8,7 +8,7 @@ session_start();
 
 \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
-$oPage = new ui\WebPage('Redmine2FlexiBee: Choose redmine users');
+$oPage = new ui\WebPage('Redmine2AbraFlexi: Choose redmine users');
 
 $oPage->addCSS('.row:hover{
     color:red ;

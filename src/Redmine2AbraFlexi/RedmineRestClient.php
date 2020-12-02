@@ -1,27 +1,26 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 /**
  * Description of RedmineRestClient
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
-{
+class RedmineRestClient extends \AbraFlexi\RO {
 
     /**
      * 
      * @param type $init
      * @param type $options
      */
-    public function __construct($init = null, $options = array())
-    {
+    public function __construct($init = null, $options = array()) {
         parent::__construct($init, $options);
     }
 
@@ -31,8 +30,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * @param array $options Object Options (company,url,user,password,evidence,
      *                                       prefix,defaultUrlParams,debug)
      */
-    public function setUp($options = [])
-    {
+    public function setUp($options = []) {
         $this->setupProperty($options, 'url', 'REDMINE_URL');
         $this->setupProperty($options, 'user', 'REDMINE_USERNAME');
         $this->setupProperty($options, 'password', 'REDMINE_PASSWORD');
@@ -48,10 +46,9 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return boolean evidence switching status
      */
-    public function setEvidence($evidence)
-    {
+    public function setEvidence($evidence) {
         $this->evidence = $evidence;
-        $result         = true;
+        $result = true;
         $this->updateApiURL();
         return $result;
     }
@@ -61,12 +58,11 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      *
      * @return string Evidence URL
      */
-    public function getEvidenceURL()
-    {
+    public function getEvidenceURL() {
         $evidenceUrl = $this->url;
-        $evidence    = $this->getEvidence();
+        $evidence = $this->getEvidence();
         if (!empty($evidence)) {
-            $evidenceUrl .= '/'.$evidence;
+            $evidenceUrl .= '/' . $evidence;
         }
         return $evidenceUrl;
     }
@@ -78,13 +74,12 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return array
      */
-    public function getProjects($params = null)
-    {
-        $result   = null;
-        $response = $this->performRequest(\Ease\Shared::addUrlParams('projects.json',
-                $params), 'GET');
+    public function getProjects($params = []) {
+        $result = null;
+        $response = $this->performRequest(\Ease\Functions::addUrlParams('projects.json',
+                        $params), 'GET');
         if ($this->lastResponseCode == 200) {
-            $response = self::reindexArrayBy($response['projects'], 'id');
+            $response = \Ease\Functions::reindexArrayBy($response['projects'], 'id');
         }
         return $response;
     }
@@ -96,13 +91,12 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return array
      */
-    public function getUsers($params = null)
-    {
-        $result   = null;
-        $response = $this->performRequest(\Ease\Shared::addUrlParams('/shared/users.json',
-                $params), 'GET');
+    public function getUsers($params = []) {
+        $result = null;
+        $response = $this->performRequest(\Ease\Functions::addUrlParams('/shared/users.json',
+                        $params), 'GET');
         if ($this->lastResponseCode == 200) {
-            $response = self::reindexArrayBy($response['users'], 'id');
+            $response = \Ease\Functions::reindexArrayBy($response['users'], 'id');
         }
         return $response;
     }
@@ -115,10 +109,9 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return array
      */
-    public function getProjectInfo($projectID, $params = null)
-    {
-        return $this->performRequest(\Ease\Shared::addUrlParams('projects/'.$projectID.'.json',
-                    $params), 'GET')['project'];
+    public function getProjectInfo($projectID, $params = []) {
+        return $this->performRequest(\Ease\Functions::addUrlParams('projects/' . $projectID . '.json',
+                                $params), 'GET')['project'];
     }
 
     /**
@@ -128,8 +121,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return type
      */
-    public function rawResponseToArray($responseRaw, $format)
-    {
+    public function rawResponseToArray($responseRaw, $format) {
         return parent::rawResponseToArray($responseRaw, 'json');
     }
 
@@ -140,8 +132,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return type
      */
-    public function parseResponse($responseDecoded, $responseCode)
-    {
+    public function parseResponse($responseDecoded, $responseCode) {
         return $responseDecoded;
     }
 
@@ -154,14 +145,13 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * @return array
      */
     public function getProjectTimeEntries($projectID, $start, $end,
-                                          $userId = null)
-    {
-        $result   = null;
-        $response = $this->performRequest('time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end).'&user_id='.$userId,
-            'GET');
+            $userId = null) {
+        $result = null;
+        $response = $this->performRequest('time_entries.json?project_id=' . $projectID . '&spent_on=' . urlencode('><' . $start . '|' . $end) . '&user_id=' . $userId,
+                'GET');
         if ($this->lastResponseCode == 200) {
-            $response = $this->addIssueNames(self::reindexArrayBy($response['time_entries'],
-                    'id'));
+            $response = $this->addIssueNames(\Ease\Functions::reindexArrayBy($response['time_entries'],
+                            'id'));
         }
         return $response;
     }
@@ -172,11 +162,10 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return array
      */
-    public function getTimeEntries(array $conditions)
-    {
-        $result   = null;
-        $response = $this->performRequest(\Ease\Shared::addUrlParams('time_entries.json',
-                $conditions), 'GET');
+    public function getTimeEntries(array $conditions) {
+        $result = null;
+        $response = $this->performRequest(\Ease\Functions::addUrlParams('time_entries.json',
+                        $conditions), 'GET');
 
         if ($this->lastResponseCode == 200) {
             $response = self::reindexArrayBy($response['time_entries'], 'id');
@@ -190,8 +179,7 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return type
      */
-    public function addIssueNames($timeEntries)
-    {
+    public function addIssueNames($timeEntries) {
         $result = [];
         $issues = [];
         foreach ($timeEntries as $timeEntryID => $timeEntry) {
@@ -201,10 +189,8 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
             $result[$timeEntryID] = [
                 'project' => $timeEntry['project']['name'],
                 'hours' => $timeEntry['hours'],
-                'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id']
-                    : 0,
-                'comments' => array_key_exists('comments', $timeEntry) ? $timeEntry['comments']
-                    : ''
+                'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id'] : 0,
+                'comments' => array_key_exists('comments', $timeEntry) ? $timeEntry['comments'] : ''
             ];
         }
         if (count($issues)) {
@@ -230,13 +216,12 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return type
      */
-    public function getNameForIssues($issuesID)
-    {
-        $result   = null;
-        $response = $this->performRequest('issues.json?status_id=*&issue_id='.implode(',',
-                $issuesID), 'GET');
+    public function getNameForIssues($issuesID) {
+        $result = null;
+        $response = $this->performRequest('issues.json?status_id=*&issue_id=' . implode(',',
+                        $issuesID), 'GET');
         if ($this->lastResponseCode == 200) {
-            $response = self::reindexArrayBy($response['issues'], 'id');
+            $response = \Ease\Functions::reindexArrayBy($response['issues'], 'id');
         }
         foreach ($response as $issuesID => $responseData) {
             $result[$issuesID] = $responseData['subject'];
@@ -251,13 +236,12 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
      * 
      * @return array
      */
-    public function getIssues(array $conditions)
-    {
-        $result   = null;
-        $response = $this->performRequest(\Ease\Shared::addUrlParams('issues.json',
-                $conditions), 'GET');
+    public function getIssues(array $conditions) {
+        $result = null;
+        $response = $this->performRequest(\Ease\Functions::addUrlParams('issues.json',
+                        $conditions), 'GET');
         if ($this->lastResponseCode == 200) {
-            $response = self::reindexArrayBy($response['issues'], 'id');
+            $response = \Ease\Functions::reindexArrayBy($response['issues'], 'id');
         }
         foreach ($response as $issuesID => $responseData) {
             $result[$issuesID] = $responseData['subject'];
@@ -265,8 +249,13 @@ class RedmineRestClient extends \FlexiPeeHP\FlexiBeeRO
         return $result;
     }
 
-    public function getIssueInfo($id)
-    {
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getIssueInfo($id) {
         return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
     }
+
 }

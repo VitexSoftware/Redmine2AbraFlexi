@@ -5,13 +5,13 @@
  * and open the template in the editor.
  */
 
-namespace Redmine2FlexiBee\ui;
+namespace Redmine2AbraFlexi\ui;
 /**
  * Description of HealthCehck
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class HealthCehck extends \Ease\TWB\Well
+class HealthCheck extends \Ease\TWB\Well
 {
 
     public function __construct()
@@ -19,23 +19,23 @@ class HealthCehck extends \Ease\TWB\Well
         parent::__construct(new \Ease\Html\H4Tag(_('API Health Check')));
 
         $this->addItem(
-            new \Ease\TWB\LinkButton(constant('FLEXIBEE_URL'), _('FlexiBee'),
-                $this->checkFlexiBee().' btn-lg'));
+            new \Ease\TWB\LinkButton(constant('ABRAFLEXI_URL'), _('AbraFlexi'),
+                $this->checkAbraFlexi().' btn-lg'));
         $this->addItem(
             new \Ease\TWB\LinkButton(constant('REDMINE_URL'), _('Redmine'),
                 $this->checkRedmine().' btn-lg'));
     }
 
     /**
-     * Check FlexiBeee
+     * Check AbraFlexie
      * 
      * @return boolean api availbility status
      */
-    public function checkFlexiBee()
+    public function checkAbraFlexi()
     {
-        $flexibeer = new \FlexiPeeHP\Adresar();
-        $flexibeer->getFirstRecordID();
-        return $flexibeer->lastResponseCode == 200 ? 'success' : 'danger';
+        $abraflexir = new \AbraFlexi\Adresar();
+        $abraflexir->getFirstRecordID();
+        return $abraflexir->lastResponseCode == 200 ? 'success' : 'danger';
     }
 
     /**
@@ -44,7 +44,7 @@ class HealthCehck extends \Ease\TWB\Well
      */
     public function checkRedmine()
     {
-        $redminer = new \Redmine2FlexiBee\RedmineRestClient();
+        $redminer = new \Redmine2AbraFlexi\RedmineRestClient();
         $redminer->getProjects();
         return ($redminer->lastResponseCode == 200) ? 'success' : 'danger';
     }

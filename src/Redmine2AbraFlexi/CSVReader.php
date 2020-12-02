@@ -1,6 +1,6 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 /**
  * Description of CSVReader

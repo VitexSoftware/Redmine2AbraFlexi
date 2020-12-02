@@ -1,13 +1,13 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 /**
  * Description of Engine
  *
  * @author vitex
  */
-class FakturaVydana extends \FlexiPeeHP\FakturaVydana
+class FakturaVydana extends \AbraFlexi\FakturaVydana
 {
     /**
      * Do not require SQL
@@ -28,7 +28,7 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
     private $projectsIncluded = [];
 
     /**
-     * FlexiBee Invoice
+     * AbraFlexi Invoice
      *
      * @param array $options Connection settings override
      */
@@ -37,7 +37,7 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
         parent::__construct($init, $options = []);
         if (!array_key_exists('typDokl', $init)) {
             $this->setDataValue('typDokl',
-                self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_TYP_FAKTURY')));
+                self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')));
         }
     }
 
@@ -68,7 +68,7 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
                     'poznam' => self::stripComas($csvData[9]),
                     'nazev' => $nazev,
                     'mnozMj' => floatval(self::stripComas($csvData[10])),
-                    'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_CENIK'))];
+                    'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
             }
         }
 
@@ -107,7 +107,7 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
         $this->setMyKey($orderID);
         $itemData['typDokl'] = $this->configuration['kodvydaneobjednavky'];
         $this->addArrayToBranch($itemData, 'polozkyDokladu');
-        $this->insertToFlexiBee();
+        $this->insertToAbraFlexi();
         return $this->lastResponseCode == 201;
     }
 
@@ -136,7 +136,7 @@ class FakturaVydana extends \FlexiPeeHP\FakturaVydana
                             'nazev' => $nazev,
                             'popis' => $timeEntry['comments'],
                             'mnozMj' => floatval($timeEntry['hours']),
-                            'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_CENIK'))];
+                            'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
                         $this->itemsIncluded[$rowId]     = $rowId;
                     }
                 }

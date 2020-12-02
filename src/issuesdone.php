@@ -1,14 +1,14 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 require_once '../vendor/autoload.php';
-new \Ease\Locale('cs_CZ', '../i18n', 'redmine2flexibee');
+new \Ease\Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 session_start();
 
 \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
-$oPage = new ui\WebPage('Redmine2FlexiBee: Issues ready for invoicing');
+$oPage = new ui\WebPage('Redmine2AbraFlexi: Issues ready for invoicing');
 
 $oPage->addCSS('.row:hover{
     color:red ;
@@ -16,15 +16,15 @@ $oPage->addCSS('.row:hover{
 }');
 
 $redminer = new RedmineRestClient();
-$addreser = new \FlexiPeeHP\Adresar();
+$addreser = new \AbraFlexi\Adresar();
 
 //$projectInfo = $redminer->getProjectInfo(32, //Outsourcing
 //    ['include' => 'time_entry_activities']); //since redmine 3.4.0
 //if (array_key_exists('custom_fields', $projectInfo)) {
 //    foreach ($projectInfo['custom_fields'] as $customFieldInfo) {
-//        if ($customFieldInfo['name'] == 'FlexiBee Firma') {
+//        if ($customFieldInfo['name'] == 'AbraFlexi Firma') {
 //            $invoicer->setDataValue('firma',
-//                \FlexiPeeHP\FlexiBeeRO::code($customFieldInfo['value']));
+//                \AbraFlexi\RO::code($customFieldInfo['value']));
 //        }
 //    }
 //}

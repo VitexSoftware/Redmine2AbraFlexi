@@ -1,12 +1,12 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 require_once '../vendor/autoload.php';
 
 \Ease\Shared::instanced()->loadConfig('../config.json');
 
-$oPage = new ui\WebPage('Redmine2FlexiBee: Choose redmine projects');
+$oPage = new ui\WebPage('Redmine2AbraFlexi: Choose redmine projects');
 
 $redminer = new RedmineRestClient();
 

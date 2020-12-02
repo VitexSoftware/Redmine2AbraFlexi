@@ -1,6 +1,6 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 include_once '../vendor/autoload.php';
 
@@ -13,7 +13,7 @@ $id       = $oPage->getRequestValue('id');
 $evidence = $oPage->getRequestValue('evidence');
 
 
-$document = new \FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
+$document = new \AbraFlexi\RO(is_numeric($id) ? intval($id) : $id,
     ['evidence' => $evidence]);
 
 if (!is_null($document->getMyKey())) {

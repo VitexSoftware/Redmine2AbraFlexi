@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 /**
  * Description of RedmineUserSelect

@@ -1,14 +1,14 @@
 <?php
 
-namespace Redmine2FlexiBee;
+namespace Redmine2AbraFlexi;
 
 require_once '../vendor/autoload.php';
-new \Ease\Locale('cs_CZ', '../i18n', 'redmine2flexibee');
+new \Ease\Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 session_start();
 
 \Ease\Shared::instanced()->loadConfig('../config.json', true);
 
-$oPage = new ui\WebPage('Redmine2FlexiBee: Choose redmine projects');
+$oPage = new ui\WebPage('Redmine2AbraFlexi: Choose redmine projects');
 
 $oPage->addCSS('.row:hover{
     color:red ;
@@ -16,7 +16,7 @@ $oPage->addCSS('.row:hover{
 }');
 
 $redminer = new RedmineRestClient();
-$addreser = new \FlexiPeeHP\Adresar();
+$addreser = new \AbraFlexi\Adresar();
 
 $deffirma = $oPage->getRequestValue('firma') ? current($oPage->getRequestValue('firma'))
         : null;
@@ -27,7 +27,7 @@ if (empty($projects)) {
     $projectsForm = new \Ease\Html\ATag('index.php',
         new \Ease\TWB\Label('warning', _('No projects found')));
 } else {
-    $projectsForm = new \Ease\TWB\Form('Projects', 'redminetimeentries.php');
+    $projectsForm = new \Ease\TWB\Form(['mame'=>'Projects','action'=>'redminetimeentries.php'] );
 
     $projectsForm->addInput(new \Ease\Html\InputDateTag('startdate',
             new \DateTime("first day of last month")), _('From'));
@@ -62,13 +62,13 @@ if (empty($projects)) {
             new \Ease\Html\ATag(constant('REDMINE_URL').'projects/'.$projectData['identifier'],
                 $projectData['name']));
         $projectRow->addColumn(2,
-            new \Ease\ui\TWBSwitch('project['.$projectID.']', null, 'on',
+            new \Ease\TWB\Widgets\TWBSwitch('project['.$projectID.']', false, 'on',
                 ['class' => 'projectswitch']));
         $projectRow->addColumn(4, $projectData['description']);
 
         if (empty($fbClient)) {
             $companyColumn = $projectRow->addColumn(4,
-                new \Ease\TWB\LinkButton('', _('no FlexiBee company set'),
+                new \Ease\TWB\LinkButton('', _('no AbraFlexi company set'),
                     'warning'));
 
             $companyColumn->addItem(new ui\SearchBox('firma['.$projectID.']',
@@ -88,13 +88,13 @@ if (empty($projects)) {
         $projectsForm->addItem($projectRow);
     }
 
-    $projectsForm->addInput(new \FlexiPeeHP\ui\RecordTypeSelect(
-            new \FlexiPeeHP\FlexiBeeRO(null,
+    $projectsForm->addInput(new \AbraFlexi\ui\RecordTypeSelect(
+            new \AbraFlexi\RO(null,
                 ['evidence' => 'typ-faktury-vydane']), 'kod'),
         _('Create invoice of type'));
 
     $projectsForm->addItem(new \Ease\TWB\SubmitButton(sprintf(_('Import to %s'),
-                constant('FLEXIBEE_URL').'/c/'.constant('FLEXIBEE_COMPANY')),
+                constant('ABRAFLEXI_URL').'/c/'.constant('ABRAFLEXI_COMPANY')),
             'success'));
 
     $projectsForm->addItem(new \Ease\Html\InputHiddenTag('firma', $deffirma));

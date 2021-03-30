@@ -52,7 +52,7 @@ if (empty($projects)) {
             $fbClient = $projectData['custom_columns'];
         } else {
             $fbClient = $deffirma;
-            $redminer->addStatusMessage(sprintf(_('there is no custom column "FIRMA" in project %s'),
+            $oPage->addStatusMessage(sprintf(_('there is no custom column "FIRMA" in project %s'),
                     $projectData['name']), 'warning');
         }
 

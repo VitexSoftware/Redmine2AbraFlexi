@@ -49,11 +49,7 @@ $setupForm->addInput(new \Ease\Html\InputTextTag('rdmurl',
 $setupForm->addInput(new \Ease\Html\InputTextTag('apikey',
                 $_SESSION['REDMINE_USERNAME']), _('Redmine API Key'));
 
-
 $setupForm->addItem(new \Ease\TWB\SubmitButton(_('Recheck'), 'inverse'));
-
-
-
 
 $cstmrForm = new \Ease\TWB\Form(['name' => 'cstmr', 'action' => 'redmineprojects.php']);
 
@@ -66,7 +62,6 @@ $cstmrForm->addInput(new ui\SearchBox('firma[0]', null,
         _('COMPANY_CODE'), _('Use chosen company as customer if not overrided'));
 
 $cstmrForm->addItem(new \Ease\TWB\SubmitButton(_('Choose projects')));
-
 
 //$setupForm->addItem(new \Ease\TWB\LinkButton('redmineusers.php',
 //    _('Choose workers')));

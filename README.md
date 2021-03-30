@@ -1,5 +1,5 @@
 Redmine to AbraFlexi importer
-============================
+=============================
 
 ![Logo](https://github.com/VitexSoftware/Redmine2AbraFlexi/raw/master/project-logo.png "Project Logo")
 

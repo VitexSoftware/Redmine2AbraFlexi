@@ -18,7 +18,7 @@
 
     "require": {
         "vitexsoftware/flexibee-bricks": "dev-abraflexi",
-        "vitexsoftware/ease-twbootstrap": "dev-master",
-        "vitexsoftware/ease-twbootstrap-widgets": "9999999-dev"
+        "vitexsoftware/ease-twbootstrap": "*",
+        "vitexsoftware/ease-twbootstrap-widgets": "*"
     }
 }

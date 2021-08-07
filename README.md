@@ -59,3 +59,9 @@ Kód je primárně psaný pro Debian, pro provoz na jiném systému, např windo
 [Statistiky práce na projektu](https://wakatime.com/@5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/projects/zgctsnwibv)
 
 Napsáno s použitím knihovny [AbraFlexi](https://github.com/Spoje-NET/php-abraflexi)
+
+
+See also:
+
+ * https://github.com/VitexSoftware/Toggl-to-AbraFlexi
+ * https://github.com/sizek-cz/Kimai2AbraFlexi

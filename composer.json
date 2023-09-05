@@ -16,6 +16,6 @@
     },
 
     "require": {
-        "vitexsoftware/flexibee-bricks": "dev-main"
+        "spojenet/flexibee": "dev-main"
     }
 }

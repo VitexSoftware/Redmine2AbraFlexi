@@ -29,19 +29,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseHtml"
-    },
-    {
-      "type": "path",
       "url": "/usr/share/php/AbraFlexi"
-    },
-    {
-      "type": "path",
-      "url": "/usr/share/php/EaseBricks"
-    },
-    {
-      "type": "path",
-      "url": "/usr/share/php/AbraFlexiBricks"
     }
   ]
 }

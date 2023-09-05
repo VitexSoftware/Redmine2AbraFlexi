@@ -11,14 +11,11 @@
     "autoload": {
         "psr-4": {
             "Redmine2AbraFlexi\\": "src/Redmine2AbraFlexi/",
-            "Redmine2AbraFlexi\\ui\\": "src/Redmine2AbraFlexi/ui/",
             "Test\\Redmine2AbraFlexi\\": "testing/src/Redmine2AbraFlexi/"
         }
     },
 
     "require": {
-        "vitexsoftware/flexibee-bricks": "dev-abraflexi",
-        "vitexsoftware/ease-twbootstrap": "*",
-        "vitexsoftware/ease-twbootstrap-widgets": "*"
+        "vitexsoftware/flexibee-bricks": "dev-main"
     }
 }

@@ -1,0 +1,15 @@
+debian/conf/composer.json       usr/lib/redmine2abraflexi/
+src/*.php			usr/share/redmine2abraflexi/
+
+src/Redmine2AbraFlexi/*.php	usr/lib/redmine2abraflexi/Redmine2AbraFlexi
+src/*.php			usr/share/redmine2abraflexi/
+
+bin/*		  		usr/bin/
+
+i18n/cs_CZ/LC_MESSAGES/*.mo     usr/share/locale/cs_CZ/LC_MESSAGES
+i18n/en_US/LC_MESSAGES/*.mo     usr/share/locale/en_US/LC_MESSAGES
+redmine2abraflexi.svg		usr/share/icons/hicolor/scalable/apps
+
+debian/io.github.vitexsoftware.redmine_to_abraflexi.metainfo.xml   usr/share/metainfo/
+
+.env.template			etc/redmine2abraflexi

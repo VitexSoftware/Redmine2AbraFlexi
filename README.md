@@ -1,52 +1,46 @@
 Redmine to AbraFlexi importer
 =============================
 
-![Logo](https://github.com/VitexSoftware/Redmine2AbraFlexi/raw/master/project-logo.png "Project Logo")
+![Logo](project-logo.png?raw=true "Project Logo")
 
-Ze zvolených projektů v Redmine vygeneruje fakturu ve AbraFlexi.
+Z odpracovaných hodin v Redmine vygeneruje fakturu ve AbraFlexi.
 
 Nastavení
 ---------
 
-Potřebujeme Redmine s povoleným api a [config.json](config.json) s patřičně vyplněnými položkami:
+Potřebujeme Redmine s povoleným api a `.env` s patřičně vyplněnými položkami:
 
-```
-{
-    "EASE_APPNAME": "Redmin2AbraFlexi",
-    "EASE_LOGGER": "syslog",
-    "ABRAFLEXI_URL": "https://demo.abraflexi.eu:5434",
-    "ABRAFLEXI_LOGIN": "demo",
-    "ABRAFLEXI_PASSWORD": "demo",
-    "ABRAFLEXI_COMPANY": "demo",
-    "ABRAFLEXI_TYP_FAKTURY": "FAKTURA",
-    "ABRAFLEXI_CENIK": "WORK",
-    "REDMINE_URL": "https://vitexsoftware.cz/redmine",
-    "REDMINE_USERNAME": "apikey",
-    "REDMINE_PASSWORD": "",
-    "debug": "false"
-}
+```env
+ABRAFLEXI_URL=https://demo.flexibee.eu:5434
+ABRAFLEXI_LOGIN=winstrom
+ABRAFLEXI_PASSWORD=winstrom
+ABRAFLEXI_COMPANY=demo_de
+ABRAFLEXI_SEND=True
+
+ABRAFLEXI_CUSTOMER=SPOJE.NET
+ABRAFLEXI_TYP_FAKTURY=FAKTURA
+ABRAFLEXI_CENIK=WORK
+
+REDMINE_URL=https://your.redmine.url/
+REDMINE_USERNAME=username_redmine_token
+REDMINE_PASSWORD=empty_for_token
+
+REDMINE_SCOPE=last_month
+REDMINE_WORKER_MAIL=vitezslav.dvorak@spojenet.cz
+
+APP_DEBUG=True
+EASE_LOGGER=console
 ```
 
 **REDMINE_USERNAME**     Do redmine je možné se přihlašovat buď s jménem a heslem uživatele, který má dostatečná práva aby měl dostupné projekty a položky ze kterých se sestavuje faktura, nebo [jeho API klíčem a náhodným heslem](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication).
 **ABRAFLEXI_CENIK**       je položka ceníku obvykle vyjadřující "člověkohodiny"
 **ABRAFLEXI_TYP_FAKTURY** Typ faktury vydané 
 
-Použití
--------
-
-Na stránce [redmineprojects.php](src/redmineprojects.php) se zvolí ze kterých projektů se budou exportovat odpracované časy
-
-![Výběr projektů](vyber-projektu.png?raw=true "Volba projektů")
-
-Po odeslání formuláře se na další [stránce](src/redminetimeentries.php) zobrazí vygenerovaná faktura.
-
-![Vygenerovaná faktura](hotovo.png?raw=true "Výsledná faktura")
+(Konfiguraci je možné taktéž pouze nastavit jako proměnné prostředí.)
 
 Instalace
 ---------
 
-Složka **src** je kořen webu který má být dostupný webserveru. 
-ve složce projektu je třeba spustit **composer install** který doinstaluje potřebné závislosti.
 
 
 Požadavky

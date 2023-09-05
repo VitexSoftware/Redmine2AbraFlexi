@@ -1,0 +1,47 @@
+{
+  "name": "deb/redmine2abraflexi",
+  "description": "Reminder sender for AbraFlexi written in PHP",
+  "type": "project",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "info@vitexsoftware.cz"
+    }
+  ],
+  "config": {
+    "vendor-dir": "/var/lib/composer/redmine2abraflexi"
+  },
+  "require": {
+    "deb/abraflexi": "*",
+    "deb/ease-core": "*",
+    "deb/abraflexi-bricks": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Redmine2AbraFlexi\\": "./Redmine2AbraFlexi/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseCore"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseHtml"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/AbraFlexi"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseBricks"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/AbraFlexiBricks"
+    }
+  ]
+}

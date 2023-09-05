@@ -14,4 +14,3 @@ override_dh_install:
 	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
 	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/redmine2abraflexi/g' 	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
 	sed -i -e 's/\.\./\/etc\/redmine2abraflexi/g'                                  debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
-	sed -i -e 's/.\/AbraFlexi\/Reminder\/Notifier/\/usr\/lib\/redmine2abraflexi\/Reminder\/Notifier/g'    debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php

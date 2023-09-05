@@ -1,6 +1,5 @@
-redmine2abraflexi (2.8) UNRELEASED; urgency=low
+redmine2abraflexi (1.0.0) UNRELEASED; urgency=low
 
-  * Initial release. Closes: #nnnn
-    <nnnn is the bug number of your ITP>
+  * Initial release.
 
  -- Vítězslav Dvořák <info@vitexsoftware.cz>  Tue, 05 Sep 2023 18:57:41 +0200

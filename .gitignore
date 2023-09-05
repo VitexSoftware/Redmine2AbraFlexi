@@ -4,3 +4,7 @@
 /nbproject/private/
 /debian/redmine2abraflexi/
 /debian/debhelper-build-stamp
+/debian/.debhelper/
+/debian/redmine2abraflexi.debhelper.log
+/debian/redmine2abraflexi.substvars
+/debian/files

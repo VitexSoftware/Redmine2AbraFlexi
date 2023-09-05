@@ -1,9 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2023 Vitex Software
  */
 
 namespace Redmine2AbraFlexi;
@@ -18,20 +19,21 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      *
-     * @var DateTime 
+     * @var \DateTime 
      */
     public $since = null;
 
     /**
      *
-     * @var DateTime 
+     * @var \DateTime 
      */
     public $until = null;
 
     /**
+     * Redmine REST client
      * 
-     * @param type $init
-     * @param type $options
+     * @param mixed $init
+     * @param array $options
      */
     public function __construct($init = null, $options = array())
     {
@@ -124,7 +126,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      * Obtain Project Info
      * 
      * @param int    $projectID
-     * @param string $params     
+     * @param array $params     
      * 
      * @return array
      */
@@ -135,11 +137,12 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
+     * Convert Raw response to Array
      * 
-     * @param type $responseRaw
-     * @param type $format
+     * @param string $responseRaw
+     * @param string $format
      * 
-     * @return type
+     * @return array
      */
     public function rawResponseToArray($responseRaw, $format)
     {
@@ -147,11 +150,12 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
+     * Parse Redmine response
      * 
-     * @param type $responseDecoded
-     * @param type $responseCode
+     * @param array $responseDecoded
+     * @param int $responseCode
      * 
-     * @return type
+     * @return array
      */
     public function parseResponse($responseDecoded, $responseCode)
     {
@@ -161,9 +165,9 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Time Entries obtainer
      * 
-     * @param int  $projectID
-     * @param type $start
-     * @param type $end
+     * @param int    $projectID
+     * @param string $start
+     * @param string $end
      * 
      * @return array
      */
@@ -191,16 +195,17 @@ class RedmineRestClient extends \AbraFlexi\RO
         $response = $this->performRequest(\Ease\Functions::addUrlParams('time_entries.json',
                         $conditions), 'GET');
         if ($this->lastResponseCode == 200) {
-            $response = self::reindexArrayBy($response['time_entries'], 'id');
+            $response = \Ease\Functions::reindexArrayBy($response['time_entries'], 'id');
         }
         return $response;
     }
 
     /**
+     * Add Issue names to time entries
      * 
-     * @param type $timeEntries
+     * @param array $timeEntries
      * 
-     * @return type
+     * @return array
      */
     public function addIssueNames($timeEntries)
     {
@@ -235,10 +240,11 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
+     * Obtain Issue name by IssueID
      * 
-     * @param type $issuesID
+     * @param int $issuesID
      * 
-     * @return type
+     * @return array
      */
     public function getNameForIssues($issuesID)
     {
@@ -276,9 +282,11 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
+     * Obtain Issue Info
      * 
-     * @param type $id
-     * @return type
+     * @param int $id of Issue
+     * 
+     * @return array
      */
     public function getIssueInfo($id)
     {
@@ -288,8 +296,9 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Prepare processing interval
      * 
-     * @param string $scope 
-     * @throws Exception
+     * @param string $scope
+     * 
+     * @throws \Ease\Exception
      */
     public function scopeToInterval($scope)
     {
@@ -334,8 +343,7 @@ class RedmineRestClient extends \AbraFlexi\RO
                 $this->until = new \DateTime('last day of ' . $scope . ' ' . date('Y'));
                 break;
             default:
-                throw new Exception('Unknown scope ' . $scope);
-                break;
+                throw new \Ease\Exception('Unknown scope ' . $scope);
         }
         $this->since = $this->since->setTime(0, 0);
         $this->until = $this->until->setTime(0, 0);

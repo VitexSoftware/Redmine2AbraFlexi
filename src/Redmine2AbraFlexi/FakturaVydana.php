@@ -1,4 +1,10 @@
 <?php
+/**
+ * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2023 Vitex Software
+ */
 
 namespace Redmine2AbraFlexi;
 
@@ -94,30 +100,13 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
     }
 
     /**
-     * Přidá položku do objednávky
-     *
-     * @param int|string $orderID
-     * @param array      $itemData
-     *
-     * @return boolean result
-     */
-    public function addItemToOrder($orderID, $itemData)
-    {
-        $this->dataReset();
-        $this->setMyKey($orderID);
-        $itemData['typDokl'] = $this->configuration['kodvydaneobjednavky'];
-        $this->addArrayToBranch($itemData, 'polozkyDokladu');
-        $this->insertToAbraFlexi();
-        return $this->lastResponseCode == 201;
-    }
-
-    /**
      * 
      * @param array $timeEntriesRaw
      */
     public function takeItemsFromArray($timeEntriesRaw)
     {
         $itemsData = [];
+        $timeEntries = [];
         foreach ($timeEntriesRaw as $rowId => $timeEntryRaw) {
             $timeEntries[$timeEntryRaw['project']][$rowId] = $timeEntryRaw;
         }

@@ -1,0 +1,1337 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: redmine2abraflexi
+Upstream-Contact: <preferred name and address to reach the upstream project>
+Source: <url://example.com>
+#
+# Please double check copyright with the licensecheck(1) command.
+
+Files:     .env
+           .env.template
+           .github/FUNDING.yml
+           .gitignore
+           README.md
+           composer.json
+           composer.lock
+           i18n/cs_CZ/LC_MESSAGES/redmine2abraflexi.po
+           i18n/en_US/LC_MESSAGES/redmine2abralexi.po
+           nbproject/private/config.properties
+           nbproject/private/private.properties
+           nbproject/project.properties
+           project-logo.png
+           project-logo.xcf
+           src/workhourstoinvoice.php
+           vendor/composer/installed.json
+           vendor/pear/console_getopt/.gitignore
+           vendor/pear/console_getopt/.travis.yml
+           vendor/pear/console_getopt/README.rst
+           vendor/pear/console_getopt/composer.json
+           vendor/pear/console_getopt/tests/001-getopt.phpt
+           vendor/pear/console_getopt/tests/bug10557.phpt
+           vendor/pear/console_getopt/tests/bug11068.phpt
+           vendor/pear/console_getopt/tests/bug13140.phpt
+           vendor/pear/mail/README.rst
+           vendor/pear/mail/composer.json
+           vendor/pear/mail_mime/README
+           vendor/pear/mail_mime/composer.json
+           vendor/pear/pear-core-minimal/README.rst
+           vendor/pear/pear-core-minimal/composer.json
+           vendor/pear/pear_exception/composer.json
+           vendor/spojenet/flexibee/.circleci/config.yml
+           vendor/spojenet/flexibee/.github/dependabot.yml
+           vendor/spojenet/flexibee/.github/workflows/php.yml
+           vendor/spojenet/flexibee/.vscode/launch.json
+           vendor/spojenet/flexibee/CODE_OF_CONDUCT.md
+           vendor/spojenet/flexibee/CONTRIBUTING.md
+           vendor/spojenet/flexibee/Examples/AttachmentSaveToFile.php
+           vendor/spojenet/flexibee/Examples/AttachmentUpload.php
+           vendor/spojenet/flexibee/Examples/AuthSessionIdUsage.php
+           vendor/spojenet/flexibee/Examples/AuthentizeContact.php
+           vendor/spojenet/flexibee/Examples/BatchOperation.php
+           vendor/spojenet/flexibee/Examples/CreateLabel.php
+           vendor/spojenet/flexibee/Examples/CreateOrder.php
+           vendor/spojenet/flexibee/Examples/DownloadInvoicePDF.php
+           vendor/spojenet/flexibee/Examples/DryRun.php
+           vendor/spojenet/flexibee/Examples/EnableChangelog.php
+           vendor/spojenet/flexibee/Examples/Error404.php
+           vendor/spojenet/flexibee/Examples/ErrorHandling.php
+           vendor/spojenet/flexibee/Examples/ExampleTemplate.php
+           vendor/spojenet/flexibee/Examples/FindOverdueInvoices.php
+           vendor/spojenet/flexibee/Examples/GetBankAccountForCompany.php
+           vendor/spojenet/flexibee/Examples/GetRecordWithRelation.php
+           vendor/spojenet/flexibee/Examples/InvoiceCopy.php
+           vendor/spojenet/flexibee/Examples/InvoiceLastChanges.php
+           vendor/spojenet/flexibee/Examples/InvoiceLockUnlock.php
+           vendor/spojenet/flexibee/Examples/LoginLogout.php
+           vendor/spojenet/flexibee/Examples/MovePricelistItemToAnotherCategory.php
+           vendor/spojenet/flexibee/Examples/NajdiDanovyDokladKzalohovemu.php
+           vendor/spojenet/flexibee/Examples/Naskladneni.php
+           vendor/spojenet/flexibee/Examples/NewInvoice.php
+           vendor/spojenet/flexibee/Examples/ObjectChaining.php
+           vendor/spojenet/flexibee/Examples/ObjectsCooperation.php
+           vendor/spojenet/flexibee/Examples/PerformingActions.php
+           vendor/spojenet/flexibee/Examples/Prevodka.php
+           vendor/spojenet/flexibee/Examples/ReadAddressColumns.php
+           vendor/spojenet/flexibee/Examples/ReadInvoiceColumns.php
+           vendor/spojenet/flexibee/Examples/SendReminders.php
+           vendor/spojenet/flexibee/Examples/SetContactAuth.php
+           vendor/spojenet/flexibee/Examples/ShowDocumentChanges.php
+           vendor/spojenet/flexibee/Examples/TestConnection.php
+           vendor/spojenet/flexibee/Examples/UpdateInvoice.php
+           vendor/spojenet/flexibee/Examples/establishWebHook.php
+           vendor/spojenet/flexibee/Examples/flexipeehp-composer-install.png
+           vendor/spojenet/flexibee/Examples/flexipeehp-debian-test.png
+           vendor/spojenet/flexibee/Examples/sendInvoiceByMail.php
+           vendor/spojenet/flexibee/Makefile
+           vendor/spojenet/flexibee/README.md
+           vendor/spojenet/flexibee/Vagrantfile
+           vendor/spojenet/flexibee/bootstrap-centos.sh
+           vendor/spojenet/flexibee/bootstrap-debian.sh
+           vendor/spojenet/flexibee/composer.json
+           vendor/spojenet/flexibee/debian/Jenkinsfile
+           vendor/spojenet/flexibee/debian/README.Debian
+           vendor/spojenet/flexibee/debian/compat
+           vendor/spojenet/flexibee/debian/composer.json
+           vendor/spojenet/flexibee/debian/php-spojenet-abraflexi-dev.install
+           vendor/spojenet/flexibee/debian/php-spojenet-abraflexi-doc.conf
+           vendor/spojenet/flexibee/debian/php-spojenet-abraflexi-doc.install
+           vendor/spojenet/flexibee/debian/php-spojenet-abraflexi.install
+           vendor/spojenet/flexibee/debian/php-spojenet-abraflexi.postinst
+           vendor/spojenet/flexibee/debian/php-spojenet-abraflexi.prerm
+           vendor/spojenet/flexibee/debian/rules
+           vendor/spojenet/flexibee/debian/source/format
+           vendor/spojenet/flexibee/debian/test/composer.json
+           vendor/spojenet/flexibee/debian/test/config.json
+           vendor/spojenet/flexibee/debian/test/flexibeeping.php
+           vendor/spojenet/flexibee/project-icon-400.png
+           vendor/spojenet/flexibee/project-logo.png
+           vendor/spojenet/flexibee/spoje-net_logo.gif
+           vendor/spojenet/flexibee/static/Actions.json
+           vendor/spojenet/flexibee/static/EvidenceFullList.json
+           vendor/spojenet/flexibee/static/EvidenceList.json
+           vendor/spojenet/flexibee/static/Formats.json
+           vendor/spojenet/flexibee/static/Properties.adresar-bankovni-ucet.json
+           vendor/spojenet/flexibee/static/Properties.adresar.json
+           vendor/spojenet/flexibee/static/Properties.analyza-nakupu.json
+           vendor/spojenet/flexibee/static/Properties.analyza-prodeje.json
+           vendor/spojenet/flexibee/static/Properties.analyza-zakazky.json
+           vendor/spojenet/flexibee/static/Properties.atribut.json
+           vendor/spojenet/flexibee/static/Properties.autotisk.json
+           vendor/spojenet/flexibee/static/Properties.banka-polozka.json
+           vendor/spojenet/flexibee/static/Properties.banka.json
+           vendor/spojenet/flexibee/static/Properties.bankovni-ucet-pokladna.json
+           vendor/spojenet/flexibee/static/Properties.bankovni-ucet-sklad-pokladna.json
+           vendor/spojenet/flexibee/static/Properties.bankovni-ucet.json
+           vendor/spojenet/flexibee/static/Properties.cenik-obal.json
+           vendor/spojenet/flexibee/static/Properties.cenik-typ-sazby-dph.json
+           vendor/spojenet/flexibee/static/Properties.cenik.json
+           vendor/spojenet/flexibee/static/Properties.cenikova-skupina.json
+           vendor/spojenet/flexibee/static/Properties.cenikovy-pohyb-nakup.json
+           vendor/spojenet/flexibee/static/Properties.cenikovy-pohyb-prodej.json
+           vendor/spojenet/flexibee/static/Properties.cenova-uroven.json
+           vendor/spojenet/flexibee/static/Properties.certifikacni-autorita.json
+           vendor/spojenet/flexibee/static/Properties.certifikat-eet.json
+           vendor/spojenet/flexibee/static/Properties.certifikat.json
+           vendor/spojenet/flexibee/static/Properties.cinnost.json
+           vendor/spojenet/flexibee/static/Properties.ciselnik-mzdovych-slozek.json
+           vendor/spojenet/flexibee/static/Properties.cislo-baliku.json
+           vendor/spojenet/flexibee/static/Properties.cleneni-dph.json
+           vendor/spojenet/flexibee/static/Properties.cleneni-kontrolni-hlaseni.json
+           vendor/spojenet/flexibee/static/Properties.custom-button.json
+           vendor/spojenet/flexibee/static/Properties.danova-evidence.json
+           vendor/spojenet/flexibee/static/Properties.dashboard-panel.json
+           vendor/spojenet/flexibee/static/Properties.dashboard-sharing.json
+           vendor/spojenet/flexibee/static/Properties.dite.json
+           vendor/spojenet/flexibee/static/Properties.dodavatel.json
+           vendor/spojenet/flexibee/static/Properties.dodavatelska-smlouva.json
+           vendor/spojenet/flexibee/static/Properties.dodavatelsky-typ-smlouvy.json
+           vendor/spojenet/flexibee/static/Properties.doklad-k-uhrade.json
+           vendor/spojenet/flexibee/static/Properties.doklad.json
+           vendor/spojenet/flexibee/static/Properties.eet-komunikace.json
+           vendor/spojenet/flexibee/static/Properties.faktura-prijata-polozka.json
+           vendor/spojenet/flexibee/static/Properties.faktura-prijata.json
+           vendor/spojenet/flexibee/static/Properties.faktura-vydana-polozka.json
+           vendor/spojenet/flexibee/static/Properties.faktura-vydana.json
+           vendor/spojenet/flexibee/static/Properties.filtr.json
+           vendor/spojenet/flexibee/static/Properties.forma-dopravy.json
+           vendor/spojenet/flexibee/static/Properties.forma-uhrady-zauctovani.json
+           vendor/spojenet/flexibee/static/Properties.forma-uhrady.json
+           vendor/spojenet/flexibee/static/Properties.format-elektronickeho-bankovnictvi.json
+           vendor/spojenet/flexibee/static/Properties.global-store.json
+           vendor/spojenet/flexibee/static/Properties.hlavni-kniha.json
+           vendor/spojenet/flexibee/static/Properties.hodnoceni-zakazky.json
+           vendor/spojenet/flexibee/static/Properties.individualni-cenik.json
+           vendor/spojenet/flexibee/static/Properties.insight.json
+           vendor/spojenet/flexibee/static/Properties.interni-doklad-polozka.json
+           vendor/spojenet/flexibee/static/Properties.interni-doklad.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-dodaci-podminky.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-druh-dopravy.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-kod-nomenklatury.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-kraj-urceni.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-kurz.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-merna-jednotka.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-obchodni-transakce.json
+           vendor/spojenet/flexibee/static/Properties.intrastat-zvlastni-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.inventura-polozka.json
+           vendor/spojenet/flexibee/static/Properties.inventura.json
+           vendor/spojenet/flexibee/static/Properties.konst-symbol.json
+           vendor/spojenet/flexibee/static/Properties.kontakt.json
+           vendor/spojenet/flexibee/static/Properties.kurz-pro-cenotvorbu.json
+           vendor/spojenet/flexibee/static/Properties.kurz-pro-preceneni.json
+           vendor/spojenet/flexibee/static/Properties.kurz.json
+           vendor/spojenet/flexibee/static/Properties.kusovnik.json
+           vendor/spojenet/flexibee/static/Properties.leasing.json
+           vendor/spojenet/flexibee/static/Properties.majetek-udalost.json
+           vendor/spojenet/flexibee/static/Properties.majetek.json
+           vendor/spojenet/flexibee/static/Properties.mapovani-skladu.json
+           vendor/spojenet/flexibee/static/Properties.mena.json
+           vendor/spojenet/flexibee/static/Properties.merna-jednotka.json
+           vendor/spojenet/flexibee/static/Properties.misto-urceni.json
+           vendor/spojenet/flexibee/static/Properties.mzda.json
+           vendor/spojenet/flexibee/static/Properties.mzdova-slozka.json
+           vendor/spojenet/flexibee/static/Properties.mzdy-bankovni-spojeni.json
+           vendor/spojenet/flexibee/static/Properties.nabidka-prijata-polozka.json
+           vendor/spojenet/flexibee/static/Properties.nabidka-prijata.json
+           vendor/spojenet/flexibee/static/Properties.nabidka-vydana-polozka.json
+           vendor/spojenet/flexibee/static/Properties.nabidka-vydana.json
+           vendor/spojenet/flexibee/static/Properties.naklad.json
+           vendor/spojenet/flexibee/static/Properties.nastaveni.json
+           vendor/spojenet/flexibee/static/Properties.nepritomnost.json
+           vendor/spojenet/flexibee/static/Properties.objednavka-prijata-polozka.json
+           vendor/spojenet/flexibee/static/Properties.objednavka-prijata.json
+           vendor/spojenet/flexibee/static/Properties.objednavka-vydana-polozka.json
+           vendor/spojenet/flexibee/static/Properties.objednavka-vydana.json
+           vendor/spojenet/flexibee/static/Properties.obrat.json
+           vendor/spojenet/flexibee/static/Properties.obratova-predvaha.json
+           vendor/spojenet/flexibee/static/Properties.odberatel.json
+           vendor/spojenet/flexibee/static/Properties.odpisova-skupina.json
+           vendor/spojenet/flexibee/static/Properties.osoba-hlavicka.json
+           vendor/spojenet/flexibee/static/Properties.osoba.json
+           vendor/spojenet/flexibee/static/Properties.parametr.json
+           vendor/spojenet/flexibee/static/Properties.penezni-ustav.json
+           vendor/spojenet/flexibee/static/Properties.po-splatnosti.json
+           vendor/spojenet/flexibee/static/Properties.podklady-dph.json
+           vendor/spojenet/flexibee/static/Properties.podobne-zbozi.json
+           vendor/spojenet/flexibee/static/Properties.pohledavka-polozka.json
+           vendor/spojenet/flexibee/static/Properties.pohledavka.json
+           vendor/spojenet/flexibee/static/Properties.pohyb-na-uctech.json
+           vendor/spojenet/flexibee/static/Properties.pokladna.json
+           vendor/spojenet/flexibee/static/Properties.pokladni-pohyb-polozka.json
+           vendor/spojenet/flexibee/static/Properties.pokladni-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.poplatek.json
+           vendor/spojenet/flexibee/static/Properties.poptavka-prijata-polozka.json
+           vendor/spojenet/flexibee/static/Properties.poptavka-prijata.json
+           vendor/spojenet/flexibee/static/Properties.poptavka-vydana-polozka.json
+           vendor/spojenet/flexibee/static/Properties.poptavka-vydana.json
+           vendor/spojenet/flexibee/static/Properties.prace-mesic.json
+           vendor/spojenet/flexibee/static/Properties.prace.json
+           vendor/spojenet/flexibee/static/Properties.pracovni-pomer-hlavicka.json
+           vendor/spojenet/flexibee/static/Properties.pracovni-pomer.json
+           vendor/spojenet/flexibee/static/Properties.pravo-viditelnosti.json
+           vendor/spojenet/flexibee/static/Properties.predpis-zauctovani.json
+           vendor/spojenet/flexibee/static/Properties.prehled-zamestnancu.json
+           vendor/spojenet/flexibee/static/Properties.preneseni-dph.json
+           vendor/spojenet/flexibee/static/Properties.pricteni-rozdilu.json
+           vendor/spojenet/flexibee/static/Properties.prikaz-k-inkasu-polozka.json
+           vendor/spojenet/flexibee/static/Properties.prikaz-k-inkasu.json
+           vendor/spojenet/flexibee/static/Properties.prikaz-k-uhrade-polozka.json
+           vendor/spojenet/flexibee/static/Properties.prikaz-k-uhrade.json
+           vendor/spojenet/flexibee/static/Properties.priloha.json
+           vendor/spojenet/flexibee/static/Properties.prislustenstvi.json
+           vendor/spojenet/flexibee/static/Properties.prodejka-platba.json
+           vendor/spojenet/flexibee/static/Properties.prodejka.json
+           vendor/spojenet/flexibee/static/Properties.psc.json
+           vendor/spojenet/flexibee/static/Properties.rada-banka.json
+           vendor/spojenet/flexibee/static/Properties.rada-faktury-prijate.json
+           vendor/spojenet/flexibee/static/Properties.rada-faktury-vydane.json
+           vendor/spojenet/flexibee/static/Properties.rada-interniho-dokladu.json
+           vendor/spojenet/flexibee/static/Properties.rada-nabidky-prijate.json
+           vendor/spojenet/flexibee/static/Properties.rada-nabidky-vydane.json
+           vendor/spojenet/flexibee/static/Properties.rada-objednavky-prijate.json
+           vendor/spojenet/flexibee/static/Properties.rada-objednavky-vydane.json
+           vendor/spojenet/flexibee/static/Properties.rada-pohledavky.json
+           vendor/spojenet/flexibee/static/Properties.rada-pokladni-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.rada-poptavky-prijate.json
+           vendor/spojenet/flexibee/static/Properties.rada-poptavky-vydane.json
+           vendor/spojenet/flexibee/static/Properties.rada-skladovy-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.rada-zavazku.json
+           vendor/spojenet/flexibee/static/Properties.rada.json
+           vendor/spojenet/flexibee/static/Properties.radek-priznani-dph.json
+           vendor/spojenet/flexibee/static/Properties.radek-sestavy.json
+           vendor/spojenet/flexibee/static/Properties.rezervace.json
+           vendor/spojenet/flexibee/static/Properties.rocni-rada.json
+           vendor/spojenet/flexibee/static/Properties.rozvaha-po-uctech.json
+           vendor/spojenet/flexibee/static/Properties.sablona-mail.json
+           vendor/spojenet/flexibee/static/Properties.sablona-upominky.json
+           vendor/spojenet/flexibee/static/Properties.sady-a-komplety.json
+           vendor/spojenet/flexibee/static/Properties.saldo-k-datu.json
+           vendor/spojenet/flexibee/static/Properties.saldo.json
+           vendor/spojenet/flexibee/static/Properties.sarze-expirace.json
+           vendor/spojenet/flexibee/static/Properties.sazba-dph.json
+           vendor/spojenet/flexibee/static/Properties.sestava.json
+           vendor/spojenet/flexibee/static/Properties.setting-store.json
+           vendor/spojenet/flexibee/static/Properties.sklad.json
+           vendor/spojenet/flexibee/static/Properties.skladova-karta.json
+           vendor/spojenet/flexibee/static/Properties.skladovy-pohyb-polozka.json
+           vendor/spojenet/flexibee/static/Properties.skladovy-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.skupina-atributu.json
+           vendor/spojenet/flexibee/static/Properties.skupina-firem.json
+           vendor/spojenet/flexibee/static/Properties.skupina-osob.json
+           vendor/spojenet/flexibee/static/Properties.skupina-stitku.json
+           vendor/spojenet/flexibee/static/Properties.skupina-zbozi.json
+           vendor/spojenet/flexibee/static/Properties.smena.json
+           vendor/spojenet/flexibee/static/Properties.smlouva-polozka.json
+           vendor/spojenet/flexibee/static/Properties.smlouva-zurnal.json
+           vendor/spojenet/flexibee/static/Properties.smlouva.json
+           vendor/spojenet/flexibee/static/Properties.souhrnne-hlaseni-dph.json
+           vendor/spojenet/flexibee/static/Properties.srazka.json
+           vendor/spojenet/flexibee/static/Properties.stala-mzdova-slozka.json
+           vendor/spojenet/flexibee/static/Properties.standardni-predpis.json
+           vendor/spojenet/flexibee/static/Properties.stat.json
+           vendor/spojenet/flexibee/static/Properties.stav-ceniku.json
+           vendor/spojenet/flexibee/static/Properties.stav-obchodniho-dokladu.json
+           vendor/spojenet/flexibee/static/Properties.stav-skladu-k-datu.json
+           vendor/spojenet/flexibee/static/Properties.stav-smlouvy.json
+           vendor/spojenet/flexibee/static/Properties.stav-uctu.json
+           vendor/spojenet/flexibee/static/Properties.stav-zakazky.json
+           vendor/spojenet/flexibee/static/Properties.stitek.json
+           vendor/spojenet/flexibee/static/Properties.stredisko.json
+           vendor/spojenet/flexibee/static/Properties.strom-cenik.json
+           vendor/spojenet/flexibee/static/Properties.strom-koren.json
+           vendor/spojenet/flexibee/static/Properties.strom.json
+           vendor/spojenet/flexibee/static/Properties.subjekt.json
+           vendor/spojenet/flexibee/static/Properties.sumace-sestavy.json
+           vendor/spojenet/flexibee/static/Properties.text.json
+           vendor/spojenet/flexibee/static/Properties.typ-aktivity.json
+           vendor/spojenet/flexibee/static/Properties.typ-atributu.json
+           vendor/spojenet/flexibee/static/Properties.typ-banka.json
+           vendor/spojenet/flexibee/static/Properties.typ-dokladu.json
+           vendor/spojenet/flexibee/static/Properties.typ-faktury-prijate.json
+           vendor/spojenet/flexibee/static/Properties.typ-faktury-vydane.json
+           vendor/spojenet/flexibee/static/Properties.typ-interniho-dokladu.json
+           vendor/spojenet/flexibee/static/Properties.typ-leasingu.json
+           vendor/spojenet/flexibee/static/Properties.typ-majetku.json
+           vendor/spojenet/flexibee/static/Properties.typ-nabidky-prijate.json
+           vendor/spojenet/flexibee/static/Properties.typ-nabidky-vydane.json
+           vendor/spojenet/flexibee/static/Properties.typ-nakladu.json
+           vendor/spojenet/flexibee/static/Properties.typ-objednavky-prijate.json
+           vendor/spojenet/flexibee/static/Properties.typ-objednavky-vydane.json
+           vendor/spojenet/flexibee/static/Properties.typ-organizace.json
+           vendor/spojenet/flexibee/static/Properties.typ-pohledavky.json
+           vendor/spojenet/flexibee/static/Properties.typ-pokladni-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.typ-poptavky-prijate.json
+           vendor/spojenet/flexibee/static/Properties.typ-poptavky-vydane.json
+           vendor/spojenet/flexibee/static/Properties.typ-pracovniho-pomeru.json
+           vendor/spojenet/flexibee/static/Properties.typ-prodejky.json
+           vendor/spojenet/flexibee/static/Properties.typ-skladovy-pohyb.json
+           vendor/spojenet/flexibee/static/Properties.typ-smlouvy.json
+           vendor/spojenet/flexibee/static/Properties.typ-stavu-ceniku.json
+           vendor/spojenet/flexibee/static/Properties.typ-uzivatelske-vazby.json
+           vendor/spojenet/flexibee/static/Properties.typ-vzajemnych-zapoctu.json
+           vendor/spojenet/flexibee/static/Properties.typ-zakazky.json
+           vendor/spojenet/flexibee/static/Properties.typ-zavazku.json
+           vendor/spojenet/flexibee/static/Properties.ucet.json
+           vendor/spojenet/flexibee/static/Properties.ucetni-denik.json
+           vendor/spojenet/flexibee/static/Properties.ucetni-obdobi.json
+           vendor/spojenet/flexibee/static/Properties.ucetni-osnova.json
+           vendor/spojenet/flexibee/static/Properties.udalost.json
+           vendor/spojenet/flexibee/static/Properties.umisteni-uctu.json
+           vendor/spojenet/flexibee/static/Properties.umisteni-ve-skladu-mistnost.json
+           vendor/spojenet/flexibee/static/Properties.umisteni-ve-skladu-police.json
+           vendor/spojenet/flexibee/static/Properties.umisteni-ve-skladu-regal.json
+           vendor/spojenet/flexibee/static/Properties.umisteni-ve-skladu.json
+           vendor/spojenet/flexibee/static/Properties.umisteni.json
+           vendor/spojenet/flexibee/static/Properties.uzivatel.json
+           vendor/spojenet/flexibee/static/Properties.uzivatelska-vazba.json
+           vendor/spojenet/flexibee/static/Properties.uzivatelsky-dotaz-parametr.json
+           vendor/spojenet/flexibee/static/Properties.uzivatelsky-dotaz-vlastnost.json
+           vendor/spojenet/flexibee/static/Properties.uzivatelsky-dotaz.json
+           vendor/spojenet/flexibee/static/Properties.vazba.json
+           vendor/spojenet/flexibee/static/Properties.vazebni-doklad.json
+           vendor/spojenet/flexibee/static/Properties.vykaz-hospodareni.json
+           vendor/spojenet/flexibee/static/Properties.vyrobni-cislo.json
+           vendor/spojenet/flexibee/static/Properties.vysledovka-po-uctech.json
+           vendor/spojenet/flexibee/static/Properties.vzajemny-zapocet.json
+           vendor/spojenet/flexibee/static/Properties.xslt.json
+           vendor/spojenet/flexibee/static/Properties.zakazka.json
+           vendor/spojenet/flexibee/static/Properties.zapujcka.json
+           vendor/spojenet/flexibee/static/Properties.zavazek-polozka.json
+           vendor/spojenet/flexibee/static/Properties.zavazek.json
+           vendor/spojenet/flexibee/static/Properties.zurnal.json
+           vendor/spojenet/flexibee/static/Relations.json
+           vendor/spojenet/flexibee/tools/force_update_all.sh
+           vendor/spojenet/flexibee/tools/nastaveni-properties.json
+           vendor/spojenet/flexibee/tools/update_all.sh
+           vendor/vitexsoftware/ease-core/.github/FUNDING.yml
+           vendor/vitexsoftware/ease-core/.github/dependabot.yml
+           vendor/vitexsoftware/ease-core/.github/workflows/packaging.yml
+           vendor/vitexsoftware/ease-core/.github/workflows/testing.yml
+           vendor/vitexsoftware/ease-core/.vscode/settings.json
+           vendor/vitexsoftware/ease-core/Examples/SendTestMail.php
+           vendor/vitexsoftware/ease-core/Examples/debian/composer.json
+           vendor/vitexsoftware/ease-core/Examples/debian/debianized.php
+           vendor/vitexsoftware/ease-core/Makefile
+           vendor/vitexsoftware/ease-core/README.md
+           vendor/vitexsoftware/ease-core/Vagrantfile
+           vendor/vitexsoftware/ease-core/bootstrap-centos.sh
+           vendor/vitexsoftware/ease-core/codeception.yml
+           vendor/vitexsoftware/ease-core/composer.json
+           vendor/vitexsoftware/ease-core/debian/Jenkinsfile
+           vendor/vitexsoftware/ease-core/debian/README.Debian
+           vendor/vitexsoftware/ease-core/debian/compat
+           vendor/vitexsoftware/ease-core/debian/composer.json
+           vendor/vitexsoftware/ease-core/debian/ease-mailer-test
+           vendor/vitexsoftware/ease-core/debian/fixversion.sh
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core-dev.install
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core-dev.links
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core-dev.postinst
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core-doc.conf
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core-doc.install
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core.install
+           vendor/vitexsoftware/ease-core/debian/php-vitexsoftware-ease-core.postinst
+           vendor/vitexsoftware/ease-core/debian/rules
+           vendor/vitexsoftware/ease-core/debian/source/format
+           vendor/vitexsoftware/ease-core/debian/tests/composer.json
+           vendor/vitexsoftware/ease-core/ease-core-social-preview.png
+           vendor/vitexsoftware/ease-core/ease-core.dsc
+           vendor/vitexsoftware/ease-core/i18n/cs_CZ/LC_MESSAGES/php-vitexsoftware-ease-core.mo
+           vendor/vitexsoftware/ease-core/i18n/cs_CZ/LC_MESSAGES/php-vitexsoftware-ease-core.po
+           vendor/vitexsoftware/ease-core/i18n/en_US/LC_MESSAGES/php-vitexsoftware-ease-core.mo
+           vendor/vitexsoftware/ease-core/i18n/en_US/LC_MESSAGES/php-vitexsoftware-ease-core.po
+           vendor/vitexsoftware/ease-core/i18n/eo/LC_MESSAGES/php-vitexsoftware-ease-core.mo
+           vendor/vitexsoftware/ease-core/i18n/eo/LC_MESSAGES/php-vitexsoftware-ease-core.po
+           vendor/vitexsoftware/ease-core/project-logo.png
+           vendor/vitexsoftware/ease-core/project-logo.xcf
+           vendor/vitexsoftware/ease-core/release.sh
+           vendor/vitexsoftware/ease-core/social-preview.xcf
+           vendor/vitexsoftware/ease-core/tests/.env
+           vendor/vitexsoftware/ease-core/tests/configtest.json
+           vendor/vitexsoftware/ease-core/tests/report.sh
+           vendor/vitexsoftware/ease-core/tests/runalltests.sh
+           vendor/vitexsoftware/ease-core/tests/unit.suite.yml
+           vendor/vitexsoftware/ease-html/.github/FUNDING.yml
+           vendor/vitexsoftware/ease-html/.github/dependabot.yml
+           vendor/vitexsoftware/ease-html/.github/workflows/packaging.yml
+           vendor/vitexsoftware/ease-html/.github/workflows/tests.yml
+           vendor/vitexsoftware/ease-html/.gitignore
+           vendor/vitexsoftware/ease-html/.scrutinizer.yml
+           vendor/vitexsoftware/ease-html/Makefile
+           vendor/vitexsoftware/ease-html/README.md
+           vendor/vitexsoftware/ease-html/composer.json
+           vendor/vitexsoftware/ease-html/debian/Jenkinsfile
+           vendor/vitexsoftware/ease-html/debian/README.Debian
+           vendor/vitexsoftware/ease-html/debian/compat
+           vendor/vitexsoftware/ease-html/debian/composer.json
+           vendor/vitexsoftware/ease-html/debian/php-vitexsoftware-ease-html-dev.install
+           vendor/vitexsoftware/ease-html/debian/php-vitexsoftware-ease-html-dev.postinst
+           vendor/vitexsoftware/ease-html/debian/php-vitexsoftware-ease-html-doc.conf
+           vendor/vitexsoftware/ease-html/debian/php-vitexsoftware-ease-html-doc.install
+           vendor/vitexsoftware/ease-html/debian/php-vitexsoftware-ease-html.install
+           vendor/vitexsoftware/ease-html/debian/php-vitexsoftware-ease-html.postinst
+           vendor/vitexsoftware/ease-html/debian/rules
+           vendor/vitexsoftware/ease-html/debian/source/format
+           vendor/vitexsoftware/ease-html/debian/test/composer.json
+           vendor/vitexsoftware/ease-html/project-icon-400.png
+           vendor/vitexsoftware/ease-html/project-logo.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/.directory
+           vendor/vitexsoftware/ease-twbootstrap-widgets/.github/FUNDING.yml
+           vendor/vitexsoftware/ease-twbootstrap-widgets/BooleanLED.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/BrowsingHistory.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/Dockerfile
+           vendor/vitexsoftware/ease-twbootstrap-widgets/LiveAge.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/LocaleSelect.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/MainPageMenu.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/Makefile
+           vendor/vitexsoftware/ease-twbootstrap-widgets/PasswordInput.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/README.md
+           vendor/vitexsoftware/ease-twbootstrap-widgets/Selectizer.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/SignIn.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/StickyNote.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/TWBSwitch.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/TreeView.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/codeception.yml
+           vendor/vitexsoftware/ease-twbootstrap-widgets/composer.json
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/Jenkinsfile
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/README.Debian
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/compat
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/composer.json
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/lastversion
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/php-vitexsoftware-ease-bootstrap-widgets.install
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/php-vitexsoftware-ease-framework-bricks-doc.install
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/postinst
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/revision
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/rules
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/source/format
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/version
+           vendor/vitexsoftware/ease-twbootstrap-widgets/i18n/cs_CZ/LC_MESSAGES/ease-framework.mo
+           vendor/vitexsoftware/ease-twbootstrap-widgets/i18n/cs_CZ/LC_MESSAGES/ease-framework.po
+           vendor/vitexsoftware/ease-twbootstrap-widgets/i18n/en_US/LC_MESSAGES/ease-framework.mo
+           vendor/vitexsoftware/ease-twbootstrap-widgets/i18n/en_US/LC_MESSAGES/ease-framework.po
+           vendor/vitexsoftware/ease-twbootstrap-widgets/nbproject/project.properties
+           vendor/vitexsoftware/ease-twbootstrap-widgets/project-icon-400.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/project-logo.png
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_data/.gitkeep
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_output/.gitignore
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/_generated/.gitignore
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/acceptance.suite.yml
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/functional.suite.yml
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/runalltests.sh
+           vendor/vitexsoftware/ease-twbootstrap-widgets/tests/unit.suite.yml
+           vendor/vitexsoftware/ease-twbootstrap/.github/FUNDING.yml
+           vendor/vitexsoftware/ease-twbootstrap/.gitignore
+           vendor/vitexsoftware/ease-twbootstrap/Makefile
+           vendor/vitexsoftware/ease-twbootstrap/README.md
+           vendor/vitexsoftware/ease-twbootstrap/composer.json
+           vendor/vitexsoftware/ease-twbootstrap/debian/Jenkinsfile
+           vendor/vitexsoftware/ease-twbootstrap/debian/README.Debian
+           vendor/vitexsoftware/ease-twbootstrap/debian/compat
+           vendor/vitexsoftware/ease-twbootstrap/debian/composer.json
+           vendor/vitexsoftware/ease-twbootstrap/debian/debhelper-build-stamp
+           vendor/vitexsoftware/ease-twbootstrap/debian/files
+           vendor/vitexsoftware/ease-twbootstrap/debian/fixversion.sh
+           vendor/vitexsoftware/ease-twbootstrap/debian/php-vitexsoftware-ease-bootstrap-doc.conf
+           vendor/vitexsoftware/ease-twbootstrap/debian/php-vitexsoftware-ease-bootstrap-doc.install
+           vendor/vitexsoftware/ease-twbootstrap/debian/php-vitexsoftware-ease-bootstrap.install
+           vendor/vitexsoftware/ease-twbootstrap/debian/postinst
+           vendor/vitexsoftware/ease-twbootstrap/debian/rules
+           vendor/vitexsoftware/ease-twbootstrap/debian/source/format
+           vendor/vitexsoftware/ease-twbootstrap/nbproject/private/config.properties
+           vendor/vitexsoftware/ease-twbootstrap/nbproject/private/private.properties
+           vendor/vitexsoftware/ease-twbootstrap/nbproject/project.properties
+           vendor/vitexsoftware/ease-twbootstrap/project-icon-400.png
+           vendor/vitexsoftware/ease-twbootstrap/project-logo.png
+           vendor/vitexsoftware/flexibee-bricks/.gitignore
+           vendor/vitexsoftware/flexibee-bricks/Examples/.directory
+           vendor/vitexsoftware/flexibee-bricks/Examples/addresseditor.png
+           vendor/vitexsoftware/flexibee-bricks/Examples/buttoninstaller.png
+           vendor/vitexsoftware/flexibee-bricks/Examples/companylogo.png
+           vendor/vitexsoftware/flexibee-bricks/Examples/composer-example.json
+           vendor/vitexsoftware/flexibee-bricks/Examples/embed.png
+           vendor/vitexsoftware/flexibee-bricks/Examples/invoices.png
+           vendor/vitexsoftware/flexibee-bricks/Examples/statussignin.png
+           vendor/vitexsoftware/flexibee-bricks/Jenkinsfile
+           vendor/vitexsoftware/flexibee-bricks/Makefile
+           vendor/vitexsoftware/flexibee-bricks/README.md
+           vendor/vitexsoftware/flexibee-bricks/codeception.yml
+           vendor/vitexsoftware/flexibee-bricks/composer.json
+           vendor/vitexsoftware/flexibee-bricks/debian/README.Debian
+           vendor/vitexsoftware/flexibee-bricks/debian/compat
+           vendor/vitexsoftware/flexibee-bricks/debian/composer.json
+           vendor/vitexsoftware/flexibee-bricks/debian/php-vitexsoftware-abraflexi-bricks-doc.conf
+           vendor/vitexsoftware/flexibee-bricks/debian/php-vitexsoftware-abraflexi-bricks-doc.install
+           vendor/vitexsoftware/flexibee-bricks/debian/php-vitexsoftware-abraflexi-bricks.install
+           vendor/vitexsoftware/flexibee-bricks/debian/rules
+           vendor/vitexsoftware/flexibee-bricks/debian/source/format
+           vendor/vitexsoftware/flexibee-bricks/docs/css/base.css
+           vendor/vitexsoftware/flexibee-bricks/docs/css/normalize.css
+           vendor/vitexsoftware/flexibee-bricks/docs/css/template.css
+           vendor/vitexsoftware/flexibee-bricks/docs/js/search.js
+           vendor/vitexsoftware/flexibee-bricks/docs/js/searchIndex.js
+           vendor/vitexsoftware/flexibee-bricks/flexipeehp.png
+           vendor/vitexsoftware/flexibee-bricks/i18n/cs_CZ/LC_MESSAGES/flexipeehp-bricks.po
+           vendor/vitexsoftware/flexibee-bricks/nbproject/configs/Example_CompanyLogo.properties
+           vendor/vitexsoftware/flexibee-bricks/nbproject/configs/PHPUnit.properties
+           vendor/vitexsoftware/flexibee-bricks/nbproject/project.properties
+           vendor/vitexsoftware/flexibee-bricks/project-logo.png
+           vendor/vitexsoftware/flexibee-bricks/tests/_data/.gitkeep
+           vendor/vitexsoftware/flexibee-bricks/tests/_output/.gitignore
+           vendor/vitexsoftware/flexibee-bricks/tests/_support/_generated/.gitignore
+           vendor/vitexsoftware/flexibee-bricks/tests/acceptance.suite.yml
+           vendor/vitexsoftware/flexibee-bricks/tests/client.json
+           vendor/vitexsoftware/flexibee-bricks/tests/functional.suite.yml
+           vendor/vitexsoftware/flexibee-bricks/tests/unit.suite.yml
+Copyright: __NO_COPYRIGHT_NOR_LICENSE__
+License:   __NO_COPYRIGHT_NOR_LICENSE__
+
+Files:     vendor/vitexsoftware/ease-core/debian/copyright
+           vendor/vitexsoftware/ease-html/debian/copyright
+           vendor/vitexsoftware/ease-twbootstrap/debian/copyright
+Copyright: 2013-2020 Vítězslav Dvořák (v.s.cz) License: MIT
+License:   __UNKNOWN__
+ License: MIT
+ On Debian systems the full text of the GNU General Public License can be found
+ in the `/usr/share/common-licenses/MIT' file.
+
+Files:     vendor/spojenet/flexibee/debian/copyright
+           vendor/vitexsoftware/ease-twbootstrap-widgets/debian/copyright
+           vendor/vitexsoftware/flexibee-bricks/debian/copyright
+Copyright: 2013 Vítězslav Dvořák (v.s.cz) License: GPL-2
+           2016 Spoje.Net s.r.o. (spoje.net) License: GPL-2
+License:   __UNKNOWN__
+ License: GPL-2
+ On Debian systems the full text of the GNU General Public License can be found
+ in the `/usr/share/common-licenses/GPL-2' file.
+
+Files:     vendor/vitexsoftware/ease-core/Dockerfile
+Copyright: __NO_COPYRIGHT__ in: vendor/vitexsoftware/ease-core/Dockerfile
+License:   __UNKNOWN__
+ COPY src/ /usr/share/php/Ease
+ COPY debian/composer.json /usr/share/php/Ease/composer.json
+ COPY docs/  /usr/share/doc/ease-core/html
+
+Files:     vendor/spojenet/flexibee/php-abraflexi.spec
+Copyright: 2018 Vítězslav Dvořák <info@vitexsoftware.cz>
+License:   __UNKNOWN__
+ License: GPLv2+
+ http://opensource.org/licenses/MIT
+ .
+ Please preserve changelog entries
+
+Files:     vendor/spojenet/flexibee/debian/control
+Copyright: __NO_COPYRIGHT__ in: vendor/spojenet/flexibee/debian/control
+License:   __UNKNOWN__
+ Package: php-spojenet-abraflexi
+ Depends: ${misc:Depends}, php-curl, php-xml, php-vitexsoftware-ease-core, composer
+ Provides: php-abraflexi
+ Conflicts: flexipeehp
+ Suggests: abraflexi-client-config,abraflexi-client,abraflexi-contract-invoices,abraflexi-dark-gui,abraflexi-digest,abraflexi-matcher,abraflexi-reminder,abraflexi-server,abraflexi-server-backup,abraflexi-tools,multi-abraflexi-setup,abraflexi-mailer,php-vitexsoftware-ease-bootstrap4-widgets-abraflexi,php-vitexsoftware-abraflexi-bricks
+ Architecture: all
+ Section: web
+ Priority: optional
+ Description: PHP Based abraflexi RestAPI/Json library
+ Allow you read and write operations on czech accounting system abraflexi
+ .
+ Package: php-spojenet-abraflexi-dev
+ Depends: ${misc:Depends}, php-spojenet-abraflexi, php-vitexsoftware-ease-core-dev
+ Architecture: all
+ Section: web
+ Priority: optional
+ Description: PHP Based abraflexi RestAPI/Json library development files
+ PHPUnit classes used for testing php-abraflexi functionality
+ .
+ Package: php-spojenet-abraflexi-doc
+ Depends: ${misc:Depends}
+ Architecture: all
+ Replaces: php-abraflexi-doc
+ Suggests: www-browser
+ Section: doc
+ Priority: optional
+ Description: PHP Based abraflexi RestAPI/Json library Documentation
+ PHP Based abraflexi RestAPI/Json library documentation generated by phpDocumentor.
+
+Files:     vendor/vitexsoftware/ease-html/debian/control
+Copyright: __NO_COPYRIGHT__ in: vendor/vitexsoftware/ease-html/debian/control
+License:   __UNKNOWN__
+ Package: php-vitexsoftware-ease-html
+
+Files:     vendor/vitexsoftware/ease-core/ease-core.spec
+Copyright: 2018 Vítězslav Dvořák <info@vitexsoftware.cz>
+License:   __UNKNOWN__
+ Please preserve changelog entries
+
+Files:     vendor/vitexsoftware/flexibee-bricks/debian/control
+Copyright: __NO_COPYRIGHT__ in: vendor/vitexsoftware/flexibee-bricks/debian/control
+License:   __UNKNOWN__
+ Package: php-vitexsoftware-abraflexi-bricks
+ Depends: ${misc:Depends}, php-spojenet-abraflexi,php-vitexsoftware-ease-bricks, php-vitexsoftware-ease-html
+ Replaces: php-abraflexi-bricks
+ Suggests: php-spojenet-abraflexi-doc,php-abraflexi-bricks-doc
+ Architecture: all
+ Section: web
+ Priority: optional
+ Description: PHP Based AbraFlexi RestAPI/Json library AddOns
+ Additional classes and code snipplets for spojenet/abraflexi library
+ .
+ Package: php-vitexsoftware-abraflexi-bricks-doc
+ Depends: ${misc:Depends}
+ Suggests: www-browser
+ Architecture: all
+ Section: doc
+ Priority: optional
+ Description: PHP Based AbraFlexi RestAPI/Json library Addons documentation
+ PHPDocumentor html documentation for AbraFlexi Bricks php library
+
+Files:     vendor/vitexsoftware/ease-twbootstrap/debian/control
+Copyright: __NO_COPYRIGHT__ in: vendor/vitexsoftware/ease-twbootstrap/debian/control
+License:   __UNKNOWN__
+ Package: php-vitexsoftware-ease-bootstrap
+ Depends: ${misc:Depends},php-vitexsoftware-ease-html
+ Architecture: all
+ Conflicts: ease-framework
+ Section: web
+ Priority: optional
+ Description: Set of Twitter Bootstrap 3 rendering objects
+ TWB3 classes for Ease Framework.
+
+Files:     vendor/vitexsoftware/ease-twbootstrap-widgets/debian/control
+Copyright: __NO_COPYRIGHT__ in: vendor/vitexsoftware/ease-twbootstrap-widgets/debian/control
+License:   __UNKNOWN__
+ Package: php-vitexsoftware-ease-bootstrap-widgets
+ Depends: ${misc:Depends},php-vitexsoftware-ease-bootstrap,libjs-bootstrap-switch
+ Architecture: all
+ Section: web
+ Priority: optional
+ Description: Simple PHP framework Bricks
+ Addon components for EasePHP Framework
+ .
+ Package: php-vitexsoftware-ease-bootstrap-widgets-doc
+ Depends: ${misc:Depends}
+ Suggests: www-browser
+ Architecture: all
+ Section: doc
+ Priority: optional
+ Description: Ease Framework documentation
+ ApiGen html documentation for ease-framework php library
+
+Files:     vendor/vitexsoftware/ease-core/debian/control
+Copyright: __NO_COPYRIGHT__ in: vendor/vitexsoftware/ease-core/debian/control
+License:   __UNKNOWN__
+ Package: php-vitexsoftware-ease-core
+ Depends: ${misc:Depends}, php-mail, php-mail-mime, composer-debian, php-intl
+ Conflicts: ease-framework
+ Architecture: all
+ Suggests: php-vitexsoftware-ease-html, php-vitexsoftware-ease-bootstrap, php-vitexsoftware-ease-bootstrap4
+ Section: web
+ Priority: optional
+ Description: EasePHP Framework Core
+ common classes for Ease Framework.
+ .
+ Package: php-vitexsoftware-ease-core-dev
+ Pre-Depends: default-mta | postfix | exim4 | ssmtp | mail-transport-agent
+ Depends: ${misc:Depends}, php-mail, php-mail-mime, php-vitexsoftware-ease-core, phpunit,
+ Architecture: all
+ Suggests: php-vitexsoftware-ease-html, php-vitexsoftware-ease-bootstrap, php-vitexsoftware-ease-bootstrap4
+ Section: web
+ Priority: optional
+ Description: EasePHP Framework Unit Tests
+ Ease Framework Core unit Test classes.
+ .
+ Package: php-vitexsoftware-ease-core-doc
+ Depends: ${misc:Depends}
+ Architecture: all
+ Suggests: www-browser
+ Section: doc
+ Priority: optional
+ Description: EasePHP Framework Documentation
+ Ease Framework core documentation generate phpDocumentor
+
+#----------------------------------------------------------------------------
+# xml and html files (skipped):
+#         nbproject/project.xml
+#         src/Redmine2AbraFlexi/RedmineUserSelect.php
+#         src/Redmine2AbraFlexi/FakturaVydana.php
+#         src/Redmine2AbraFlexi/CSVReader.php
+#         src/Redmine2AbraFlexi/RedmineRestClient.php
+#         vendor/autoload.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/project-logo.svg
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/Bootstrap.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/configuration.xml
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/AcceptanceTester.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/FunctionalTester.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/UnitTester.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/Helper/Functional.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/Helper/Unit.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/_support/Helper/Acceptance.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/src/Ease/TWB/Widgets/TWBTreeViewTest.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/src/Ease/TWB/Widgets/SemaforLEDTest.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/src/Ease/TWB/Widgets/BrowsingHistoryTest.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/src/Ease/TWB/Widgets/MainPageMenuTest.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/src/Ease/TWB/Widgets/TWBSwitchTest.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/acceptance/Ease/ui/MainPageMenuCept.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/acceptance/Ease/ui/SemaforLEDCept.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/tests/acceptance/Ease/ui/TWBSwitchCept.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/nbproject/project.xml
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/PageBottom.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/LiveAge.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/TWBTreeView.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/StickyNote.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/SignInForm.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/TWBSwitch.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/SemaforLight.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/PasswordInput.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/BrowsingHistory.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/PageTop.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/LangSelect.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/MainPageMenu.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/Selectizer.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/src/Ease/TWB/Widgets/MainMenu.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/db/migrations/20180407035009_gdpr_log.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/signinform.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/semaforlight.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/mainpagemenu.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/stickynote.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/twbswitch.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/selectizer.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/twbtreeview.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/liveage.php
+#         vendor/vitexsoftware/ease-twbootstrap-widgets/Examples/selectlang.php
+#         vendor/vitexsoftware/flexibee-bricks/project-logo.svg
+#         vendor/vitexsoftware/flexibee-bricks/phpunit.xml
+#         vendor/vitexsoftware/flexibee-bricks/abraflexi-logo.svg
+#         vendor/vitexsoftware/flexibee-bricks/tests/bootstrap.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/unit/zalozUcetniObdobiOdDo.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/_support/AcceptanceTester.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/_support/FunctionalTester.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/_support/UnitTester.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/_support/Helper/Functional.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/_support/Helper/Unit.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/_support/Helper/Acceptance.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/GateKeeperTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/ParovacFakturTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/HookRecieverTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/ConvertorTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/ConvertRules/Banka_to_FakturaVydanaTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/ConvertRules/FakturaVydana_to_FakturaVydanaTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/ConvertRules/FakturaVydana_to_PokladniPohybTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_ZavazekTest.php
+#         vendor/vitexsoftware/flexibee-bricks/tests/acceptance/ConnectionInfoCept.php
+#         vendor/vitexsoftware/flexibee-bricks/docs/index.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/packages/default.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/packages/Default.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/indices/files.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/graphs/classes.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/namespaces/abraflexi-bricks-convertrules.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/namespaces/abraflexi-ui.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/namespaces/default.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/namespaces/abraflexi.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/namespaces/abraflexi-bricks.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-SearchBox.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ParovacFaktur.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-RecordChooser.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-Convertor.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertRules-Banka-to-FakturaVydana.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-GateKeeper.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-DocumentLink.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-AbraFlexiLogo.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertRules-FakturaVydana-to-PokladniPohyb.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertRules-FakturaPrijata-to-FakturaVydana.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertRules-FakturaVydana-to-FakturaPrijata.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-HookReciever.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-RecordSelector.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-Customer.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-EmbedResponsivePDF.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-GdprLog.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertorRule.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-EmbedResponsive.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-CompanyLogo.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-PotvrzeniUhrady.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-RecordTypeSelect.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-ui-EmbedResponsiveHTML.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertRules-FakturaPrijata-to-Zavazek.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/classes/AbraFlexi-Bricks-ConvertRules-FakturaVydana-to-FakturaVydana.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/reports/errors.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/reports/markers.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/reports/deprecated.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-customer.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-documentlink.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-abraflexilogo.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertrules-fakturaprijata-to-zavazek.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertrules-fakturaprijata-to-fakturavydana.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertrules-fakturavydana-to-fakturaprijata.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-embedresponsive.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertrules-fakturavydana-to-fakturavydana.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertrules-fakturavydana-to-pokladnipohyb.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-hookreciever.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-gatekeeper.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-potvrzeniuhrady.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-gdprlog.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-recordchooser.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-recordselector.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-searchbox.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-companylogo.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertorrule.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertrules-banka-to-fakturavydana.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-recordtypeselect.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-parovacfaktur.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-embedresponsivehtml.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-bricks-convertor.html
+#         vendor/vitexsoftware/flexibee-bricks/docs/files/src-abraflexi-ui-embedresponsivepdf.html
+#         vendor/vitexsoftware/flexibee-bricks/nbproject/project.xml
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/DocumentLink.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/CompanyLogo.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/RecordTypeSelect.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/RecordSelector.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/AbraFlexiLogo.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/EmbedResponsivePDF.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/EmbedResponsive.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/SearchBox.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/RecordChooser.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/ui/EmbedResponsiveHTML.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ParovacFaktur.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/GdprLog.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/Convertor.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertorRule.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/PotvrzeniUhrady.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/Customer.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/HookReciever.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/GateKeeper.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertRules/FakturaVydana_to_PokladniPohyb.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_FakturaVydana.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertRules/Banka_to_FakturaVydana.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_Zavazek.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertRules/FakturaVydana_to_FakturaVydana.php
+#         vendor/vitexsoftware/flexibee-bricks/src/AbraFlexi/Bricks/ConvertRules/FakturaVydana_to_FakturaPrijata.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/LogResults.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/invoices.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/addresseditor.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/conversion.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/productCodeSuggest.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/parse-cmdline.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/companylogo.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/config.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/webhook.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/RegisterAddress.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/embed.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/CurrencyExchange.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/ConnectionInfo.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/zalozUcetniObdobiOdDo.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/VazbaZDD.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/ConvertIncomeToZdd.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/gethtml.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/buttoninstaller.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/getpdf_1.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/UpomenNeplatice.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/sendPaymentConfirmation.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/apiURLtoLinkUrl.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/XSLTimporter.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/common.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/getpdf.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/pricelistsearcher.php
+#         vendor/vitexsoftware/flexibee-bricks/Examples/statussignin.php
+#         vendor/vitexsoftware/ease-html/project-logo.svg
+#         vendor/vitexsoftware/ease-html/phpunit.xml
+#         vendor/vitexsoftware/ease-html/tests/Bootstrap.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/WebPageTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/ContainerTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/DocumentTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/HeadTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/H3TagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/RubyTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputFileTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/BodyTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/IframeTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/KeygenTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DialogTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/RpTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SpanTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputPasswordTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ButtonTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DtTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/EmbedTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputColorTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TrTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ATagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/JavaScriptTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TbodyTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SvgTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/PreTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputSubmitTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ImgTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/CheckboxTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/HeaderTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TextareaTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/PTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputHiddenTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/OptionTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/CanvasTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DivTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ScriptTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TheadTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DlTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/LabelTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/MainTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SourceTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/WbrTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/MarkTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/AddressTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputMonthTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/HrTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputTextTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/FormTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/LiTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/EmTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SpanTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/FieldSetTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ThTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/HtmlTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/H5TagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/CommentTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputTelTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/BdiTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SelectTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/NavTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SummaryTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputDateTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputSearchTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputRadioTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/UlTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SmallTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/AudioTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ParamTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/VideoTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DdTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/H1TagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DetailsTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TimeTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/FigCaptionTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/H2TagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/DatalistTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/FooterTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/MenuItemTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/FigureTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TrackTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputNumberTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SimpleHeadTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TdTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TitleTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/PairTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/H4TagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/OutputTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ProgressTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputDateTimeTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/EmbedableTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SubmitButtonTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/OlTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/StrongTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/RtTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/InputEmailTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/MeterTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/ArticleTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/SectionTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/AsideTagTest.php
+#         vendor/vitexsoftware/ease-html/tests/src/Ease/Html/TableTagTest.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Part.php
+#         vendor/vitexsoftware/ease-html/src/Ease/HtmlMailer.php
+#         vendor/vitexsoftware/ease-html/src/Ease/WebPage.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Glue.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Embedable.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Document.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Container.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputColorTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputDateTimeTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TrTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputEmailTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputWeekTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Span.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SubmitButton.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SpanTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Tbody.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/H1Tag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/EmbedTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DivTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputTextTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TextareaTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/WbrTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DlTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/HtmlTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ArticleTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/PairTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/AudioTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SvgTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/AsideTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputHiddenTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/UlTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ProgressTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputDateTimeLocalTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Form.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/FigCaptionTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/IframeTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/PTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TimeTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Tag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TdTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputRangeTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/MeterTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SimpleHeadTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ButtonTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/H3Tag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/JavaScript.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ATag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputFileTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputNumberTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TitleTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/HeadTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Comment.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ThTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/FigureTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/CanvasTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/HrTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DetailsTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/OutputTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/LiTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputPasswordTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/CheckboxTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/MarkTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/OlTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SummaryTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/RpTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DialogTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Tfoot.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/EmTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ScriptTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DtTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DdTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/OptionTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/H5Tag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputSearchTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/Thead.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/KeygenTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputDateTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/StrongTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/H2Tag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ImgTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/DatalistTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/MenuItemTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputTimeTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SmallTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/LabelTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/VideoTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/FieldSet.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/RubyTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputSubmitTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputRadioTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/FooterTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TableTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/NavTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/MetaTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/MainTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/TrackTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputMonthTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/BdiTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SourceTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/SectionTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/H4Tag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/PreTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/RtTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputTelTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/ParamTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/AddressTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/BodyTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/InputUrlTag.php
+#         vendor/vitexsoftware/ease-html/src/Ease/Html/HeaderTag.php
+#         vendor/vitexsoftware/ease-html/Examples/table.php
+#         vendor/vitexsoftware/ease-html/Examples/webpage.php
+#         vendor/vitexsoftware/ease-html/Examples/webpageClass.php
+#         vendor/vitexsoftware/ease-html/Examples/Basic.php
+#         vendor/vitexsoftware/ease-html/Examples/form.php
+#         vendor/vitexsoftware/ease-html/debian/test/Bootstrap.php
+#         vendor/vitexsoftware/ease-html/debian/test/phpunit.xml
+#         vendor/vitexsoftware/ease-core/project-logo.svg
+#         vendor/vitexsoftware/ease-core/php-vitexsoftware-ease-core-dev.svg
+#         vendor/vitexsoftware/ease-core/php-vitexsoftware-ease-core-doc.svg
+#         vendor/vitexsoftware/ease-core/tests/Bootstrap.php
+#         vendor/vitexsoftware/ease-core/tests/configuration.xml
+#         vendor/vitexsoftware/ease-core/tests/BrickTester.php
+#         vendor/vitexsoftware/ease-core/tests/SandTester.php
+#         vendor/vitexsoftware/ease-core/tests/LoggingTester.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/MoleculeTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/FunctionsTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/LocaleTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/MailerTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/ExceptionTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/AtomTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/AnonymTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/RecordKeyTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/SharedTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/SandTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/BrickTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/UserTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToEmailTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToSyslogTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/RegentTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToFileTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToConsoleTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/MessageTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToMemoryTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToStdTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/ToEventlogTest.php
+#         vendor/vitexsoftware/ease-core/tests/src/Ease/Logger/LoggingTest.php
+#         vendor/vitexsoftware/ease-core/src/Ease/RecordKey.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Exception.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Brick.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Mailer.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Functions.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Atom.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Person.php
+#         vendor/vitexsoftware/ease-core/src/Ease/User.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Locale.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Sand.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Anonym.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Molecule.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Shared.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToStd.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/Loggingable.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToConsole.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToEventlog.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/Message.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToSyslog.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToEmail.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToMemory.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/Logging.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/ToFile.php
+#         vendor/vitexsoftware/ease-core/src/Ease/Logger/Regent.php
+#         vendor/vitexsoftware/ease-core/Examples/Logger/logToConsole.php
+#         vendor/vitexsoftware/ease-core/Examples/Logger/logToEmail.php
+#         vendor/vitexsoftware/ease-core/debian/tests/Bootstrap.php
+#         vendor/vitexsoftware/ease-core/debian/tests/phpunit.xml
+#         vendor/vitexsoftware/ease-twbootstrap/Boostrap_logo_backup.svg
+#         vendor/vitexsoftware/ease-twbootstrap/project-logo.svg
+#         vendor/vitexsoftware/ease-twbootstrap/Boostrap_logo.svg
+#         vendor/vitexsoftware/ease-twbootstrap/tests/Bootstrap.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/WellTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/ListGroupTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/GlyphIconTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/StatusMessagesTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/LabelTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/RowTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/PartTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/FormGroupTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/CheckboxTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/TextareaTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/PaginationTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/TabsTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/ButtonGroupTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/WebPageTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/FormTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/LinkButtonTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/ContainerTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/PanelTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/ColTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/ButtonDropdownTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/CarouselTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/NavbarTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/BadgeTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/RadioButtonTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/ModalTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/tests/src/Ease/TWB/SubmitButtonTest.php
+#         vendor/vitexsoftware/ease-twbootstrap/nbproject/project.xml
+#         vendor/vitexsoftware/ease-twbootstrap/nbproject/private/private.xml
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Part.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/SubmitButton.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Badge.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Panel.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/WebPage.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/ButtonGroup.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/CheckBoxGroup.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Form.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/RadioButtonGroup.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Navbar.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Modal.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/StatusMessages.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Pagination.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/FormGroup.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Well.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/RadioButton.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Col.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Checkbox.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Carousel.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Tabs.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/ButtonDropdown.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Label.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Textarea.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/LinkButton.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/GlyphIcon.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/ListGroup.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Row.php
+#         vendor/vitexsoftware/ease-twbootstrap/src/Ease/TWB/Container.php
+#         vendor/vitexsoftware/ease-twbootstrap/Examples/WebPage.php
+#         vendor/vitexsoftware/ease-twbootstrap/Examples/Form.php
+#         vendor/vitexsoftware/ease-twbootstrap/Examples/Modal.php
+#         vendor/vitexsoftware/ease-twbootstrap/Examples/twbtabs.php
+#         vendor/vitexsoftware/ease-twbootstrap/Examples/classes/AppMenu.php
+#         vendor/vitexsoftware/ease-twbootstrap/Examples/classes/AppWebPage.php
+#         vendor/pear/pear_exception/PEAR/Exception.php
+#         vendor/pear/mail_mime/Mail/mimePart.php
+#         vendor/pear/mail_mime/Mail/mime.php
+#         vendor/pear/mail/Mail.php
+#         vendor/pear/mail/Mail/null.php
+#         vendor/pear/mail/Mail/mock.php
+#         vendor/pear/mail/Mail/RFC822.php
+#         vendor/pear/mail/Mail/sendmail.php
+#         vendor/pear/mail/Mail/mail.php
+#         vendor/pear/mail/Mail/smtpmx.php
+#         vendor/pear/mail/Mail/smtp.php
+#         vendor/pear/console_getopt/package.xml
+#         vendor/pear/console_getopt/Console/Getopt.php
+#         vendor/pear/pear-core-minimal/src/System.php
+#         vendor/pear/pear-core-minimal/src/PEAR.php
+#         vendor/pear/pear-core-minimal/src/PEAR/Error.php
+#         vendor/pear/pear-core-minimal/src/PEAR/ErrorStack.php
+#         vendor/pear/pear-core-minimal/src/OS/Guess.php
+#         vendor/spojenet/flexibee/project-logo.svg
+#         vendor/spojenet/flexibee/tools/current_settings.php
+#         vendor/spojenet/flexibee/tools/update_evidencelist_class.php
+#         vendor/spojenet/flexibee/tools/update_properties_class.php
+#         vendor/spojenet/flexibee/tools/update_actions_class.php
+#         vendor/spojenet/flexibee/tools/time_to_update.php
+#         vendor/spojenet/flexibee/tools/update_relations_class.php
+#         vendor/spojenet/flexibee/tools/find_undocumented_columns.php
+#         vendor/spojenet/flexibee/tools/current_version.php
+#         vendor/spojenet/flexibee/tools/update_formats_class.php
+#         vendor/spojenet/flexibee/tools/common.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/RW.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Relation.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Relations.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Pokladna.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Status.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/InterniDoklad.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Evidence.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/SkladovaKarta.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Exception.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/getChanges.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Company.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/VyrobniCislo.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/DateTime.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Date.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/firma.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/RO.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/FakturaVydana.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Root.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/PokladniPohyb.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Banka.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Stitek.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Adresar.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Report.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/RadaPokladniPohyb.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Nastaveni.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/StromCenik.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Zavazek.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Smlouva.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/FakturaPrijata.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/subItems.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Formats.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/ObjednavkaPrijata.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/FakturaVydanaPolozka.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/stitky.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Strom.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/ObjednavkaPrijataPolozka.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/email.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/sum.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Changes.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Zurnal.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Cenik.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Priloha.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Document.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Actions.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/SkladovyPohybPolozka.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Hooks.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/Kontakt.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/DodavatelskaSmlouva.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/SkupinaFirem.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/SkladovyPohyb.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/UcetniObdobi.php
+#         vendor/spojenet/flexibee/src/AbraFlexi/EvidenceList.php
+#         vendor/spojenet/flexibee/Examples/ExternalID.php
+#         vendor/spojenet/flexibee/Examples/config.php
+#         vendor/spojenet/flexibee/Examples/demo.php
+#         vendor/spojenet/flexibee/Examples/ReportUpdater.php
+#         vendor/spojenet/flexibee/Examples/common.php
+#         vendor/spojenet/flexibee/Examples/AddressImporter.php
+#         vendor/spojenet/flexibee/debian/bootstrap.php
+#         vendor/composer/include_paths.php
+#         vendor/composer/autoload_static.php
+#         vendor/composer/autoload_classmap.php
+#         vendor/composer/autoload_real.php
+#         vendor/composer/platform_check.php
+#         vendor/composer/ClassLoader.php
+#         vendor/composer/autoload_namespaces.php
+#         vendor/composer/autoload_psr4.php
+#         vendor/composer/installed.php
+#         vendor/composer/InstalledVersions.php
+
+#----------------------------------------------------------------------------
+# Files marked as NO_LICENSE_TEXT_FOUND may be covered by the following
+# license/copyright files.

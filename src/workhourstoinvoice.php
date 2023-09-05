@@ -37,7 +37,7 @@ foreach ($redminer->getUsers() as $user) {
     }
 }
 
-if (is_null($user)) {
+if (is_null($workerID)) {
     $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), \Ease\Functions::cfg('REDMINE_WORKER_MAIL')), 'error');
     exit(1);
 }

@@ -14,8 +14,6 @@ Architecture: any
 Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends}, php-spojenet-abraflexi, php-cli, php-gd, locales-all, php-vitexsoftware-ease-core (>= 1.40.1) 
 Suggests: abraflexi-server, multiflexi, abraflexi-client-config
-
 Description: It generates an invoice from the hours worked in Redmine
  Commandline tool that generates an invoice in AbraFlexi from the 
  hours worked in Redmine.
-

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours
  *
@@ -15,6 +16,7 @@ namespace Redmine2AbraFlexi;
  */
 class FakturaVydana extends \AbraFlexi\FakturaVydana
 {
+
     /**
      * Do not require SQL
      * @var null
@@ -43,7 +45,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         parent::__construct($init, $options = []);
         if (!array_key_exists('typDokl', $init)) {
             $this->setDataValue('typDokl',
-                self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')));
+                    self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')));
         }
     }
 
@@ -55,7 +57,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
     public function takeItemsFromCSV($dataSource)
     {
         $lastProject = null;
-        $itemsData   = [];
+        $itemsData = [];
         foreach ($dataSource->getData() as $rowId => $csvData) {
             if (empty($csvData) || (count($csvData) < 5)) {
                 continue;
@@ -65,7 +67,6 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
             }
 
             $nazev = self::stripComas($csvData[8]);
-
             if (isset($itemsData[$lastProject][$nazev])) {
                 $itemsData[$lastProject][$nazev]['mnozMj'] += floatval(self::stripComas($csvData[10]));
             } else {
@@ -79,8 +80,8 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         }
 
         foreach ($itemsData as $projectName => $projectData) {
-            $this->addArrayToBranch(['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
-                'polozkyFaktury');
+            $this->addArrayToBranch(['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: ' . $projectName],
+                    'polozkyFaktury');
             foreach ($projectData as $taskName => $taskData) {
                 $this->addArrayToBranch($taskData, 'polozkyFaktury');
             }
@@ -114,7 +115,6 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         foreach ($timeEntries as $projectName => $projectTimeEntries) {
             foreach ($projectTimeEntries as $rowId => $timeEntry) {
                 $nazev = $timeEntry['issue'];
-
                 if (isset($itemsData[$projectName][$nazev])) {
                     $itemsData[$projectName][$nazev]['mnozMj'] += floatval($timeEntry['hours']);
                 } else {
@@ -125,8 +125,8 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
                             'nazev' => $nazev,
                             'popis' => $timeEntry['comments'],
                             'mnozMj' => floatval($timeEntry['hours']),
-                            'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
-                        $this->itemsIncluded[$rowId]     = $rowId;
+                            'cenik' => self::code(\Ease\Functions::cfg('ABRAFLEXI_CENIK'))];
+                        $this->itemsIncluded[$rowId] = $rowId;
                     }
                 }
             }
@@ -134,8 +134,8 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
 
         foreach ($itemsData as $projectName => $projectData) {
             if (!array_key_exists($projectName, $this->projectsIncluded)) {
-                $this->addArrayToBranch(['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
-                    'polozkyFaktury'); // Task Title as Heading/TextRow
+                $this->addArrayToBranch(['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: ' . $projectName],
+                        'polozkyFaktury'); // Task Title as Heading/TextRow
                 $this->projectsIncluded[$projectName] = $projectName;
                 foreach ($projectData as $taskName => $taskData) {
                     $this->addArrayToBranch($taskData, 'polozkyFaktury');

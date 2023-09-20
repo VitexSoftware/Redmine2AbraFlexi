@@ -8,6 +8,10 @@
 %:
 	dh $@
 
+override_dh_prep:
+	rm -rf vendor
+	dh_prep
+
 override_dh_install:
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	dh_install

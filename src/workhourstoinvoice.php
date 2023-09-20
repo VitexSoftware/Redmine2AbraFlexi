@@ -19,6 +19,7 @@ require_once '../vendor/autoload.php';
     'REDMINE_URL',
     'REDMINE_USERNAME',
     'ABRAFLEXI_CUSTOMER',
+    'ABRAFLEXI_CENIK',
     'REDMINE_SCOPE',
     'REDMINE_WORKER_MAIL'
         ], isset($argv[1]) ? $argv[1] : '../.env');

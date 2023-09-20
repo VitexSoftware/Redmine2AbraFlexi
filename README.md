@@ -33,7 +33,7 @@ EASE_LOGGER=console
 ```
 
 **REDMINE_USERNAME**     Do redmine je možné se přihlašovat buď s jménem a heslem uživatele, který má dostatečná práva aby měl dostupné projekty a položky ze kterých se sestavuje faktura, nebo [jeho API klíčem a náhodným heslem](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication).
-**ABRAFLEXI_CENIK**       je položka ceníku obvykle vyjadřující "člověkohodiny"
+**ABRAFLEXI_CENIK**       je položka ceníku obvykle vyjadřující "člověkohodiny" 
 **ABRAFLEXI_TYP_FAKTURY** Typ faktury vydané 
 
 (Konfiguraci je možné taktéž pouze nastavit jako proměnné prostředí.)

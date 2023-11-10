@@ -5,8 +5,8 @@
     "executable": "\/bin\/redmine2abraflexi-invoice",
     "setup": "",
     "cmdparams": "",
-    "deploy": null,
-    "homepage": null,
+    "deploy": "sudo apt install redmine2abraflexi",
+    "homepage": "https://github.com/VitexSoftware/Redmine2AbraFlexi/",
     "environment": {
         "ABRAFLEXI_CENIK": {
             "type": "text",

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours
  *
@@ -15,13 +16,12 @@ namespace Redmine2AbraFlexi;
  */
 class CSVReader extends \Ease\Brick
 {
-
     public $sourceFile = null;
     public $columns = [];
 
     /**
      * CSV Reader class
-     * 
+     *
      * @param string $sourceFile
      */
     public function __construct($sourceFile)
@@ -33,8 +33,8 @@ class CSVReader extends \Ease\Brick
     }
 
     /**
-     * Populate object by source file 
-     * 
+     * Populate object by source file
+     *
      * @param string $sourceFile
      */
     public function loadFromCSV($sourceFile)

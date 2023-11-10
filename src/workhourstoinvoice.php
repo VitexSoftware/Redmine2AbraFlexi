@@ -9,6 +9,7 @@ namespace Redmine2AbraFlexi;
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2023 Vitex Software
  */
+
 define('EASE_APPNAME', 'RedmineWorkHours2Invoice');
 require_once '../vendor/autoload.php';
 \Ease\Shared::init([
@@ -52,7 +53,6 @@ $projects = $redminer->getProjects(['limit' => 100]); //since redmine 3.4.0
 if (empty($projects)) {
     $redminer->addStatusMessage(_('No projects found'), 'error');
 } else {
-
     $invoicer = new FakturaVydana([
         'typDokl' => \AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
         'firma' => \AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_CUSTOMER')),
@@ -66,10 +66,10 @@ if (empty($projects)) {
         }
     }
 
-    if(\Ease\Functions::cfg('ABRAFLEXI_SEND','False') == 'True'){
+    if (\Ease\Functions::cfg('ABRAFLEXI_SEND', 'False') == 'True') {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
-    
+
     $created = $invoicer->sync();
     $invoicer->addStatusMessage($invoicer->getRecordCode() . ' ' . $invoicer->getDataValue('sumCelkem') . ' ' . \AbraFlexi\RO::uncode($invoicer->getDataValue('mena')), $created ? 'success' : 'error');
 }

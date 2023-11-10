@@ -1,0 +1,11 @@
+#!/bin/sh
+# postinst script for multiflexi-redmine2abraflexi
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Iterate over all json files inf usr/lib/redmine2abraflexi/multiflexi
+for file in `ls /usr/lib/redmine2abraflexi/multiflexi/*.json`
+do
+	multiflexi-json2app $file
+done

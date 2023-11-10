@@ -17,3 +17,11 @@ Suggests: abraflexi-server, multiflexi, abraflexi-client-config
 Description: It generates an invoice from the hours worked in Redmine
  Commandline tool that generates an invoice in AbraFlexi from the 
  hours worked in Redmine.
+
+Package: multiflexi-redmine2abraflexi
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}, multiflexi-redmine2abraflexi, multiflexi
+Description: Install redmine2abraflexi to MultiFlexi
+ Json definiton to add redmine2abraflexi into MultiFlexi
+

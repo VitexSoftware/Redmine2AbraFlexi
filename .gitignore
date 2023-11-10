@@ -8,3 +8,6 @@
 /debian/redmine2abraflexi.debhelper.log
 /debian/redmine2abraflexi.substvars
 /debian/files
+/debian/multiflexi-redmine2abraflexi.debhelper.log
+/debian/multiflexi-redmine2abraflexi.substvars
+/debian/multiflexi-redmine2abraflexi/

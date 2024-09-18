@@ -1,90 +1,93 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours
+ * This file is part of the xls2abralexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Redmine2AbraFlexi;
 
 /**
- * Description of Engine
+ * Description of Engine.
  *
  * @author vitex
  */
 class FakturaVydana extends \AbraFlexi\FakturaVydana
 {
     /**
-     * Do not require SQL
+     * Do not require SQL.
+     *
      * @var null
      */
-    public $myTable = null;
+    public $myTable;
+    private array $itemsIncluded = [];
+    private array $projectsIncluded = [];
 
     /**
+     * AbraFlexi Invoice.
      *
-     * @var array
-     */
-    private $itemsIncluded = [];
-
-    /**
-     *
-     * @var array
-     */
-    private $projectsIncluded = [];
-
-    /**
-     * AbraFlexi Invoice
-     *
-     * @param array $options Connection settings override
+     * @param null|mixed $init
+     * @param array      $options Connection settings override
      */
     public function __construct($init = null, $options = [])
     {
         parent::__construct($init, $options = []);
-        if (!array_key_exists('typDokl', $init)) {
+
+        if (!\array_key_exists('typDokl', $init)) {
             $this->setDataValue(
                 'typDokl',
-                self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY'))
+                self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')),
             );
         }
     }
 
     /**
-     * Fill Invoice items from datasource
+     * Fill Invoice items from datasource.
      *
      * @param CSVReader $dataSource
      */
-    public function takeItemsFromCSV($dataSource)
+    public function takeItemsFromCSV($dataSource): void
     {
         $lastProject = null;
         $itemsData = [];
+
         foreach ($dataSource->getData() as $rowId => $csvData) {
-            if (empty($csvData) || (count($csvData) < 5)) {
+            if (empty($csvData) || (\count($csvData) < 5)) {
                 continue;
             }
-            if (self::stripComas($csvData[5]) != $lastProject) {
+
+            if (self::stripComas($csvData[5]) !== $lastProject) {
                 $lastProject = self::stripComas($csvData[5]);
             }
 
             $nazev = self::stripComas($csvData[8]);
+
             if (isset($itemsData[$lastProject][$nazev])) {
-                $itemsData[$lastProject][$nazev]['mnozMj'] += floatval(self::stripComas($csvData[10]));
+                $itemsData[$lastProject][$nazev]['mnozMj'] += (float) self::stripComas($csvData[10]);
             } else {
                 $itemsData[$lastProject][$nazev] = [
                     'typPolozkyK' => 'typPolozky.katalog',
                     'poznam' => self::stripComas($csvData[9]),
                     'nazev' => $nazev,
-                    'mnozMj' => floatval(self::stripComas($csvData[10])),
+                    'mnozMj' => (float) self::stripComas($csvData[10]),
                     'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
             }
         }
 
         foreach ($itemsData as $projectName => $projectData) {
             $this->addArrayToBranch(
-                ['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: ' . $projectName],
-                'polozkyFaktury'
+                ['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
+                'polozkyFaktury',
             );
+
             foreach ($projectData as $taskName => $taskData) {
                 $this->addArrayToBranch($taskData, 'polozkyFaktury');
             }
@@ -92,7 +95,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
     }
 
     /**
-     * Remove Initial and Ending " from string
+     * Remove Initial and Ending " from string.
      *
      * @param string $string
      *
@@ -104,13 +107,13 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
     }
 
     /**
-     *
      * @param array $timeEntriesRaw
      */
-    public function takeItemsFromArray($timeEntriesRaw)
+    public function takeItemsFromArray($timeEntriesRaw): void
     {
         $itemsData = [];
         $timeEntries = [];
+
         foreach ($timeEntriesRaw as $rowId => $timeEntryRaw) {
             $timeEntries[$timeEntryRaw['project']][$rowId] = $timeEntryRaw;
         }
@@ -118,16 +121,17 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         foreach ($timeEntries as $projectName => $projectTimeEntries) {
             foreach ($projectTimeEntries as $rowId => $timeEntry) {
                 $nazev = $timeEntry['issue'];
+
                 if (isset($itemsData[$projectName][$nazev])) {
-                    $itemsData[$projectName][$nazev]['mnozMj'] += floatval($timeEntry['hours']);
+                    $itemsData[$projectName][$nazev]['mnozMj'] += (float) $timeEntry['hours'];
                 } else {
-                    if (!array_key_exists($rowId, $this->itemsIncluded)) {
+                    if (!\array_key_exists($rowId, $this->itemsIncluded)) {
                         $itemsData[$projectName][$nazev] = [
-//                            'id' => 'ext:redmine:'.$rowId,
+                            //                            'id' => 'ext:redmine:'.$rowId,
                             'typPolozkyK' => 'typPolozky.katalog',
                             'nazev' => $nazev,
                             'popis' => $timeEntry['comments'],
-                            'mnozMj' => floatval($timeEntry['hours']),
+                            'mnozMj' => (float) $timeEntry['hours'],
                             'cenik' => self::code(\Ease\Functions::cfg('ABRAFLEXI_CENIK'))];
                         $this->itemsIncluded[$rowId] = $rowId;
                     }
@@ -136,12 +140,13 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         }
 
         foreach ($itemsData as $projectName => $projectData) {
-            if (!array_key_exists($projectName, $this->projectsIncluded)) {
+            if (!\array_key_exists($projectName, $this->projectsIncluded)) {
                 $this->addArrayToBranch(
-                    ['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: ' . $projectName],
-                    'polozkyFaktury'
+                    ['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
+                    'polozkyFaktury',
                 ); // Task Title as Heading/TextRow
                 $this->projectsIncluded[$projectName] = $projectName;
+
                 foreach ($projectData as $taskName => $taskData) {
                     $this->addArrayToBranch($taskData, 'polozkyFaktury');
                 }

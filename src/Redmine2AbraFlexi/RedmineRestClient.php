@@ -1,77 +1,77 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours
+ * This file is part of the xls2abralexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Redmine2AbraFlexi;
 
 /**
- * Description of RedmineRestClient
+ * Description of RedmineRestClient.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class RedmineRestClient extends \AbraFlexi\RO
 {
-    /**
-     *
-     * @var \DateTime
-     */
-    public $since = null;
+    public \DateTime $since;
+    public \DateTime $until;
 
     /**
-     *
-     * @var \DateTime
-     */
-    public $until = null;
-
-    /**
-     * Redmine REST client
+     * RedMine REST client.
      *
      * @param mixed $init
      * @param array $options
      */
-    public function __construct($init = null, $options = array())
+    public function __construct($init = null, $options = [])
     {
         parent::__construct($init, $options);
     }
 
     /**
-     * SetUp Object to be ready for connect
+     * SetUp Object to be ready for connect.
      *
      * @param array $options Object Options (company,url,user,password,evidence,
-     *                                       prefix,defaultUrlParams,debug)
+     *                       prefix,defaultUrlParams,debug)
      */
-    public function setUp($options = [])
+    public function setUp($options = []): bool
     {
         $this->setupProperty($options, 'url', 'REDMINE_URL');
         $this->setupProperty($options, 'user', 'REDMINE_USERNAME');
         $this->setupProperty($options, 'password', 'REDMINE_PASSWORD');
         $this->setupProperty($options, 'debug');
         $this->updateApiURL();
+
+        return true;
     }
 
     /**
      * Nastaví Evidenci pro Komunikaci.
-     * Set evidence for communication
+     * Set evidence for communication.
      *
      * @param string $evidence evidence pathName to use
      *
-     * @return boolean evidence switching status
+     * @return bool evidence switching status
      */
     public function setEvidence($evidence)
     {
         $this->evidence = $evidence;
         $result = true;
         $this->updateApiURL();
+
         return $result;
     }
 
     /**
-     * Return basic URL for used Evidence
+     * Return basic URL for used Evidence.
      *
      * @return string Evidence URL
      */
@@ -79,14 +79,16 @@ class RedmineRestClient extends \AbraFlexi\RO
     {
         $evidenceUrl = $this->url;
         $evidence = $this->getEvidence();
+
         if (!empty($evidence)) {
-            $evidenceUrl .= '/' . $evidence;
+            $evidenceUrl .= '/'.$evidence;
         }
+
         return $evidenceUrl;
     }
 
     /**
-     * Obtaing Redmine Projects listing
+     * Obtaing Redmine Projects listing.
      *
      * @param array $params conditions
      *
@@ -97,16 +99,18 @@ class RedmineRestClient extends \AbraFlexi\RO
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
             'projects.json',
-            $params
+            $params,
         ), 'GET');
-        if ($this->lastResponseCode == 200) {
+
+        if ($this->lastResponseCode === 200) {
             $response = \Ease\Functions::reindexArrayBy($response['projects'], 'id');
         }
+
         return $response;
     }
 
     /**
-     * Obtain Redmine  Users List
+     * Obtain RedMine  Users List.
      *
      * @param array $params conditions
      *
@@ -117,18 +121,20 @@ class RedmineRestClient extends \AbraFlexi\RO
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
             '/shared/users.json',
-            $params
+            $params,
         ), 'GET');
-        if ($this->lastResponseCode == 200) {
+
+        if ($this->lastResponseCode === 200) {
             $response = \Ease\Functions::reindexArrayBy($response['users'], 'id');
         }
+
         return $response;
     }
 
     /**
-     * Obtain Project Info
+     * Obtain Project Info.
      *
-     * @param int    $projectID
+     * @param int   $projectID
      * @param array $params
      *
      * @return array
@@ -136,13 +142,13 @@ class RedmineRestClient extends \AbraFlexi\RO
     public function getProjectInfo($projectID, $params = [])
     {
         return $this->performRequest(\Ease\Functions::addUrlParams(
-            'projects/' . $projectID . '.json',
-            $params
+            'projects/'.$projectID.'.json',
+            $params,
         ), 'GET')['project'];
     }
 
     /**
-     * Convert Raw response to Array
+     * Convert Raw response to Array.
      *
      * @param string $responseRaw
      * @param string $format
@@ -155,10 +161,10 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
-     * Parse Redmine response
+     * Parse Redmine response.
      *
      * @param array $responseDecoded
-     * @param int $responseCode
+     * @param int   $responseCode
      *
      * @return array
      */
@@ -168,11 +174,12 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
-     * Time Entries obtainer
+     * Time Entries obtainer.
      *
-     * @param int    $projectID
-     * @param string $start
-     * @param string $end
+     * @param int        $projectID
+     * @param string     $start
+     * @param string     $end
+     * @param null|mixed $userId
      *
      * @return array
      */
@@ -180,22 +187,21 @@ class RedmineRestClient extends \AbraFlexi\RO
     {
         $result = null;
         $response = $this->performRequest(
-            'time_entries.json?project_id=' . $projectID . '&spent_on=' . urlencode('><' . $start . '|' . $end) . '&user_id=' . $userId,
-            'GET'
+            'time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end).'&user_id='.$userId,
+            'GET',
         );
-        if ($this->lastResponseCode == 200) {
+
+        if ($this->lastResponseCode === 200) {
             $response = $this->addIssueNames(\Ease\Functions::reindexArrayBy(
                 $response['time_entries'],
-                'id'
+                'id',
             ));
         }
+
         return $response;
     }
 
     /**
-     *
-     * @param array $conditions
-     *
      * @return array
      */
     public function getTimeEntries(array $conditions)
@@ -203,16 +209,18 @@ class RedmineRestClient extends \AbraFlexi\RO
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
             'time_entries.json',
-            $conditions
+            $conditions,
         ), 'GET');
-        if ($this->lastResponseCode == 200) {
+
+        if ($this->lastResponseCode === 200) {
             $response = \Ease\Functions::reindexArrayBy($response['time_entries'], 'id');
         }
+
         return $response;
     }
 
     /**
-     * Add Issue names to time entries
+     * Add Issue names to time entries.
      *
      * @param array $timeEntries
      *
@@ -222,36 +230,43 @@ class RedmineRestClient extends \AbraFlexi\RO
     {
         $result = [];
         $issues = [];
+
         foreach ($timeEntries as $timeEntryID => $timeEntry) {
             if (isset($timeEntry['issue'])) {
                 $issues[$timeEntry['issue']['id']] = $timeEntry['issue']['id'];
             }
+
             $result[$timeEntryID] = [
                 'project' => $timeEntry['project']['name'],
                 'hours' => $timeEntry['hours'],
-                'issue' => array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id'] : 0,
-                'comments' => array_key_exists('comments', $timeEntry) ? $timeEntry['comments'] : ''
+                'issue' => \array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id'] : 0,
+                'comments' => \array_key_exists('comments', $timeEntry) ? $timeEntry['comments'] : '',
             ];
         }
-        if (count($issues)) {
+
+        if (\count($issues)) {
             $issueInfo = $this->getNameForIssues($issues);
+
             foreach ($result as $timeEntryID => $timeEntry) {
                 if (isset($timeEntry['issue'])) {
                     $issueID = $timeEntry['issue'];
+
                     if (isset($issueInfo[$issueID])) {
                         $timeEntry['issue'] = $issueInfo[$issueID];
                     } else {
                         $timeEntry['issue'] = $issueID;
                     }
                 }
+
                 $result[$timeEntryID] = $timeEntry;
             }
         }
+
         return $result;
     }
 
     /**
-     * Obtain Issue name by IssueID
+     * Obtain Issue name by IssueID.
      *
      * @param int $issuesID
      *
@@ -260,23 +275,24 @@ class RedmineRestClient extends \AbraFlexi\RO
     public function getNameForIssues($issuesID)
     {
         $result = null;
-        $response = $this->performRequest('issues.json?status_id=*&issue_id=' . implode(
+        $response = $this->performRequest('issues.json?status_id=*&issue_id='.implode(
             ',',
-            $issuesID
+            $issuesID,
         ), 'GET');
-        if ($this->lastResponseCode == 200) {
+
+        if ($this->lastResponseCode === 200) {
             $response = \Ease\Functions::reindexArrayBy($response['issues'], 'id');
         }
+
         foreach ($response as $issuesID => $responseData) {
             $result[$issuesID] = $responseData['subject'];
         }
+
         return $result;
     }
 
     /**
-     * Get Issued
-     *
-     * @param array $conditions
+     * Get Issued.
      *
      * @return array
      */
@@ -285,19 +301,22 @@ class RedmineRestClient extends \AbraFlexi\RO
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
             'issues.json',
-            $conditions
+            $conditions,
         ), 'GET');
-        if ($this->lastResponseCode == 200) {
+
+        if ($this->lastResponseCode === 200) {
             $response = \Ease\Functions::reindexArrayBy($response['issues'], 'id');
         }
+
         foreach ($response as $issuesID => $responseData) {
             $result[$issuesID] = $responseData['subject'];
         }
+
         return $result;
     }
 
     /**
-     * Obtain Issue Info
+     * Obtain Issue Info.
      *
      * @param int $id of Issue
      *
@@ -309,57 +328,66 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
-     * Prepare processing interval
+     * Prepare processing interval.
      *
      * @param string $scope
      *
      * @throws \Ease\Exception
      */
-    public function scopeToInterval($scope)
+    public function scopeToInterval($scope): void
     {
         switch ($scope) {
             case 'current_month':
-                $this->since = new \DateTime("first day of this month");
+                $this->since = new \DateTime('first day of this month');
                 $this->until = new \DateTime();
+
                 break;
             case 'last_month':
-                $this->since = new \DateTime("first day of last month");
-                $this->until = new \DateTime("last day of last month");
+                $this->since = new \DateTime('first day of last month');
+                $this->until = new \DateTime('last day of last month');
+
                 break;
             case 'last_two_months':
-                $this->since = (new \DateTime("first day of last month"))->modify('-1 month');
-                $this->until = (new \DateTime("last day of last month"));
+                $this->since = (new \DateTime('first day of last month'))->modify('-1 month');
+                $this->until = (new \DateTime('last day of last month'));
+
                 break;
             case 'previous_month':
-                $this->since = new \DateTime("first day of -2 month");
-                $this->until = new \DateTime("last day of -2 month");
+                $this->since = new \DateTime('first day of -2 month');
+                $this->until = new \DateTime('last day of -2 month');
+
                 break;
             case 'two_months_ago':
-                $this->since = new \DateTime("first day of -3 month");
-                $this->until = new \DateTime("last day of -3 month");
+                $this->since = new \DateTime('first day of -3 month');
+                $this->until = new \DateTime('last day of -3 month');
+
                 break;
             case 'this_year':
-                $this->since = new \DateTime('first day of January ' . date('Y'));
-                $this->until = new \DateTime("last day of December" . date('Y'));
+                $this->since = new \DateTime('first day of January '.date('Y'));
+                $this->until = new \DateTime('last day of December'.date('Y'));
+
                 break;
-            case 'January':  //1
-            case 'February': //2
-            case 'March':    //3
-            case 'April':    //4
-            case 'May':      //5
-            case 'June':     //6
-            case 'July':     //7
-            case 'August':   //8
-            case 'September'://9
-            case 'October':  //10
-            case 'November': //11
-            case 'December': //12
-                $this->since = new \DateTime('first day of ' . $scope . ' ' . date('Y'));
-                $this->until = new \DateTime('last day of ' . $scope . ' ' . date('Y'));
+            case 'January':  // 1
+            case 'February': // 2
+            case 'March':    // 3
+            case 'April':    // 4
+            case 'May':      // 5
+            case 'June':     // 6
+            case 'July':     // 7
+            case 'August':   // 8
+            case 'September':// 9
+            case 'October':  // 10
+            case 'November': // 11
+            case 'December': // 12
+                $this->since = new \DateTime('first day of '.$scope.' '.date('Y'));
+                $this->until = new \DateTime('last day of '.$scope.' '.date('Y'));
+
                 break;
+
             default:
-                throw new \Ease\Exception('Unknown scope ' . $scope);
+                throw new \Ease\Exception('Unknown scope '.$scope);
         }
+
         $this->since = $this->since->setTime(0, 0);
         $this->until = $this->until->setTime(0, 0);
     }

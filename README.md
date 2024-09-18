@@ -1,7 +1,7 @@
 Redmine to AbraFlexi importer
 =============================
 
-![Logo](project-logo.png?raw=true "Project Logo")
+![Logo](redmine2abraflexi.svg?raw=true "Project Logo")
 
 Z odpracovaných hodin v Redmine vygeneruje fakturu ve AbraFlexi.
 
@@ -26,6 +26,7 @@ REDMINE_USERNAME=username_redmine_token
 REDMINE_PASSWORD=empty_for_token
 
 REDMINE_SCOPE=last_month
+REDMINE_PROJECT=project_name
 REDMINE_WORKER_MAIL=vitezslav.dvorak@spojenet.cz
 
 APP_DEBUG=True

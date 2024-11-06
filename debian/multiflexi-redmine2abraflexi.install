@@ -1,3 +1,2 @@
 multiflexi/*.json  usr/lib/redmine2abraflexi/multiflexi
-multiflexi/*.svg   usr/lib/multiflexi/images
-
+multiflexi/*.svg   usr/share/multiflexi/images

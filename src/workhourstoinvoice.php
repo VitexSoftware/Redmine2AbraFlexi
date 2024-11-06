@@ -36,7 +36,7 @@ require_once '../vendor/autoload.php';
     'ABRAFLEXI_CENIK',
     'REDMINE_SCOPE',
     'REDMINE_WORKER_MAIL',
-], $argv[1] ?? '../.env');
+], isset($argv[1]) ? $argv[1] : '../.env');
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 $redminer = new RedmineRestClient();
 

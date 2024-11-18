@@ -7,7 +7,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Redmine2AbraFlexi\\": "src/Redmine2AbraFlexi/",
@@ -16,7 +16,7 @@
     },
 
     "require": {
-        "spojenet/flexibee": "dev-main"
+        "spojenet/flexibee": "^3.3"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

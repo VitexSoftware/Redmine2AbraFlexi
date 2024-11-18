@@ -28,10 +28,10 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * RedMine REST client.
      *
-     * @param mixed $init
-     * @param array $options
+     * @param mixed                 $init
+     * @param array<string, string> $options
      */
-    public function __construct($init = null, $options = [])
+    public function __construct($init = null, array $options = [])
     {
         parent::__construct($init, $options);
     }
@@ -39,8 +39,8 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * SetUp Object to be ready for connect.
      *
-     * @param array $options Object Options (company,url,user,password,evidence,
-     *                       prefix,defaultUrlParams,debug)
+     * @param array<string, string> $options Object Options (company,url,user,password,evidence,
+     *                                       prefix,defaultUrlParams,debug)
      */
     public function setUp($options = []): bool
     {

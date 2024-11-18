@@ -36,11 +36,11 @@ require_once '../vendor/autoload.php';
     'ABRAFLEXI_CENIK',
     'REDMINE_SCOPE',
     'REDMINE_WORKER_MAIL',
-], isset($argv[1]) ? $argv[1] : '../.env');
+], $argv[1] ?? '../.env');
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 $redminer = new RedmineRestClient();
 
-if (strtolower(\Ease\Functions::cfg('APP_DEBUG', 'false')) === 'true') {
+if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'false')) === 'true') {
     $redminer->logBanner(\Ease\Shared::appName().' v'.\Ease\Shared::appVersion());
 }
 
@@ -61,24 +61,24 @@ foreach ($redminer->getUsers() as $user) {
 }
 
 if (null === $workerID) {
-    $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), \Ease\Functions::cfg('REDMINE_WORKER_MAIL')), 'error');
+    $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), \Ease\Shared::cfg('REDMINE_WORKER_MAIL')), 'error');
 
     exit(1);
 }
 
 $addreser = new \AbraFlexi\Adresar();
-$redminer->scopeToInterval(\Ease\Functions::cfg('REDMINE_SCOPE'));
+$redminer->scopeToInterval(\Ease\Shared::cfg('REDMINE_SCOPE'));
 $projects = $redminer->getProjects(['limit' => 100]); // since redmine 3.4.0
 
 if (empty($projects)) {
     $redminer->addStatusMessage(_('No projects found'), 'error');
 } else {
     $invoicer = new FakturaVydana([
-        'typDokl' => \AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
-        'firma' => \AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_CUSTOMER')),
+        'typDokl' => \AbraFlexi\RO::code(\Ease\Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
+        'firma' => \AbraFlexi\RO::code(\Ease\Shared::cfg('ABRAFLEXI_CUSTOMER')),
         'popis' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
     ]);
-    $pricelister = new \AbraFlexi\Cenik(\AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_CENIK')));
+    $pricelister = new \AbraFlexi\Cenik(\AbraFlexi\RO::code(\Ease\Shared::cfg('ABRAFLEXI_CENIK')));
 
     foreach (array_keys($projects) as $projectID) {
         if (\strlen(\Ease\Shared::cfg('REDMINE_PROJECT', '')) && $projects[$projectID]['identifier'] !== \Ease\Shared::cfg('REDMINE_PROJECT')) {
@@ -92,7 +92,7 @@ if (empty($projects)) {
         }
     }
 
-    if (strtolower(\Ease\Functions::cfg('ABRAFLEXI_SEND', 'false')) === 'true') {
+    if (strtolower(\Ease\Shared::cfg('ABRAFLEXI_SEND', 'false')) === 'true') {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
 

@@ -28,23 +28,35 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
      * @var null
      */
     public $myTable;
+
+    /**
+     * List of itemsIncluded.
+     *
+     * @var array<int>
+     */
     private array $itemsIncluded = [];
+
+    /**
+     * List of projectsIncluded.
+     *
+     * @var array<int>
+     */
     private array $projectsIncluded = [];
 
     /**
      * AbraFlexi Invoice.
      *
-     * @param null|mixed $init
-     * @param array      $options Connection settings override
+     * @param null|mixed            $init
+     * @param array<string, string> $options Connection settings override
      */
-    public function __construct($init = null, $options = [])
+    public function __construct($init = null, array $options = [])
     {
         parent::__construct($init, $options = []);
 
         if (!\array_key_exists('typDokl', $init)) {
             $this->setDataValue(
                 'typDokl',
-                self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')),
+                \AbraFlexi\Functions::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')),
             );
         }
     }
@@ -78,7 +90,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
                     'poznam' => self::stripComas($csvData[9]),
                     'nazev' => $nazev,
                     'mnozMj' => (float) self::stripComas($csvData[10]),
-                    'cenik' => self::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
+                    'cenik' => \AbraFlexi\Functions::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
             }
         }
 
@@ -132,7 +144,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
                             'nazev' => $nazev,
                             'popis' => $timeEntry['comments'],
                             'mnozMj' => (float) $timeEntry['hours'],
-                            'cenik' => self::code(\Ease\Functions::cfg('ABRAFLEXI_CENIK'))];
+                            'cenik' => \AbraFlexi\Functions::code(\Ease\Shared::cfg('ABRAFLEXI_CENIK'))];
                         $this->itemsIncluded[$rowId] = $rowId;
                     }
                 }

@@ -119,9 +119,9 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
     }
 
     /**
-     * @param array $timeEntriesRaw
+     * @param array<mixed> $timeEntriesRaw
      */
-    public function takeItemsFromArray($timeEntriesRaw): void
+    public function takeItemsFromArray(array $timeEntriesRaw): void
     {
         $itemsData = [];
         $timeEntries = [];

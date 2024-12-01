@@ -116,7 +116,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function getUsers($params = [])
+    public function getUsers(array $params = [])
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -139,7 +139,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function getProjectInfo($projectID, $params = [])
+    public function getProjectInfo($projectID,array $params = [])
     {
         return $this->performRequest(\Ease\Functions::addUrlParams(
             'projects/'.$projectID.'.json',

@@ -96,6 +96,10 @@ if (empty($projects)) {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
 
-    $created = $invoicer->sync();
-    $invoicer->addStatusMessage($invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\RO::uncode((string) $invoicer->getDataValue('mena')), $created ? 'success' : 'error');
+    if($invoicer->getSubItems()){
+        $created = $invoicer->sync();
+        $invoicer->addStatusMessage($invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\RO::uncode((string) $invoicer->getDataValue('mena')), $created ? 'success' : 'error');
+    } else {
+        $invoicer->addStatusMessage(_('Invoice Empty'), 'success');
+    }
 }

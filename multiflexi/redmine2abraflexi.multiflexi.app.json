@@ -11,6 +11,12 @@
     "deploy": "apt install redmine2abraflexi",
     "homepage": "https://github.com/VitexSoftware/Redmine2AbraFlexi/",
     "environment": {
+        "APP_DEBUG": {
+            "type": "checkbox",
+            "description": "Show debug messages",
+            "defval": "False",
+            "required": true
+        },        
         "ABRAFLEXI_CENIK": {
             "type": "text",
             "description": "Cen\u00edkov\u00e1 polo\u017eka pr\u00e1ce",
@@ -53,10 +59,10 @@
             "required": true
         },
         "ABRAFLEXI_SEND": {
-          "type": "checkbox",
-          "description": "Send generated invoice by mail ?", 
-          "defval": "true",
-          "required": false
+            "type": "checkbox",
+            "description": "Send generated invoice by mail ?", 
+            "defval": "true",
+            "required": false
         },
         "REDMINE_PASSWORD": {
             "type": "text",
@@ -84,7 +90,7 @@
         },
         "REDMINE_WORKER_MAIL": {
             "type": "text",
-            "description": "",
+            "description": "identify user who perform the work",
             "defval": "",
             "required": true
         },
@@ -93,7 +99,25 @@
             "description": "Process only this project",
             "defval": "",
             "required": false
-        }
+        },
+        "RESULT_FILE": {
+            "type": "string",
+            "description": "write output json data to",
+            "defval": "redmine2abraflexi_{REDMINE_PROJECT}.json",
+            "required": false
+        },
+        "ZABBIX_KEY": {
+            "type": "string",
+            "description": "Default name for Zabbix Item key name",
+            "defval": "redmine2abraflexi-{REDMINE_PROJECT}",
+            "required": false
+        },
+        "EASE_LOGGER": {
+            "type": "string",
+            "description": "write log messages using",
+            "defval": "console|syslog",
+            "required": false
+        }        
     },
     "multiflexi": "1.7.2"
 }

@@ -16,6 +16,13 @@ declare(strict_types=1);
 
 namespace Redmine2AbraFlexi;
 
+use AbraFlexi\Adresar;
+use AbraFlexi\Cenik;
+use AbraFlexi\FakturaVydana;
+use AbraFlexi\RO;
+use Ease\Locale;
+use Ease\Shared;
+
 /**
  * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours.
  *
@@ -25,7 +32,13 @@ namespace Redmine2AbraFlexi;
 \define('EASE_APPNAME', 'RedmineWorkHours2Invoice');
 
 require_once '../vendor/autoload.php';
-\Ease\Shared::init([
+
+/**
+ * Get today's Statements list.
+ */
+$options = getopt('o::e::', ['output::environment::']);
+
+Shared::init([
     'ABRAFLEXI_URL',
     'ABRAFLEXI_LOGIN',
     'ABRAFLEXI_PASSWORD',
@@ -36,14 +49,17 @@ require_once '../vendor/autoload.php';
     'ABRAFLEXI_CENIK',
     'REDMINE_SCOPE',
     'REDMINE_WORKER_MAIL',
-], $argv[1] ?? '../.env');
-$localer = new \Ease\Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
+], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
+$destination = \array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout');
+$localer = new Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 $redminer = new RedmineRestClient();
 
-if (strtolower(\Ease\Functions::cfg('APP_DEBUG', 'false')) === 'true') {
-    $redminer->logBanner(\Ease\Shared::appName().' v'.\Ease\Shared::appVersion());
+if (strtolower(Shared::cfg('APP_DEBUG', 'false')) === 'true') {
+    $redminer->logBanner(Shared::appName().' v'.Shared::appVersion());
 }
 
+$report = [];
+$exitcode = 0;
 $workerID = null;
 
 foreach ($redminer->getUsers() as $user) {
@@ -53,7 +69,7 @@ foreach ($redminer->getUsers() as $user) {
         exit(1);
     }
 
-    if (\array_key_exists('mail', $user) && $user['mail'] === \Ease\Shared::cfg('REDMINE_WORKER_MAIL')) {
+    if (\array_key_exists('mail', $user) && $user['mail'] === Shared::cfg('REDMINE_WORKER_MAIL')) {
         $workerID = (int) $user['id'];
 
         break;
@@ -61,41 +77,48 @@ foreach ($redminer->getUsers() as $user) {
 }
 
 if (null === $workerID) {
-    $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), \Ease\Functions::cfg('REDMINE_WORKER_MAIL')), 'error');
+    $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), Shared::cfg('REDMINE_WORKER_MAIL')), 'error');
 
     exit(1);
 }
 
-$addreser = new \AbraFlexi\Adresar();
-$redminer->scopeToInterval(\Ease\Functions::cfg('REDMINE_SCOPE'));
+$addreser = new Adresar();
+$redminer->scopeToInterval(Shared::cfg('REDMINE_SCOPE'));
 $projects = $redminer->getProjects(['limit' => 100]); // since redmine 3.4.0
 
 if (empty($projects)) {
-    $redminer->addStatusMessage(_('No projects found'), 'error');
+    $report['message'] = _('No projects found');
+    $redminer->addStatusMessage($report['message'], 'error');
 } else {
     $invoicer = new FakturaVydana([
-        'typDokl' => \AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
-        'firma' => \AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_CUSTOMER')),
+        'typDokl' => RO::code(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
+        'firma' => RO::code(Shared::cfg('ABRAFLEXI_CUSTOMER')),
         'popis' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
     ]);
-    $pricelister = new \AbraFlexi\Cenik(\AbraFlexi\RO::code(\Ease\Functions::cfg('ABRAFLEXI_CENIK')));
+    $pricelister = new Cenik(RO::code(Shared::cfg('ABRAFLEXI_CENIK')));
 
     foreach (array_keys($projects) as $projectID) {
-        if (\strlen(\Ease\Shared::cfg('REDMINE_PROJECT', '')) && $projects[$projectID]['identifier'] !== \Ease\Shared::cfg('REDMINE_PROJECT')) {
+        if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projects[$projectID]['identifier'] !== Shared::cfg('REDMINE_PROJECT')) {
             continue;
         }
 
         $items = $redminer->getProjectTimeEntries($projectID, $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d'), $workerID);
+        $report[$projectID] = $items;
 
-        if (!empty($items)) {
+        if (empty($items) === false) {
             $invoicer->takeItemsFromArray($items);
         }
     }
 
-    if (strtolower(\Ease\Functions::cfg('ABRAFLEXI_SEND', 'false')) === 'true') {
+    if (strtolower(Shared::cfg('ABRAFLEXI_SEND', 'false')) === 'true') {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
 
     $created = $invoicer->sync();
-    $invoicer->addStatusMessage($invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\RO::uncode((string) $invoicer->getDataValue('mena')), $created ? 'success' : 'error');
+    $invoicer->addStatusMessage($invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.RO::uncode((string) $invoicer->getDataValue('mena')), $created ? 'success' : 'error');
 }
+
+$written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
+
+exit($exitcode);

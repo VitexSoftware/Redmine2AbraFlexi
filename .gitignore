@@ -11,3 +11,4 @@
 /debian/multiflexi-redmine2abraflexi.debhelper.log
 /debian/multiflexi-redmine2abraflexi.substvars
 /debian/multiflexi-redmine2abraflexi/
+/.build/

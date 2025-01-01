@@ -22,8 +22,14 @@ namespace Redmine2AbraFlexi;
  */
 class CSVReader extends \Ease\Brick
 {
-    public $sourceFile;
-    public $columns = [];
+    public string $sourceFile;
+
+    /**
+     * List of columns to be read.
+     *
+     * @var array<string>
+     */
+    public array $columns = [];
 
     /**
      * CSV Reader class.
@@ -41,10 +47,8 @@ class CSVReader extends \Ease\Brick
 
     /**
      * Populate object by source file.
-     *
-     * @param string $sourceFile
      */
-    public function loadFromCSV($sourceFile): void
+    public function loadFromCSV(string $sourceFile): void
     {
         $this->sourceFile = $sourceFile;
         $rows = explode("\n", file_get_contents($sourceFile));

@@ -114,8 +114,14 @@ if (empty($projects)) {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
 
-    $created = $invoicer->sync();
-    $invoicer->addStatusMessage($invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.RO::uncode((string) $invoicer->getDataValue('mena')), $created ? 'success' : 'error');
+    if($invoicer->getSubItems()){
+        $created = $invoicer->sync();
+        $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.RO::uncode((string) $invoicer->getDataValue('mena'));
+        $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');
+    } else {
+        $report['message'] = _('Invoice Empty');
+        $invoicer->addStatusMessage($report['message'], 'success');
+    }
 }
 
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));

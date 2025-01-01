@@ -3,12 +3,12 @@ Redmine to AbraFlexi importer
 
 ![Logo](redmine2abraflexi.svg?raw=true "Project Logo")
 
-Generates an invoice in AbraFlexi from hours worked in Redmine.
+Z odpracovaných hodin v Redmine vygeneruje fakturu ve AbraFlexi.
 
-Configuration
--------------
+Nastavení
+---------
 
-We need Redmine with enabled API and `.env` file with appropriately filled items:
+Potřebujeme Redmine s povoleným api a `.env` s patřičně vyplněnými položkami:
 
 ```env
 ABRAFLEXI_URL=https://demo.flexibee.eu:5434
@@ -33,11 +33,11 @@ APP_DEBUG=True
 EASE_LOGGER=console
 ```
 
-**REDMINE_USERNAME**     You can log in to Redmine either with the username and password of a user who has sufficient rights to access projects and items from which the invoice is generated, or [with their API key and a random password](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication).
-**ABRAFLEXI_CENIK**       is a price list item usually representing "man-hours"
-**ABRAFLEXI_TYP_FAKTURY** Type of issued invoice
+**REDMINE_USERNAME**     Do redmine je možné se přihlašovat buď s jménem a heslem uživatele, který má dostatečná práva aby měl dostupné projekty a položky ze kterých se sestavuje faktura, nebo [jeho API klíčem a náhodným heslem](http://www.redmine.org/projects/redmine/wiki/Rest_api#Authentication).
+**ABRAFLEXI_CENIK**       je položka ceníku obvykle vyjadřující "člověkohodiny"
+**ABRAFLEXI_TYP_FAKTURY** Typ faktury vydané
 
-(The configuration can also be set only as environment variables.)
+(Konfiguraci je možné taktéž pouze nastavit jako proměnné prostředí.)
 
 MultiFlexi
 ----------
@@ -48,10 +48,11 @@ See the full list of ready-to-run applications within the MultiFlexi platform on
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
 
 
-Installation
-------------
+Instalace
+---------
 
-A repository of Debian packages is available:
+K dispozici je repozitář debianích balíčků:
+
 
 ```shell
 sudo apt install lsb-release wget apt-transport-https bzip2
@@ -63,16 +64,17 @@ sudo apt update
 sudo apt install redmine2abraflexi
 ```
 
-Requirements
-------------
+Požadavky
+---------
 
 https://github.com/ANovitsky/redmine_shared_api
 
-The code is primarily written for Debian, for running on another system, e.g. Windows, it is necessary to add the required CSS and scripts.
+Kód je primárně psaný pro Debian, pro provoz na jiném systému, např windows je třeba doplnit požadované css a skripty.
 
-[Project work statistics](https://wakatime.com/@5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/projects/zgctsnwibv)
+[Statistiky práce na projektu](https://wakatime.com/@5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/projects/zgctsnwibv)
 
-Written using the [AbraFlexi](https://github.com/Spoje-NET/php-abraflexi) library.
+Napsáno s použitím knihovny [AbraFlexi](https://github.com/Spoje-NET/php-abraflexi)
+
 
 See also:
 

@@ -12,7 +12,7 @@ Rules-Requires-Root: no
 Package: redmine2abraflexi
 Architecture: any
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${shlibs:Depends}, php-spojenet-abraflexi, php-cli, php-gd, locales-all, php-vitexsoftware-ease-core (>= 1.40) 
+Depends: ${misc:Depends}, ${shlibs:Depends}, php-spojenet-abraflexi (>=3.3), php-cli, php-gd, locales-all 
 Suggests: abraflexi-server, multiflexi, abraflexi-client-config
 Description: It generates an invoice from the hours worked in Redmine
  Commandline tool that generates an invoice in AbraFlexi from the 

@@ -27,7 +27,7 @@ use Ease\Shared;
  * Redmine2AbraFlexi - Generate AbraFlexi invoice from Redmine's workhours.
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2023 Vitex Software
+ * @copyright  (G) 2023-2025 Vitex Software
  */
 \define('EASE_APPNAME', 'RedmineWorkHours2Invoice');
 
@@ -114,7 +114,7 @@ if (empty($projects)) {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
 
-    if($invoicer->getSubItems()){
+    if ($invoicer->getSubItems()) {
         $created = $invoicer->sync();
         $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.RO::uncode((string) $invoicer->getDataValue('mena'));
         $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');

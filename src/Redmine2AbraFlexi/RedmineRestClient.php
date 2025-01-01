@@ -134,12 +134,11 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Obtain Project Info.
      *
-     * @param int   $projectID
-     * @param array $params
+     * @param int $projectID
      *
      * @return array
      */
-    public function getProjectInfo($projectID,array $params = [])
+    public function getProjectInfo($projectID, array $params = [])
     {
         return $this->performRequest(\Ease\Functions::addUrlParams(
             'projects/'.$projectID.'.json',

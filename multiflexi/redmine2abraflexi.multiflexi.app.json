@@ -19,7 +19,7 @@
         },        
         "ABRAFLEXI_CENIK": {
             "type": "text",
-            "description": "Cen\u00edkov\u00e1 polo\u017eka pr\u00e1ce",
+            "description": "Pricelist entry code",
             "defval": "WORK",
             "required": true
         },
@@ -30,7 +30,7 @@
         },
         "ABRAFLEXI_CUSTOMER": {
             "type": "text",
-            "description": "Cen\u00edkov\u00e1 polo\u017eka pr\u00e1ce",
+            "description": "Addressbook entry code",
             "defval": "",
             "required": true
         },
@@ -48,8 +48,8 @@
         },
         "ABRAFLEXI_TYP_FAKTURY": {
             "type": "text",
-            "description": "Cen\u00edkov\u00e1 polo\u017eka pr\u00e1ce",
-            "defval": "WORK",
+            "description": "Type of invoice created",
+            "defval": "FAKTURA",
             "required": true
         },
         "ABRAFLEXI_URL": {

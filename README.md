@@ -27,6 +27,7 @@ REDMINE_PASSWORD=empty_for_token
 
 REDMINE_SCOPE=last_month
 REDMINE_PROJECT=project_name
+REDMINE_SKIPLIST=project_name,project_name2
 REDMINE_WORKER_MAIL=vitezslav.dvorak@spojenet.cz
 
 APP_DEBUG=True

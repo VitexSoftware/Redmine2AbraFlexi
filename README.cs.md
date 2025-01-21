@@ -27,6 +27,7 @@ REDMINE_PASSWORD=empty_for_token
 
 REDMINE_SCOPE=last_month
 REDMINE_PROJECT=project_name
+REDMINE_SKIPLIST=project_name,project_name2
 REDMINE_WORKER_MAIL=vitezslav.dvorak@spojenet.cz
 
 APP_DEBUG=True
@@ -42,8 +43,8 @@ EASE_LOGGER=console
 MultiFlexi
 ----------
 
-Redmine2AbraFlexi is ready to run as a [MultiFlexi](https://multiflexi.eu) application.
-See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
+Redmine2AbraFlexi je připraveno běžet jako [MultiFlexi](https://multiflexi.eu) aplikace.
+Podívejte se na [kompletní seznam aplikací](https://www.multiflexi.eu/apps.php).
 
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
 

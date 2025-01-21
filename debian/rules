@@ -17,5 +17,5 @@ override_dh_install:
 	dh_install
 	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
 	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/redmine2abraflexi/g' 	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
-	sed -i -e 's/\.\./\/etc\/redmine2abraflexi/g'                                  debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
+	sed -i -e 's/\..\/\.env//g'                                  debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/multiflexi-redmine2abraflexi/usr/lib/redmine2abraflexi/multiflexi/redmine2abraflexi.multiflexi.app.json | sponge debian/multiflexi-redmine2abraflexi/usr/lib/redmine2abraflexi/multiflexi/redmine2abraflexi.multiflexi.app.json

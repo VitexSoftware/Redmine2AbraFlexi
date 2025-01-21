@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the xls2abralexi package
+ * This file is part of the RedMine2AbraFlexi package
  *
- * https://multiflexi.eu/
+ * https://github.com/VitexSoftware/Redmine2AbraFlexi/
  *
- * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ * (c) Vítězslav Dvořák <https://vitexsoftware.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -92,7 +92,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @param array<string, mixed> $params conditions
      *
-     * @return array<int, mixed>|null
+     * @return null|array<int, mixed>
      */
     public function getProjects(array $params = []): ?array
     {
@@ -135,8 +135,6 @@ class RedmineRestClient extends \AbraFlexi\RO
      * Obtain Project Info.
      *
      * @param int $projectID
-     *
-     * @return array
      */
     public function getProjectInfo($projectID, array $params = []): array
     {
@@ -148,11 +146,6 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Convert Raw response to Array.
-     *
-     * @param string $responseRaw
-     * @param string $format
-     *
-     * @return array
      */
     public function rawResponseToArray(string $responseRaw, string $format): array
     {
@@ -164,10 +157,8 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @param array $responseDecoded
      * @param int   $responseCode
-     *
-     * @return array
      */
-    public function parseResponse(/*array*/ $responseDecoded, /*int*/ $responseCode): array
+    public function parseResponse(/* array */ $responseDecoded, /* int */ $responseCode): array
     {
         return $responseDecoded;
     }
@@ -175,7 +166,6 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Time Entries obtainer.
      *
-     * @param int        $projectID
      * @param string     $start
      * @param string     $end
      * @param null|mixed $userId
@@ -220,10 +210,6 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Add Issue names to time entries.
-     *
-     * @param array $timeEntries
-     *
-     * @return array
      */
     public function addIssueNames(array $timeEntries): array
     {
@@ -266,10 +252,6 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Obtain Issue name by IssueID.
-     *
-     * @param array $issuesID
-     *
-     * @return array
      */
     public function getNameForIssues(array $issuesID): array
     {
@@ -292,10 +274,8 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Get Issued.
-     *
-     * @return array
      */
-    public function getIssues(array $conditions): array|null
+    public function getIssues(array $conditions): null|array
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -318,10 +298,10 @@ class RedmineRestClient extends \AbraFlexi\RO
      * Obtain Issue Info.
      *
      * @param int $id of Issue
-     *
-     * @return array
+     * 
+     * @return array<int, mixed>
      */
-    public function getIssueInfo($id): array
+    public function getIssueInfo(int $id): array|null
     {
         return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
     }
@@ -398,8 +378,6 @@ class RedmineRestClient extends \AbraFlexi\RO
 
                     throw new \Exception('Unknown scope '.$scope);
                 }
-
-
         }
 
         $this->since = $this->since->setTime(0, 0);

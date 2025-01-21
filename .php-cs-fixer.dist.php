@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the xls2abralexi package
+ * This file is part of the RedMine2AbraFlexi package
  *
- * https://multiflexi.eu/
+ * https://github.com/VitexSoftware/Redmine2AbraFlexi/
  *
- * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ * (c) Vítězslav Dvořák <https://vitexsoftware.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,11 +18,11 @@ use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php74;
 
 $header = <<<'HEADER'
-This file is part of the xls2abralexi package
+This file is part of the RedMine2AbraFlexi package
 
-https://multiflexi.eu/
+https://github.com/VitexSoftware/Redmine2AbraFlexi/
 
-(c) Vítězslav Dvořák <http://vitexsoftware.com>
+(c) Vítězslav Dvořák <https://vitexsoftware.com>
 
 For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.

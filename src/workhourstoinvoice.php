@@ -4,11 +4,11 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the xls2abralexi package
+ * This file is part of the RedMine2AbraFlexi package
  *
- * https://multiflexi.eu/
+ * https://github.com/VitexSoftware/Redmine2AbraFlexi/
  *
- * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ * (c) Vítězslav Dvořák <https://vitexsoftware.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -104,6 +104,12 @@ if (empty($projects)) {
             continue;
         }
 
+        if (strstr(Shared::cfg('REDMINE_SKIPLIST', ''), $projects[$projectID]['identifier'])) {
+            $redminer->addStatusMessage(sprintf(_('Skipping project in REDMINE_SKIPLIST: %s'), $projects[$projectID]['identifier']));
+
+            continue;
+        }
+
         $items = $redminer->getProjectTimeEntries($projectID, $redminer->since, $redminer->until, $workerID);
         $report[$projectID] = $items;
 
@@ -127,6 +133,6 @@ if (empty($projects)) {
 }
 
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
-$invoicer->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
+$redminer->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
 exit($exitcode);

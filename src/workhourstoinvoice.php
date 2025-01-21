@@ -18,7 +18,6 @@ namespace Redmine2AbraFlexi;
 
 use AbraFlexi\Adresar;
 use AbraFlexi\Cenik;
-use AbraFlexi\FakturaVydana;
 use AbraFlexi\RO;
 use Ease\Locale;
 use Ease\Shared;
@@ -38,18 +37,21 @@ require_once '../vendor/autoload.php';
  */
 $options = getopt('o::e::', ['output::environment::']);
 
-Shared::init([
-    'ABRAFLEXI_URL',
-    'ABRAFLEXI_LOGIN',
-    'ABRAFLEXI_PASSWORD',
-    'ABRAFLEXI_COMPANY',
-    'REDMINE_URL',
-    'REDMINE_USERNAME',
-    'ABRAFLEXI_CUSTOMER',
-    'ABRAFLEXI_CENIK',
-    'REDMINE_SCOPE',
-    'REDMINE_WORKER_MAIL',
-], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
+Shared::init(
+    [
+        'ABRAFLEXI_URL',
+        'ABRAFLEXI_LOGIN',
+        'ABRAFLEXI_PASSWORD',
+        'ABRAFLEXI_COMPANY',
+        'REDMINE_URL',
+        'REDMINE_USERNAME',
+        'ABRAFLEXI_CUSTOMER',
+        'ABRAFLEXI_CENIK',
+        'REDMINE_SCOPE',
+        'REDMINE_WORKER_MAIL',
+    ],
+    \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
+);
 $destination = \array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout');
 $localer = new Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 $redminer = new RedmineRestClient();
@@ -84,25 +86,25 @@ if (null === $workerID) {
 
 $addreser = new Adresar();
 $redminer->scopeToInterval(Shared::cfg('REDMINE_SCOPE'));
-$projects = $redminer->getProjects(['limit' => 100]); // since redmine 3.4.0
+$projects = $redminer->getProjects(['limit' => 1000]); // since redmine 3.4.0
 
 if (empty($projects)) {
     $report['message'] = _('No projects found');
     $redminer->addStatusMessage($report['message'], 'error');
 } else {
     $invoicer = new FakturaVydana([
-        'typDokl' => RO::code(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
-        'firma' => RO::code(Shared::cfg('ABRAFLEXI_CUSTOMER')),
+        'typDokl' => \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
+        'firma' => \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_CUSTOMER')),
         'popis' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
     ]);
-    $pricelister = new Cenik(RO::code(Shared::cfg('ABRAFLEXI_CENIK')));
+    $pricelister = new Cenik(\AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_CENIK')));
 
     foreach (array_keys($projects) as $projectID) {
         if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projects[$projectID]['identifier'] !== Shared::cfg('REDMINE_PROJECT')) {
             continue;
         }
 
-        $items = $redminer->getProjectTimeEntries($projectID, $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d'), $workerID);
+        $items = $redminer->getProjectTimeEntries($projectID, $redminer->since, $redminer->until, $workerID);
         $report[$projectID] = $items;
 
         if (empty($items) === false) {
@@ -125,6 +127,6 @@ if (empty($projects)) {
 }
 
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
-$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
+$invoicer->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
 exit($exitcode);

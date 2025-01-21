@@ -88,13 +88,13 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
-     * Obtaing Redmine Projects listing.
+     * Obtain Redmine Projects listing.
      *
-     * @param array $params conditions
+     * @param array<string, mixed> $params conditions
      *
-     * @return array
+     * @return array<int, mixed>|null
      */
-    public function getProjects($params = [])
+    public function getProjects(array $params = []): ?array
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -110,13 +110,13 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
-     * Obtain RedMine  Users List.
+     * Obtain RedMine Users List.
      *
-     * @param array $params conditions
+     * @param array<string, mixed> $params conditions
      *
-     * @return array
+     * @return array<int, mixed>
      */
-    public function getUsers(array $params = [])
+    public function getUsers(array $params = []): array
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -138,7 +138,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function getProjectInfo($projectID, array $params = [])
+    public function getProjectInfo($projectID, array $params = []): array
     {
         return $this->performRequest(\Ease\Functions::addUrlParams(
             'projects/'.$projectID.'.json',
@@ -154,7 +154,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function rawResponseToArray($responseRaw, $format)
+    public function rawResponseToArray(string $responseRaw, string $format): array
     {
         return parent::rawResponseToArray($responseRaw, 'json');
     }
@@ -167,7 +167,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function parseResponse($responseDecoded, $responseCode)
+    public function parseResponse(/*array*/ $responseDecoded, /*int*/ $responseCode): array
     {
         return $responseDecoded;
     }
@@ -182,11 +182,11 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function getProjectTimeEntries($projectID, $start, $end, $userId = null)
+    public function getProjectTimeEntries(int $projectID, \DateTime $start, \DateTime $end, $userId = null)
     {
         $result = null;
         $response = $this->performRequest(
-            'time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start.'|'.$end).'&user_id='.$userId,
+            'time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start->format('Y-m-d').'|'.$end->format('Y-m-d')).'&user_id='.$userId,
             'GET',
         );
 
@@ -203,7 +203,7 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * @return array
      */
-    public function getTimeEntries(array $conditions)
+    public function getTimeEntries(array $conditions): array|bool
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -225,7 +225,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function addIssueNames($timeEntries)
+    public function addIssueNames(array $timeEntries): array
     {
         $result = [];
         $issues = [];
@@ -267,11 +267,11 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Obtain Issue name by IssueID.
      *
-     * @param int $issuesID
+     * @param array $issuesID
      *
      * @return array
      */
-    public function getNameForIssues($issuesID)
+    public function getNameForIssues(array $issuesID): array
     {
         $result = null;
         $response = $this->performRequest('issues.json?status_id=*&issue_id='.implode(
@@ -295,7 +295,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function getIssues(array $conditions)
+    public function getIssues(array $conditions): array|null
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -321,7 +321,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array
      */
-    public function getIssueInfo($id)
+    public function getIssueInfo($id): array
     {
         return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
     }
@@ -384,10 +384,24 @@ class RedmineRestClient extends \AbraFlexi\RO
                 break;
 
             default:
-                throw new \Ease\Exception('Unknown scope '.$scope);
+                if (strstr($scope, '>')) {
+                    [$begin, $end] = explode('>', $scope);
+                    $this->since = new \DateTime($begin);
+                    $this->until = new \DateTime($end);
+                } else {
+                    if (preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $scope)) {
+                        $this->since = new \DateTime($scope);
+                        $this->until = (new \DateTime($scope))->setTime(23, 59, 59, 999);
+
+                        break;
+                    }
+
+                    throw new \Exception('Unknown scope '.$scope);
+                }
+
+
         }
 
         $this->since = $this->since->setTime(0, 0);
-        $this->until = $this->until->setTime(0, 0);
     }
 }

@@ -37,6 +37,33 @@ EASE_LOGGER=console
 **ABRAFLEXI_CENIK**       is a price list item usually representing "man-hours"
 **ABRAFLEXI_TYP_FAKTURY** Type of issued invoice
 
+Import Scopes
+-------------
+
+  * `today` 
+  * `yesterday`
+  * `last_week`
+  * `last_month`
+  * `last_two_months`
+  * `previous_month` 
+  * `two_months_ago`
+  * `this_year` 
+  * `January`  
+  * `February` 
+  * `March` 
+  * `April` 
+  * `May` 
+  * `June` 
+  * `July` 
+  * `August` 
+  * `September` 
+  * `October` 
+  * `November` 
+  * `December` 
+  * `2024-08-05>2024-08-11` - custom scope 
+  * `2024-10-11` - only specific day
+
+
 (The configuration can also be set only as environment variables.)
 
 MultiFlexi

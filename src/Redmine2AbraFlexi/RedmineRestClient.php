@@ -298,10 +298,10 @@ class RedmineRestClient extends \AbraFlexi\RO
      * Obtain Issue Info.
      *
      * @param int $id of Issue
-     * 
+     *
      * @return array<int, mixed>
      */
-    public function getIssueInfo(int $id): array|null
+    public function getIssueInfo(int $id): null|array
     {
         return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
     }

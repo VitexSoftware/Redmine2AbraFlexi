@@ -275,7 +275,7 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Get Issued.
      */
-    public function getIssues(array $conditions): null|array
+    public function getIssues(array $conditions): ?array
     {
         $result = null;
         $response = $this->performRequest(\Ease\Functions::addUrlParams(
@@ -301,7 +301,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      *
      * @return array<int, mixed>
      */
-    public function getIssueInfo(int $id): null|array
+    public function getIssueInfo(int $id): ?array
     {
         return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
     }

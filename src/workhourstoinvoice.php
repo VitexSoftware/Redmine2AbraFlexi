@@ -57,7 +57,7 @@ $localer = new Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 $redminer = new RedmineRestClient();
 
 if (strtolower(Shared::cfg('APP_DEBUG', 'false')) === 'true') {
-    $redminer->logBanner(Shared::appName().' v'.Shared::appVersion());
+    $redminer->logBanner(Shared::appName().' v'.Shared::appVersion(),Shared::cfg('REDMINE_SCOPE'));
 }
 
 $report = [];
@@ -96,6 +96,7 @@ if (empty($projects)) {
         'typDokl' => \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
         'firma' => \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_CUSTOMER')),
         'popis' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
+        'uvodTxt' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
     ]);
     $pricelister = new Cenik(\AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_CENIK')));
 

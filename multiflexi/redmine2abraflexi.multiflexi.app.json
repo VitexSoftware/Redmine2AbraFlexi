@@ -10,6 +10,10 @@
     "requirements": "Redmine,AbraFlexi",
     "deploy": "apt install redmine2abraflexi",
     "homepage": "https://github.com/VitexSoftware/Redmine2AbraFlexi/",
+    "artifacts": {
+        "pattern": "redmine2abraflexi_.*\\.json",
+        "presence": "optional"
+    },
     "environment": {
         "APP_DEBUG": {
             "type": "checkbox",
@@ -120,4 +124,5 @@
         }        
     },
     "multiflexi": "1.7.2"
+
 }

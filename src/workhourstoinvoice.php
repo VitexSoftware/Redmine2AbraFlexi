@@ -125,7 +125,7 @@ if (empty($projects)) {
 
     if ($invoicer->getSubItems()) {
         $created = $invoicer->sync();
-        $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.RO::uncode((string) $invoicer->getDataValue('mena'));
+        $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::uncode((string) $invoicer->getDataValue('mena'));
         $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');
     } else {
         $report['message'] = _('Invoice Empty');

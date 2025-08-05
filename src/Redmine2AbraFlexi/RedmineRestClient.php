@@ -88,7 +88,7 @@ class RedmineRestClient extends \AbraFlexi\RO
     }
 
     /**
-     * Obtain Redmine Projects listing.
+     * Obtain RedMine Projects listing.
      *
      * @param array<string, mixed> $params conditions
      *

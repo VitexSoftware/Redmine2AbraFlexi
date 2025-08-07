@@ -6,8 +6,15 @@
     "setup": "",
     "cmdparams": "",
     "uuid": "0f667a75-6c60-46c0-a1a8-9bc35b21a396",
-    "topics": "Redmine,Abraflexi,Invoice",
-    "requirements": "Redmine,AbraFlexi",
+    "topics": [
+        "Redmine",
+        "Abraflexi",
+        "Invoice"
+    ],
+    "requirements": [
+        "Redmine",
+        "AbraFlexi"
+    ],
     "deploy": "apt install redmine2abraflexi",
     "homepage": "https://github.com/VitexSoftware/Redmine2AbraFlexi/",
     "artifacts": {
@@ -20,7 +27,7 @@
             "description": "Show debug messages",
             "defval": "False",
             "required": true
-        },        
+        },
         "ABRAFLEXI_CENIK": {
             "type": "text",
             "description": "Pricelist entry code",
@@ -59,12 +66,12 @@
         "ABRAFLEXI_URL": {
             "type": "string",
             "description": "AbraFlexi Server URI",
-            "defval": "https:\/\/demo.flexibee.eu:5434",
+            "defval": "https://demo.flexibee.eu:5434",
             "required": true
         },
         "ABRAFLEXI_SEND": {
             "type": "checkbox",
-            "description": "Send generated invoice by mail ?", 
+            "description": "Send generated invoice by mail ?",
             "defval": "true",
             "required": false
         },
@@ -121,8 +128,7 @@
             "description": "write log messages using",
             "defval": "console|syslog",
             "required": false
-        }        
+        }
     },
-    "multiflexi": "1.7.2"
-
+    "multiflexi": "1.20.0"
 }

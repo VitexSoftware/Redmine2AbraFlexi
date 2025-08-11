@@ -57,7 +57,7 @@ $localer = new Locale('cs_CZ', '../i18n', 'redmine2abraflexi');
 $redminer = new RedmineRestClient();
 
 if (strtolower(Shared::cfg('APP_DEBUG', 'false')) === 'true') {
-    $redminer->logBanner(Shared::appName().' v'.Shared::appVersion(),Shared::cfg('REDMINE_SCOPE'));
+    $redminer->logBanner(Shared::appName().' v'.Shared::appVersion().' '.Shared::cfg('REDMINE_SCOPE').' '.Shared::cfg('ABRAFLEXI_URL').'/c/'.Shared::cfg('ABRAFLEXI_COMPANY'));
 }
 
 $report = [];
@@ -125,7 +125,7 @@ if (empty($projects)) {
 
     if ($invoicer->getSubItems()) {
         $created = $invoicer->sync();
-        $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::uncode((string) $invoicer->getDataValue('mena'));
+        $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
         $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');
     } else {
         $report['message'] = _('Invoice Empty');
@@ -133,7 +133,7 @@ if (empty($projects)) {
     }
 }
 
-$written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+$written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG', false) ? \JSON_PRETTY_PRINT : 0));
 $redminer->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
 exit($exitcode);

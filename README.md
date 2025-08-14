@@ -6,6 +6,7 @@ Redmine to AbraFlexi importer
 Generates an invoice in AbraFlexi from hours worked in Redmine.
 
 [![wakatime](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/9d7aba67-89a3-4c49-a38c-aaeded7a4067.svg)](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/9d7aba67-89a3-4c49-a38c-aaeded7a4067)
+[![Docker](https://github.com/VitexSoftware/Redmine2AbraFlexi/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/VitexSoftware/Redmine2AbraFlexi/actions/workflows/docker-publish.yml)
 
 Configuration
 -------------

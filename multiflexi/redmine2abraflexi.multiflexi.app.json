@@ -5,6 +5,7 @@
     "executable": "redmine2abraflexi-invoice",
     "setup": "",
     "cmdparams": "",
+    "ociimage": "ghcr.io/vitexsoftware/redmine2abraflexi",
     "uuid": "0f667a75-6c60-46c0-a1a8-9bc35b21a396",
     "topics": [
         "Redmine",

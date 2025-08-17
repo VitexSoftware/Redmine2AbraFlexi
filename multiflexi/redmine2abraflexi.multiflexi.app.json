@@ -18,10 +18,14 @@
     ],
     "deploy": "apt install redmine2abraflexi",
     "homepage": "https://github.com/VitexSoftware/Redmine2AbraFlexi/",
-    "artifacts": {
-        "pattern": "redmine2abraflexi_.*\\.json",
-        "presence": "optional"
-    },
+    "artifacts": [
+        {
+            "name": "Redmine2AbraFlexi JSON Report",
+            "path": "redmine2abraflexi_{REDMINE_PROJECT}.json",
+            "type": "file",
+            "description": "JSON file containing invoice data generated from Redmine work hours."
+        }
+    ],
     "environment": {
         "APP_DEBUG": {
             "type": "checkbox",
@@ -38,7 +42,8 @@
         "ABRAFLEXI_COMPANY": {
             "type": "string",
             "description": "",
-            "defval": "demo_de"
+            "defval": "demo_de",
+            "required": true
         },
         "ABRAFLEXI_CUSTOMER": {
             "type": "text",

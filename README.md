@@ -44,29 +44,28 @@ EASE_LOGGER=console
 Import Scopes
 -------------
 
-  * `today` 
-  * `yesterday`
-  * `last_week`
-  * `last_month`
-  * `last_two_months`
-  * `previous_month` 
-  * `two_months_ago`
-  * `this_year` 
-  * `January`  
-  * `February` 
-  * `March` 
-  * `April` 
-  * `May` 
-  * `June` 
-  * `July` 
-  * `August` 
-  * `September` 
-  * `October` 
-  * `November` 
-  * `December` 
-  * `2024-08-05>2024-08-11` - custom scope 
-  * `2024-10-11` - only specific day
-
+* `today`
+* `yesterday`
+* `last_week`
+* `last_month`
+* `last_two_months`
+* `previous_month`
+* `two_months_ago`
+* `this_year`
+* `January`  
+* `February`
+* `March`
+* `April`
+* `May`
+* `June`
+* `July`
+* `August`
+* `September`
+* `October`
+* `November`
+* `December`
+* `2024-08-05>2024-08-11` - custom scope
+* `2024-10-11` - only specific day
 
 (The configuration can also be set only as environment variables.)
 
@@ -77,7 +76,6 @@ Redmine2AbraFlexi is ready to run as a [MultiFlexi](https://multiflexi.eu) appli
 See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
 
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
-
 
 Installation
 ------------
@@ -97,7 +95,7 @@ sudo apt install redmine2abraflexi
 Requirements
 ------------
 
-https://github.com/ANovitsky/redmine_shared_api
+<https://github.com/ANovitsky/redmine_shared_api>
 
 The code is primarily written for Debian, for running on another system, e.g. Windows, it is necessary to add the required CSS and scripts.
 
@@ -107,5 +105,5 @@ Written using the [AbraFlexi](https://github.com/Spoje-NET/php-abraflexi) librar
 
 See also:
 
- * https://github.com/VitexSoftware/Toggl-to-AbraFlexi
- * https://github.com/sizek-cz/Kimai2AbraFlexi
+* <https://github.com/VitexSoftware/Toggl-to-AbraFlexi>
+* <https://github.com/sizek-cz/Kimai2AbraFlexi>

@@ -18,7 +18,6 @@ namespace Redmine2AbraFlexi;
 
 use AbraFlexi\Adresar;
 use AbraFlexi\Cenik;
-use AbraFlexi\RO;
 use Ease\Locale;
 use Ease\Shared;
 

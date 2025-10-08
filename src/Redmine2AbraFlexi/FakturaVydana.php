@@ -56,7 +56,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         if (!\array_key_exists('typDokl', $init)) {
             $this->setDataValue(
                 'typDokl',
-                \AbraFlexi\Functions::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')),
+                \AbraFlexi\Code::ensure(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_TYP_FAKTURY')),
             );
         }
     }
@@ -90,7 +90,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
                     'poznam' => self::stripComas($csvData[9]),
                     'nazev' => $nazev,
                     'mnozMj' => (float) self::stripComas($csvData[10]),
-                    'cenik' => \AbraFlexi\Functions::code(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
+                    'cenik' => \AbraFlexi\Code::ensure(\Ease\Shared::instanced()->getConfigValue('ABRAFLEXI_CENIK'))];
             }
         }
 
@@ -144,7 +144,7 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
                             'nazev' => $nazev,
                             'popis' => $timeEntry['comments'],
                             'mnozMj' => (float) $timeEntry['hours'],
-                            'cenik' => \AbraFlexi\Functions::code(\Ease\Shared::cfg('ABRAFLEXI_CENIK'))];
+                            'cenik' => \AbraFlexi\Code::ensure(\Ease\Shared::cfg('ABRAFLEXI_CENIK'))];
                         $this->itemsIncluded[$rowId] = $rowId;
                     }
                 }

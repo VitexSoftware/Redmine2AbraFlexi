@@ -60,6 +60,7 @@ if (strtolower(Shared::cfg('APP_DEBUG', 'false')) === 'true') {
 }
 
 $report = [];
+$totalHours = 0.0;
 $exitcode = 0;
 $workerID = null;
 
@@ -84,7 +85,7 @@ if (null === $workerID) {
 }
 
 $addreser = new Adresar();
-$redminer->scopeToInterval(Shared::cfg('REDMINE_SCOPE'));
+$redminer->setScope(Shared::cfg('REDMINE_SCOPE'));
 $projects = $redminer->getProjects(['limit' => 1000]); // since redmine 3.4.0
 
 if (empty($projects)) {
@@ -92,12 +93,12 @@ if (empty($projects)) {
     $redminer->addStatusMessage($report['message'], 'error');
 } else {
     $invoicer = new FakturaVydana([
-        'typDokl' => \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
-        'firma' => \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_CUSTOMER')),
-        'popis' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
-        'uvodTxt' => sprintf(_('Work from %s to %s'), $redminer->since->format('Y-m-d'), $redminer->until->format('Y-m-d')),
+        'typDokl' => \AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
+        'firma' => \AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_CUSTOMER')),
+        'popis' => sprintf(_('Work from %s to %s'), $redminer->getSince()->format('Y-m-d'), $redminer->getUntil()->format('Y-m-d')),
+        'uvodTxt' => sprintf(_('Work from %s to %s'), $redminer->getSince()->format('Y-m-d'), $redminer->getUntil()->format('Y-m-d')),
     ]);
-    $pricelister = new Cenik(\AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_CENIK')));
+    $pricelister = new Cenik(\AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_CENIK')));
 
     foreach (array_keys($projects) as $projectID) {
         if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projects[$projectID]['identifier'] !== Shared::cfg('REDMINE_PROJECT')) {
@@ -110,10 +111,18 @@ if (empty($projects)) {
             continue;
         }
 
-        $items = $redminer->getProjectTimeEntries($projectID, $redminer->since, $redminer->until, $workerID);
-        $report[$projectID] = $items;
+        $items = $redminer->getProjectTimeEntries($projectID, $redminer->getSince(), $redminer->getUntil(), $workerID);
 
         if (empty($items) === false) {
+            $report[$projectID] = $items;
+
+            // Sum hours from all items in this project
+            foreach ($items as $item) {
+                if (isset($item['hours'])) {
+                    $totalHours += (float) $item['hours'];
+                }
+            }
+
             $invoicer->takeItemsFromArray($items);
         }
     }
@@ -123,13 +132,29 @@ if (empty($projects)) {
     }
 
     if ($invoicer->getSubItems()) {
+        $invoiceInfo = ' ⏱️ '.$totalHours.' '._('hours');
+        $invoicer->setDataValue('zavTxt', $invoiceInfo);
+
         $created = $invoicer->sync();
-        $report['message'] = $invoicer->getRecordCode().' '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
+        $report['message'] = ' 🧾 '.\AbraFlexi\Code::strip($invoicer->getRecordCode()).
+                ' 🗓️'.$redminer->getSince()->format('Y-m-d').
+                ' ⏯️ '.$redminer->getUntil()->format('Y-m-d').
+                ' ⏱️'.$totalHours.
+                ' 🤑 '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
+
         $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');
     } else {
         $report['message'] = _('Invoice Empty');
         $invoicer->addStatusMessage($report['message'], 'success');
     }
+
+    // Add total hours and date range to the report
+    $report['total_hours'] = $totalHours;
+    $report['total_amount'] = $invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
+    $report['period'] = [
+        'since' => $redminer->getSince()->format('Y-m-d'),
+        'until' => $redminer->getUntil()->format('Y-m-d'),
+    ];
 }
 
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG', false) ? \JSON_PRETTY_PRINT : 0));

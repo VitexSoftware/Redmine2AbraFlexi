@@ -22,8 +22,9 @@ namespace Redmine2AbraFlexi;
  */
 class RedmineRestClient extends \AbraFlexi\RO
 {
-    public \DateTime $since;
-    public \DateTime $until;
+    use \Ease\datescope;
+    public \DateTime $redmineSince;
+    public \DateTime $redmineUntil;
 
     /**
      * RedMine REST client.
@@ -134,9 +135,11 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Obtain Project Info.
      *
-     * @param int $projectID
+     * @param array<string, mixed> $params Additional request parameters
+     *
+     * @return array<string, mixed> Project information
      */
-    public function getProjectInfo($projectID, array $params = []): array
+    public function getProjectInfo(int $projectID, array $params = []): array
     {
         return $this->performRequest(\Ease\Functions::addUrlParams(
             'projects/'.$projectID.'.json',
@@ -146,6 +149,11 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Convert Raw response to Array.
+     *
+     * @param string $responseRaw the raw response string
+     * @param string $format      the format of the response
+     *
+     * @return array<int|string, mixed> the decoded response as an array
      */
     public function rawResponseToArray(string $responseRaw, string $format): array
     {
@@ -155,24 +163,27 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Parse Redmine response.
      *
-     * @param array $responseDecoded
-     * @param int   $responseCode
+     * @param mixed $responseDecoded the decoded response array
+     * @param mixed $responseCode    the HTTP response code
+     *
+     * @return mixed the parsed response array
      */
-    public function parseResponse(/* array */ $responseDecoded, /* int */ $responseCode): array
+    public function parseResponse($responseDecoded, $responseCode)
     {
         return $responseDecoded;
     }
 
     /**
-     * Time Entries obtainer.
+     * Obtain time entries for a project within a date range and optionally for a specific user.
      *
-     * @param string     $start
-     * @param string     $end
-     * @param null|mixed $userId
+     * @param int        $projectID the project ID
+     * @param \DateTime  $start     the start date
+     * @param \DateTime  $end       the end date
+     * @param null|mixed $userId    the user ID (optional)
      *
-     * @return array
+     * @return array<int, array<string, mixed>> time entries with issue names
      */
-    public function getProjectTimeEntries(int $projectID, \DateTime $start, \DateTime $end, $userId = null)
+    public function getProjectTimeEntries(int $projectID, \DateTime $start, \DateTime $end, $userId = null): array
     {
         $result = null;
         $response = $this->performRequest(
@@ -187,11 +198,15 @@ class RedmineRestClient extends \AbraFlexi\RO
             ));
         }
 
-        return $response;
+        return $response ? $response : [];
     }
 
     /**
-     * @return array
+     * Obtain time entries based on given conditions.
+     *
+     * @param array<string, mixed> $conditions conditions for filtering time entries
+     *
+     * @return array<int, mixed>|bool returns an array of time entries indexed by ID or false on failure
      */
     public function getTimeEntries(array $conditions): array|bool
     {
@@ -210,6 +225,10 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Add Issue names to time entries.
+     *
+     * @param array<int, array<string, mixed>> $timeEntries array of time entries indexed by ID
+     *
+     * @return array<int, array<string, mixed>> array of time entries with issue names indexed by ID
      */
     public function addIssueNames(array $timeEntries): array
     {
@@ -252,10 +271,14 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Obtain Issue name by IssueID.
+     *
+     * @param array<int, int> $issuesID array of issue IDs
+     *
+     * @return array<int, string> array of issue IDs mapped to their subject names
      */
     public function getNameForIssues(array $issuesID): array
     {
-        $result = null;
+        $result = [];
         $response = $this->performRequest('issues.json?status_id=*&issue_id='.implode(
             ',',
             $issuesID,
@@ -265,8 +288,8 @@ class RedmineRestClient extends \AbraFlexi\RO
             $response = \Ease\Functions::reindexArrayBy($response['issues'], 'id');
         }
 
-        foreach ($response as $issuesID => $responseData) {
-            $result[$issuesID] = $responseData['subject'];
+        foreach ($response as $issueID => $responseData) {
+            $result[$issueID] = $responseData['subject'];
         }
 
         return $result;
@@ -274,6 +297,10 @@ class RedmineRestClient extends \AbraFlexi\RO
 
     /**
      * Get Issued.
+     *
+     * @param array<string, mixed> $conditions conditions for filtering issues
+     *
+     * @return null|array<int|string, string> returns an array of issue subjects indexed by issue ID, or null on failure
      */
     public function getIssues(array $conditions): ?array
     {
@@ -287,8 +314,10 @@ class RedmineRestClient extends \AbraFlexi\RO
             $response = \Ease\Functions::reindexArrayBy($response['issues'], 'id');
         }
 
-        foreach ($response as $issuesID => $responseData) {
-            $result[$issuesID] = $responseData['subject'];
+        if (\is_array($response)) {
+            foreach ($response as $issuesID => $responseData) {
+                $result[$issuesID] = $responseData['subject'];
+            }
         }
 
         return $result;
@@ -304,82 +333,5 @@ class RedmineRestClient extends \AbraFlexi\RO
     public function getIssueInfo(int $id): ?array
     {
         return $this->getIssues(['issue_id' => $id, 'status_id' => '*']);
-    }
-
-    /**
-     * Prepare processing interval.
-     *
-     * @param string $scope
-     *
-     * @throws \Ease\Exception
-     */
-    public function scopeToInterval($scope): void
-    {
-        switch ($scope) {
-            case 'current_month':
-                $this->since = new \DateTime('first day of this month');
-                $this->until = new \DateTime();
-
-                break;
-            case 'last_month':
-                $this->since = new \DateTime('first day of last month');
-                $this->until = new \DateTime('last day of last month');
-
-                break;
-            case 'last_two_months':
-                $this->since = (new \DateTime('first day of last month'))->modify('-1 month');
-                $this->until = (new \DateTime('last day of last month'));
-
-                break;
-            case 'previous_month':
-                $this->since = new \DateTime('first day of -2 month');
-                $this->until = new \DateTime('last day of -2 month');
-
-                break;
-            case 'two_months_ago':
-                $this->since = new \DateTime('first day of -3 month');
-                $this->until = new \DateTime('last day of -3 month');
-
-                break;
-            case 'this_year':
-                $this->since = new \DateTime('first day of January '.date('Y'));
-                $this->until = new \DateTime('last day of December'.date('Y'));
-
-                break;
-            case 'January':  // 1
-            case 'February': // 2
-            case 'March':    // 3
-            case 'April':    // 4
-            case 'May':      // 5
-            case 'June':     // 6
-            case 'July':     // 7
-            case 'August':   // 8
-            case 'September':// 9
-            case 'October':  // 10
-            case 'November': // 11
-            case 'December': // 12
-                $this->since = new \DateTime('first day of '.$scope.' '.date('Y'));
-                $this->until = new \DateTime('last day of '.$scope.' '.date('Y'));
-
-                break;
-
-            default:
-                if (strstr($scope, '>')) {
-                    [$begin, $end] = explode('>', $scope);
-                    $this->since = new \DateTime($begin);
-                    $this->until = new \DateTime($end);
-                } else {
-                    if (preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $scope)) {
-                        $this->since = new \DateTime($scope);
-                        $this->until = (new \DateTime($scope))->setTime(23, 59, 59, 999);
-
-                        break;
-                    }
-
-                    throw new \Exception('Unknown scope '.$scope);
-                }
-        }
-
-        $this->since = $this->since->setTime(0, 0);
     }
 }

@@ -118,50 +118,32 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         return substr($string, 1, -1);
     }
 
-    /**
-     * @param array<mixed> $timeEntriesRaw
-     */
-    public function takeItemsFromArray(array $timeEntriesRaw): void
+    public function takeItemsFromArray(array $timeEntries, array $projectHours): void
     {
         $itemsData = [];
-        $timeEntries = [];
 
-        foreach ($timeEntriesRaw as $rowId => $timeEntryRaw) {
-            $timeEntries[$timeEntryRaw['project']][$rowId] = $timeEntryRaw;
-        }
-
-        foreach ($timeEntries as $projectName => $projectTimeEntries) {
-            foreach ($projectTimeEntries as $rowId => $timeEntry) {
-                $nazev = $timeEntry['issue'];
-
-                if (isset($itemsData[$projectName][$nazev])) {
-                    $itemsData[$projectName][$nazev]['mnozMj'] += (float) $timeEntry['hours'];
-                } else {
-                    if (!\array_key_exists($rowId, $this->itemsIncluded)) {
-                        $itemsData[$projectName][$nazev] = [
-                            //                            'id' => 'ext:redmine:'.$rowId,
-                            'typPolozkyK' => 'typPolozky.katalog',
-                            'nazev' => $nazev,
-                            'popis' => $timeEntry['comments'],
-                            'mnozMj' => (float) $timeEntry['hours'],
-                            'cenik' => \AbraFlexi\Code::ensure(\Ease\Shared::cfg('ABRAFLEXI_CENIK'))];
-                        $this->itemsIncluded[$rowId] = $rowId;
-                    }
-                }
+        foreach ($timeEntries as $projectName => $issues) {
+            foreach ($issues as $issue => $hours) {
+                $itemsData[$projectName][$issue] = [
+                    //                            'id' => 'ext:redmine:'.$rowId,
+                    'typPolozkyK' => 'typPolozky.katalog',
+                    'nazev' => $issue,
+                    //                            'popis' => $timeEntry['comments'],
+                    'mnozMj' => (float) $hours,
+                    'cenik' => \AbraFlexi\Code::ensure(\Ease\Shared::cfg('ABRAFLEXI_CENIK'))];
             }
         }
 
         foreach ($itemsData as $projectName => $projectData) {
             if (!\array_key_exists($projectName, $this->projectsIncluded)) {
                 $this->addArrayToBranch(
-                    ['typPolozkyK' => 'typPolozky.text', 'nazev' => 'Projekt: '.$projectName],
+                    ['typPolozkyK' => 'typPolozky.text',
+                        'nazev' => 'Projekt: '.$projectName.'    '.count($projectData).' / '.$projectHours[$projectName].' h'],
                     'polozkyFaktury',
                 ); // Task Title as Heading/TextRow
                 $this->projectsIncluded[$projectName] = $projectName;
-
-                foreach ($projectData as $taskName => $taskData) {
-                    $this->addArrayToBranch($taskData, 'polozkyFaktury');
-                }
+                $this->addArrayToBranch(array_values($itemsData[$projectName]), 'polozkyFaktury');
+                
             }
         }
     }

@@ -25,6 +25,7 @@ class RedmineRestClient extends \AbraFlexi\RO
     use \Ease\datescope;
     public \DateTime $redmineSince;
     public \DateTime $redmineUntil;
+    public array $defaultUrlParams = ['limit' => 500];
 
     /**
      * RedMine REST client.
@@ -176,51 +177,30 @@ class RedmineRestClient extends \AbraFlexi\RO
     /**
      * Obtain time entries for a project within a date range and optionally for a specific user.
      *
-     * @param int        $projectID the project ID
-     * @param \DateTime  $start     the start date
-     * @param \DateTime  $end       the end date
-     * @param null|mixed $userId    the user ID (optional)
+     * @param int       $userId the user ID
+     * @param \DateTime $start  the start date
+     * @param \DateTime $end    the end date
      *
      * @return array<int, array<string, mixed>> time entries with issue names
      */
-    public function getProjectTimeEntries(int $projectID, \DateTime $start, \DateTime $end, $userId = null): array
+    public function getUserTimeEntries(int $userId, \DateTime $start, \DateTime $end): array
     {
-        $result = null;
-        $response = $this->performRequest(
-            'time_entries.json?project_id='.$projectID.'&spent_on='.urlencode('><'.$start->format('Y-m-d').'|'.$end->format('Y-m-d')).'&user_id='.$userId,
+        $timeEntriesRaw = $this->performRequest(
+            'time_entries.json?spent_on='.urlencode('><'.$start->format('Y-m-d').'|'.$end->format('Y-m-d')).'&user_id='.$userId,
             'GET',
         );
 
-        if ($this->lastResponseCode === 200) {
-            $response = $this->addIssueNames(\Ease\Functions::reindexArrayBy(
-                $response['time_entries'],
-                'id',
-            ));
+        if ($timeEntriesRaw && $this->lastResponseCode === 200) {
+            $projects = \Ease\Functions::reindexArrayBy($this->getProjects(['limit' => 100]), 'id');
+
+            foreach ($timeEntriesRaw['time_entries'] as $timeEntryId => $timeEntryData) {
+                $timeEntriesRaw['time_entries'][$timeEntryId]['project'] = $projects[$timeEntryData['project']['id']];
+            }
+
+            $response = $this->addIssueNames(\Ease\Functions::reindexArrayBy($timeEntriesRaw['time_entries'], 'id'));
         }
 
-        return $response ? $response : [];
-    }
-
-    /**
-     * Obtain time entries based on given conditions.
-     *
-     * @param array<string, mixed> $conditions conditions for filtering time entries
-     *
-     * @return array<int, mixed>|bool returns an array of time entries indexed by ID or false on failure
-     */
-    public function getTimeEntries(array $conditions): array|bool
-    {
-        $result = null;
-        $response = $this->performRequest(\Ease\Functions::addUrlParams(
-            'time_entries.json',
-            $conditions,
-        ), 'GET');
-
-        if ($this->lastResponseCode === 200) {
-            $response = \Ease\Functions::reindexArrayBy($response['time_entries'], 'id');
-        }
-
-        return $response;
+        return $timeEntriesRaw ? $response : [];
     }
 
     /**
@@ -242,6 +222,7 @@ class RedmineRestClient extends \AbraFlexi\RO
 
             $result[$timeEntryID] = [
                 'project' => $timeEntry['project']['name'],
+                'project_slug' => $timeEntry['project']['identifier'],
                 'hours' => $timeEntry['hours'],
                 'issue' => \array_key_exists('issue', $timeEntry) ? $timeEntry['issue']['id'] : 0,
                 'comments' => \array_key_exists('comments', $timeEntry) ? $timeEntry['comments'] : '',

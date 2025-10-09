@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace Redmine2AbraFlexi;
 
-use AbraFlexi\Adresar;
 use AbraFlexi\Cenik;
 use Ease\Locale;
 use Ease\Shared;
@@ -59,7 +58,9 @@ if (strtolower(Shared::cfg('APP_DEBUG', 'false')) === 'true') {
     $redminer->logBanner(Shared::appName().' v'.Shared::appVersion().' '.Shared::cfg('REDMINE_SCOPE').' '.Shared::cfg('ABRAFLEXI_URL').'/c/'.Shared::cfg('ABRAFLEXI_COMPANY'));
 }
 
-$report = [];
+$report = [
+    'entries' => [],
+];
 $totalHours = 0.0;
 $exitcode = 0;
 $workerID = null;
@@ -84,7 +85,6 @@ if (null === $workerID) {
     exit(1);
 }
 
-$addreser = new Adresar();
 $redminer->setScope(Shared::cfg('REDMINE_SCOPE'));
 $projects = $redminer->getProjects(['limit' => 1000]); // since redmine 3.4.0
 
@@ -98,64 +98,82 @@ if (empty($projects)) {
         'popis' => sprintf(_('Work from %s to %s'), $redminer->getSince()->format('Y-m-d'), $redminer->getUntil()->format('Y-m-d')),
         'uvodTxt' => sprintf(_('Work from %s to %s'), $redminer->getSince()->format('Y-m-d'), $redminer->getUntil()->format('Y-m-d')),
     ]);
-    $pricelister = new Cenik(\AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_CENIK')));
-
-    foreach (array_keys($projects) as $projectID) {
-        if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projects[$projectID]['identifier'] !== Shared::cfg('REDMINE_PROJECT')) {
-            continue;
-        }
-
-        if (strstr(Shared::cfg('REDMINE_SKIPLIST', ''), $projects[$projectID]['identifier'])) {
-            $redminer->addStatusMessage(sprintf(_('Skipping project in REDMINE_SKIPLIST: %s'), $projects[$projectID]['identifier']));
-
-            continue;
-        }
-
-        $items = $redminer->getProjectTimeEntries($projectID, $redminer->getSince(), $redminer->getUntil(), $workerID);
-
-        if (empty($items) === false) {
-            $report[$projectID] = $items;
-
-            // Sum hours from all items in this project
-            foreach ($items as $item) {
-                if (isset($item['hours'])) {
-                    $totalHours += (float) $item['hours'];
-                }
-            }
-
-            $invoicer->takeItemsFromArray($items);
-        }
-    }
 
     if (strtolower(Shared::cfg('ABRAFLEXI_SEND', 'false')) === 'true') {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');
     }
 
-    if ($invoicer->getSubItems()) {
-        $invoiceInfo = ' ⏱️ '.$totalHours.' '._('hours');
-        $invoicer->setDataValue('zavTxt', $invoiceInfo);
+    $pricelister = new Cenik(\AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_CENIK')));
 
-        $created = $invoicer->sync();
-        $report['message'] = ' 🧾 '.\AbraFlexi\Code::strip($invoicer->getRecordCode()).
-                ' 🗓️'.$redminer->getSince()->format('Y-m-d').
-                ' ⏯️ '.$redminer->getUntil()->format('Y-m-d').
-                ' ⏱️'.$totalHours.
-                ' 🤑 '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
+    $timeEntries = $redminer->getUserTimeEntries($workerID, $redminer->getSince(), $redminer->getUntil());
 
-        $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');
-    } else {
-        $report['message'] = _('Invoice Empty');
-        $invoicer->addStatusMessage($report['message'], 'success');
+    $invoiceData = [];
+    $projectHours = [];
+
+    foreach ($timeEntries as $timeEntry) {
+        $projectName = $timeEntry['project'];
+        $projectSlug = $timeEntry['project_slug'];
+        $issueName = $timeEntry['issue'];
+        $hours = $timeEntry['hours'];
+
+        if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projectSlug !== Shared::cfg('REDMINE_PROJECT')) {
+            continue;
+        }
+
+        if (strstr(Shared::cfg('REDMINE_SKIPLIST', ''), $projectSlug)) {
+            $redminer->addStatusMessage(sprintf(_('Skipping project in REDMINE_SKIPLIST: %s'), $projectSlug));
+
+            continue;
+        }
+
+        if (\array_key_exists($projectName, $invoiceData) === false) {
+            $invoiceData[$projectName] = [];
+        }
+
+        if (\array_key_exists($issueName, $invoiceData[$projectName]) === false) {
+            $invoiceData[$projectName][$issueName] = 0.0;
+        }
+
+        $invoiceData[$projectName][$issueName] += $hours;
+
+        if (\array_key_exists($projectName, $projectHours) === false) {
+            $projectHours[$projectName] = 0.0;
+        }
+
+        $projectHours[$projectName] += (float) $hours;
+
+        $totalHours += (float) $hours;
     }
 
-    // Add total hours and date range to the report
-    $report['total_hours'] = $totalHours;
-    $report['total_amount'] = $invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
-    $report['period'] = [
-        'since' => $redminer->getSince()->format('Y-m-d'),
-        'until' => $redminer->getUntil()->format('Y-m-d'),
-    ];
+    $invoicer->takeItemsFromArray($invoiceData, $projectHours);
 }
+
+if ($invoicer->getSubItems()) {
+    $report['issues'] = $invoiceData;
+    $report['projects'] = $projectHours;
+    $invoiceInfo = ' ⏱️ '.$totalHours.' '._('hours');
+    $invoicer->setDataValue('zavTxt', $invoiceInfo);
+
+    $created = $invoicer->sync();
+    $report['message'] = ' 🧾 '.\AbraFlexi\Code::strip($invoicer->getRecordCode()).
+            ' 🗓️ '.$redminer->getSince()->format('Y-m-d').
+            ' ⏯️ '.$redminer->getUntil()->format('Y-m-d').
+            ' ⏱️ '.$totalHours.
+            ' 🤑 '.$invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
+
+    $invoicer->addStatusMessage($report['message'], $created ? 'success' : 'error');
+} else {
+    $report['message'] = _('Invoice Empty');
+    $invoicer->addStatusMessage($report['message'], 'success');
+}
+
+// Add total hours and date range to the report
+$report['total_hours'] = $totalHours;
+$report['total_amount'] = $invoicer->getDataValue('sumCelkem').' '.\AbraFlexi\Code::strip((string) $invoicer->getDataValue('mena'));
+$report['period'] = [
+    'since' => $redminer->getSince()->format('Y-m-d'),
+    'until' => $redminer->getUntil()->format('Y-m-d'),
+];
 
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG', false) ? \JSON_PRETTY_PRINT : 0));
 $redminer->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');

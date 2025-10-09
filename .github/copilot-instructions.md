@@ -50,3 +50,13 @@ When create new class or update existing class, always create or update its phpu
 When writing code, always ensure that it is compatible with the latest version of the VitexSoftware libraries and follows their coding standards.
 
 When writing code, always ensure that it is properly documented, including inline comments where necessary to explain complex logic or important decisions.
+
+When developing or testing this application, always run the main script from the src/ directory:
+```bash
+cd src/
+php workhourstoinvoice.php
+```
+
+This ensures the relative paths (../vendor/autoload.php and ../.env) work correctly during development.
+
+The application uses relative paths intentionally - they are resolved during Debian packaging via sed commands in debian/rules file for production deployment.

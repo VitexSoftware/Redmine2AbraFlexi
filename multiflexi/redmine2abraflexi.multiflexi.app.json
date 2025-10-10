@@ -1,5 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.0.0",
     "name": {
         "en": "Redmine2AbraFlexi",
         "cs": "Redmine na AbraFlexi"
@@ -92,9 +93,13 @@
         },
         "ABRAFLEXI_SEND": {
             "type": "bool",
-            "description": "Send generated invoice by mail ?",
+            "description": {
+                "en": "Send generated invoice by mail ?",
+                "cs": "Odeslat generated invoice by e-mail ?"
+            },
             "defval": true,
-            "required": false
+            "required": false,
+            "category": "API"
         },
         "REDMINE_PASSWORD": {
             "type": "password",
@@ -187,17 +192,6 @@
             "required": false
         }
     },
-    "artifacts": [
-        {
-            "name": "Redmine2AbraFlexi JSON Report",
-            "path": "redmine2abraflexi_{REDMINE_PROJECT}.json",
-            "type": "file",
-            "description": {
-                "en": "JSON file containing invoice data generated from Redmine work hours.",
-                "cs": "JSON soubor obsahující data faktury generovaná z pracovních hodin Redmine."
-            }
-        }
-    ],
     "produces": {
         "invoice-json": {
             "description": {
@@ -219,5 +213,16 @@
             "required": true,
             "format": "json"
         }
-    }
+    },
+    "artifacts": [
+        {
+            "name": "Redmine2AbraFlexi JSON Report",
+            "path": "redmine2abraflexi_{REDMINE_PROJECT}.json",
+            "type": "file",
+            "description": {
+                "en": "JSON file containing invoice data generated from Redmine work hours.",
+                "cs": "JSON soubor obsahující data faktury generovaná z pracovních hodin Redmine."
+            }
+        }
+    ]
 }

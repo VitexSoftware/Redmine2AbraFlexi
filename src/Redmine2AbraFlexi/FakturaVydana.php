@@ -138,12 +138,11 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
             if (!\array_key_exists($projectName, $this->projectsIncluded)) {
                 $this->addArrayToBranch(
                     ['typPolozkyK' => 'typPolozky.text',
-                        'nazev' => 'Projekt: '.$projectName.'    '.count($projectData).' / '.$projectHours[$projectName].' h'],
+                        'nazev' => 'Projekt: '.$projectName.'    '.\count($projectData).' / '.$projectHours[$projectName].' h'],
                     'polozkyFaktury',
                 ); // Task Title as Heading/TextRow
                 $this->projectsIncluded[$projectName] = $projectName;
                 $this->addArrayToBranch(array_values($itemsData[$projectName]), 'polozkyFaktury');
-                
             }
         }
     }

@@ -60,3 +60,5 @@ php workhourstoinvoice.php
 This ensures the relative paths (../vendor/autoload.php and ../.env) work correctly during development.
 
 The application uses relative paths intentionally - they are resolved during Debian packaging via sed commands in debian/rules file for production deployment.
+
+After every single edit to a PHP file, always run `php -l` on the edited file to lint it and ensure code sanity before proceeding further. This is mandatory for all PHP code changes.

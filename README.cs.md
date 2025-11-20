@@ -81,3 +81,10 @@ See also:
 
  * https://github.com/VitexSoftware/Toggl-to-AbraFlexi
  * https://github.com/sizek-cz/Kimai2AbraFlexi
+
+## Exit Codes
+
+This application uses the following exit codes:
+
+- `0`: Success
+- `1`: General error

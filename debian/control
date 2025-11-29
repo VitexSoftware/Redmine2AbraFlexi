@@ -21,7 +21,7 @@ Description: It generates an invoice from the hours worked in Redmine
 Package: multiflexi-redmine2abraflexi
 Architecture: any
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${shlibs:Depends}, redmine2abraflexi, multiflexi
+Depends: ${misc:Depends}, ${shlibs:Depends}, redmine2abraflexi, multiflexi-cli
 Description: Install redmine2abraflexi to MultiFlexi
  Json definiton to add redmine2abraflexi into MultiFlexi
 

@@ -5,7 +5,7 @@ set -e
 . /usr/share/debconf/confmodule
 
 # Iterate over all json files inf usr/lib/redmine2abraflexi/multiflexi
-for file in /usr/lib/redmine2abraflexi/multiflexi/*.json
+for file in `ls /usr/lib/redmine2abraflexi/multiflexi/*.json`
 do
 	multiflexi-cli application import-json --file $file
 done

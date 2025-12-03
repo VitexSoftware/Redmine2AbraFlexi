@@ -1,246 +1,246 @@
 {
-    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-    "schemaVersion": "3.1.0",
-    "name": {
-        "en": "Redmine2AbraFlexi",
-        "cs": "Redmine na AbraFlexi"
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+  "schemaVersion": "3.2.1",
+  "name": {
+    "en": "Redmine2AbraFlexi",
+    "cs": "Redmine na AbraFlexi"
+  },
+  "description": {
+    "en": "Redmine WorkHours to AbraFlexi invoice",
+    "cs": "Převod pracovních hodin z Redmine do faktury AbraFlexi"
+  },
+  "executable": "redmine2abraflexi-invoice",
+  "environment": {
+    "APP_DEBUG": {
+      "type": "bool",
+      "category": "Behavior",
+      "description": {
+        "en": "Show debug messages",
+        "cs": "Zobrazit ladicí zprávy"
+      },
+      "defval": false,
+      "required": true
     },
-    "description": {
-        "en": "Redmine WorkHours to AbraFlexi invoice",
-        "cs": "Převod pracovních hodin z Redmine do faktury AbraFlexi"
+    "ABRAFLEXI_CENIK": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "Pricelist entry code",
+        "cs": "Kód položky ceníku"
+      },
+      "defval": "WORK",
+      "required": true
     },
-    "executable": "redmine2abraflexi-invoice",
-    "environment": {
-        "APP_DEBUG": {
-            "type": "bool",
-            "category": "Behavior",
-            "description": {
-                "en": "Show debug messages",
-                "cs": "Zobrazit ladicí zprávy"
-            },
-            "defval": false,
-            "required": true
-        },
-        "ABRAFLEXI_CENIK": {
-            "type": "string",
-            "category": "API",
-            "description": {
-                "en": "Pricelist entry code",
-                "cs": "Kód položky ceníku"
-            },
-            "defval": "WORK",
-            "required": true
-        },
-        "ABRAFLEXI_COMPANY": {
-            "type": "string",
-            "category": "API",
-            "description": {
-                "en": "AbraFlexi company identifier",
-                "cs": "Identifikátor společnosti AbraFlexi"
-            },
-            "defval": "demo_de",
-            "required": true
-        },
-        "ABRAFLEXI_CUSTOMER": {
-            "type": "string",
-            "category": "API",
-            "description": {
-                "en": "Addressbook entry code",
-                "cs": "Kód položky v adresáři"
-            },
-            "defval": "",
-            "required": true
-        },
-        "ABRAFLEXI_LOGIN": {
-            "type": "string",
-            "category": "API",
-            "description": {
-                "en": "AbraFlexi Login",
-                "cs": "Přihlašovací jméno do AbraFlexi"
-            },
-            "defval": "winstrom",
-            "required": true
-        },
-        "ABRAFLEXI_PASSWORD": {
-            "type": "password",
-            "category": "Security",
-            "description": {
-                "en": "AbraFlexi password",
-                "cs": "Heslo do AbraFlexi"
-            },
-            "defval": "winstrom",
-            "required": true
-        },
-        "ABRAFLEXI_TYP_FAKTURY": {
-            "type": "string",
-            "category": "Behavior",
-            "description": {
-                "en": "Type of invoice created",
-                "cs": "Typ vytvořené faktury"
-            },
-            "defval": "FAKTURA",
-            "required": true
-        },
-        "ABRAFLEXI_URL": {
-            "type": "url",
-            "category": "API",
-            "description": {
-                "en": "AbraFlexi Server URI",
-                "cs": "URI serveru AbraFlexi"
-            },
-            "defval": "https://demo.flexibee.eu:5434",
-            "required": true
-        },
-        "ABRAFLEXI_SEND": {
-            "type": "bool",
-            "description": {
-                "en": "Send generated invoice by mail ?",
-                "cs": "Odeslat generated invoice by e-mail ?"
-            },
-            "defval": true,
-            "required": false,
-            "category": "API"
-        },
-        "REDMINE_PASSWORD": {
-            "type": "password",
-            "category": "Security",
-            "description": {
-                "en": "Redmine password or API key",
-                "cs": "Heslo nebo API klíč Redmine"
-            },
-            "defval": "",
-            "required": true
-        },
-        "REDMINE_SCOPE": {
-            "type": "string",
-            "category": "Behavior",
-            "description": {
-                "en": "Scope of Redmine data to process",
-                "cs": "Rozsah dat Redmine ke zpracování"
-            },
-            "defval": "last_month",
-            "required": false
-        },
-        "REDMINE_URL": {
-            "type": "url",
-            "category": "API",
-            "description": {
-                "en": "Redmine base URL",
-                "cs": "Základní URL Redmine"
-            },
-            "defval": "",
-            "required": true
-        },
-        "REDMINE_USERNAME": {
-            "type": "string",
-            "category": "API",
-            "description": {
-                "en": "Redmine username",
-                "cs": "Uživatelské jméno Redmine"
-            },
-            "defval": "",
-            "required": true
-        },
-        "REDMINE_WORKER_MAIL": {
-            "type": "email",
-            "category": "API",
-            "description": {
-                "en": "Identify user who performed the work",
-                "cs": "Identifikace uživatele, který práci provedl"
-            },
-            "defval": "",
-            "required": true
-        },
-        "REDMINE_PROJECT": {
-            "type": "string",
-            "category": "Behavior",
-            "description": {
-                "en": "Process only this project",
-                "cs": "Zpracovat pouze tento projekt"
-            },
-            "defval": "",
-            "required": false
-        },
-        "RESULT_FILE": {
-            "type": "file-path",
-            "category": "Behavior",
-            "description": {
-                "en": "Write output JSON data to",
-                "cs": "Zapsat výstupní JSON data do"
-            },
-            "defval": "redmine2abraflexi_{REDMINE_PROJECT}.json",
-            "required": false
-        },
-        "ZABBIX_KEY": {
-            "type": "string",
-            "category": "Other",
-            "description": {
-                "en": "Default name for Zabbix Item key name",
-                "cs": "Výchozí název pro klíč položky Zabbix"
-            },
-            "defval": "redmine2abraflexi-{REDMINE_PROJECT}",
-            "required": false
-        },
-        "EASE_LOGGER": {
-            "type": "set",
-            "category": "Behavior",
-            "description": {
-                "en": "Write log messages using",
-                "cs": "Zapisovat logovací zprávy pomocí"
-            },
-            "defval": "console|syslog",
-            "required": false
-        }
+    "ABRAFLEXI_COMPANY": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "AbraFlexi company identifier",
+        "cs": "Identifikátor společnosti AbraFlexi"
+      },
+      "defval": "demo_de",
+      "required": true
     },
-    "produces": {
-        "invoice-json": {
-            "description": {
-                "en": "Generated invoice in JSON format",
-                "cs": "Generovaná faktura ve formátu JSON"
-            },
-            "patterns": [
-                "*.json"
-            ],
-            "format": "json"
-        }
+    "ABRAFLEXI_CUSTOMER": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "Addressbook entry code",
+        "cs": "Kód položky v adresáři"
+      },
+      "defval": "",
+      "required": true
     },
-    "consumes": {
-        "redmine-data": {
-            "description": {
-                "en": "Redmine work hours data",
-                "cs": "Data pracovních hodin z Redmine"
-            },
-            "required": true,
-            "format": "json"
-        }
+    "ABRAFLEXI_LOGIN": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "AbraFlexi Login",
+        "cs": "Přihlašovací jméno do AbraFlexi"
+      },
+      "defval": "winstrom",
+      "required": true
     },
-    "artifacts": [
-        {
-            "name": "Redmine2AbraFlexi JSON Report",
-            "path": "redmine2abraflexi_{REDMINE_PROJECT}.json",
-            "type": "file",
-            "description": {
-                "en": "JSON file containing invoice data generated from Redmine work hours.",
-                "cs": "JSON soubor obsahující data faktury generovaná z pracovních hodin Redmine."
-            }
-        }
-    ],
-    "exitCodes": {
-        "0": {
-            "description": {
-                "en": "Success",
-                "cs": "Úspěch"
-            },
-            "severity": "success",
-            "retry": false
-        },
-        "1": {
-            "description": {
-                "en": "General error",
-                "cs": "Obecná chyba"
-            },
-            "severity": "error",
-            "retry": true
-        }
+    "ABRAFLEXI_PASSWORD": {
+      "type": "password",
+      "category": "Security",
+      "description": {
+        "en": "AbraFlexi password",
+        "cs": "Heslo do AbraFlexi"
+      },
+      "defval": "winstrom",
+      "required": true
+    },
+    "ABRAFLEXI_TYP_FAKTURY": {
+      "type": "string",
+      "category": "Behavior",
+      "description": {
+        "en": "Type of invoice created",
+        "cs": "Typ vytvořené faktury"
+      },
+      "defval": "FAKTURA",
+      "required": true
+    },
+    "ABRAFLEXI_URL": {
+      "type": "url",
+      "category": "API",
+      "description": {
+        "en": "AbraFlexi Server URI",
+        "cs": "URI serveru AbraFlexi"
+      },
+      "defval": "https://demo.flexibee.eu:5434",
+      "required": true
+    },
+    "ABRAFLEXI_SEND": {
+      "type": "bool",
+      "description": {
+        "en": "Send generated invoice by mail ?",
+        "cs": "Odeslat generated invoice by e-mail ?"
+      },
+      "defval": true,
+      "required": false,
+      "category": "API"
+    },
+    "REDMINE_PASSWORD": {
+      "type": "password",
+      "category": "Security",
+      "description": {
+        "en": "Redmine password or API key",
+        "cs": "Heslo nebo API klíč Redmine"
+      },
+      "defval": "",
+      "required": true
+    },
+    "REDMINE_SCOPE": {
+      "type": "string",
+      "category": "Behavior",
+      "description": {
+        "en": "Scope of Redmine data to process",
+        "cs": "Rozsah dat Redmine ke zpracování"
+      },
+      "defval": "last_month",
+      "required": false
+    },
+    "REDMINE_URL": {
+      "type": "url",
+      "category": "API",
+      "description": {
+        "en": "Redmine base URL",
+        "cs": "Základní URL Redmine"
+      },
+      "defval": "",
+      "required": true
+    },
+    "REDMINE_USERNAME": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "Redmine username",
+        "cs": "Uživatelské jméno Redmine"
+      },
+      "defval": "",
+      "required": true
+    },
+    "REDMINE_WORKER_MAIL": {
+      "type": "email",
+      "category": "API",
+      "description": {
+        "en": "Identify user who performed the work",
+        "cs": "Identifikace uživatele, který práci provedl"
+      },
+      "defval": "",
+      "required": true
+    },
+    "REDMINE_PROJECT": {
+      "type": "string",
+      "category": "Behavior",
+      "description": {
+        "en": "Process only this project",
+        "cs": "Zpracovat pouze tento projekt"
+      },
+      "defval": "",
+      "required": false
+    },
+    "RESULT_FILE": {
+      "type": "file-path",
+      "category": "Behavior",
+      "description": {
+        "en": "Write output JSON data to",
+        "cs": "Zapsat výstupní JSON data do"
+      },
+      "defval": "redmine2abraflexi_{REDMINE_PROJECT}.json",
+      "required": false
+    },
+    "ZABBIX_KEY": {
+      "type": "string",
+      "category": "Other",
+      "description": {
+        "en": "Default name for Zabbix Item key name",
+        "cs": "Výchozí název pro klíč položky Zabbix"
+      },
+      "defval": "redmine2abraflexi-{REDMINE_PROJECT}",
+      "required": false
+    },
+    "EASE_LOGGER": {
+      "type": "set",
+      "category": "Behavior",
+      "description": {
+        "en": "Write log messages using",
+        "cs": "Zapisovat logovací zprávy pomocí"
+      },
+      "defval": "console|syslog",
+      "required": false
     }
+  },
+  "produces": {
+    "invoice-json": {
+      "description": {
+        "en": "Generated invoice in JSON format",
+        "cs": "Generovaná faktura ve formátu JSON"
+      },
+      "patterns": [
+        "*.json"
+      ],
+      "format": "json"
+    }
+  },
+  "consumes": {
+    "redmine-data": {
+      "description": {
+        "en": "Redmine work hours data",
+        "cs": "Data pracovních hodin z Redmine"
+      },
+      "required": true,
+      "format": "json"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "Redmine2AbraFlexi JSON Report",
+      "path": "redmine2abraflexi_{REDMINE_PROJECT}.json",
+      "type": "file",
+      "description": {
+        "en": "JSON file containing invoice data generated from Redmine work hours.",
+        "cs": "JSON soubor obsahující data faktury generovaná z pracovních hodin Redmine."
+      }
+    }
+  ],
+  "exitCodes": {
+    "0": {
+      "description": {
+        "en": "Success",
+        "cs": "Úspěch"
+      },
+      "severity": "success",
+      "retry": false
+    },
+    "1": {
+      "description": {
+        "en": "General error",
+        "cs": "Obecná chyba"
+      },
+      "severity": "error",
+      "retry": true
+    }
+  }
 }

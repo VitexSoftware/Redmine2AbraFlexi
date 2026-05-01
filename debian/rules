@@ -5,6 +5,9 @@
 #export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
+PKG_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/~.*//')
+PKG_SOURCE  := $(shell jq -r '.name' composer.json)
+
 %:
 	dh $@ --with phpcomposer
 
@@ -18,8 +21,12 @@ override_dh_prep:
 override_dh_install:
 	dh_install
 	install -D -m 0644 debian/autoload.php debian/redmine2abraflexi/usr/share/php/redmine2abraflexi/autoload.php
+	sed -i "1a defined('APP_NAME') || define('APP_NAME', '$(PKG_SOURCE)');" debian/redmine2abraflexi/usr/share/php/redmine2abraflexi/autoload.php
+	sed -i "s|'unknown'|'$(PKG_SOURCE)'|" debian/redmine2abraflexi/usr/share/php/redmine2abraflexi/autoload.php
+	sed -i "s|'0.0.0'|'$(PKG_VERSION)'|" debian/redmine2abraflexi/usr/share/php/redmine2abraflexi/autoload.php
+	sed -i "2a defined('APP_VERSION') || define('APP_VERSION', '$(PKG_VERSION)');" debian/redmine2abraflexi/usr/share/php/redmine2abraflexi/autoload.php
 	sed -i -e 's/..\/..\/i18n/\/usr\/share\/locale/g'            	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
-	sed -i -e 's/..\/..\/vendor/\/usr\/share\/php\/redmine2abraflexi/g' 	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
+	sed -i -e "s|require_once '../vendor/autoload.php';|require_once '/usr/share/php/redmine2abraflexi/autoload.php';|g" 	      debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
 	sed -i -e 's/\..\/\.env//g'                                  debian/redmine2abraflexi/usr/share/redmine2abraflexi/*.php
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/redmine2abraflexi/usr/lib/redmine2abraflexi/composer.json
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  composer.json |sponge debian/redmine2abraflexi/usr/lib/redmine2abraflexi/composer.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/multiflexi-redmine2abraflexi/usr/lib/redmine2abraflexi/multiflexi/redmine2abraflexi.multiflexi.app.json | sponge debian/multiflexi-redmine2abraflexi/usr/lib/redmine2abraflexi/multiflexi/redmine2abraflexi.multiflexi.app.json

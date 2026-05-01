@@ -2,7 +2,7 @@ Source: redmine2abraflexi
 Section: office
 Priority: optional
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
-Build-Depends: debhelper-compat (= 13), jq, moreutils
+Build-Depends: debhelper-compat (= 13), jq, moreutils, pkg-php-tools
 Standards-Version: 4.5.1
 Homepage: https://github.com/VitexSoftware/Redmine2AbraFlexi
 Rules-Requires-Root: no
@@ -12,7 +12,7 @@ Rules-Requires-Root: no
 Package: redmine2abraflexi
 Architecture: any
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${shlibs:Depends}, php-spojenet-abraflexi (>=3.6), php-cli, php-gd, locales-all 
+Depends: ${misc:Depends}, ${shlibs:Depends}, php-spojenet-abraflexi (>=3.6), php-cli, php-gd, locales-all, composer
 Suggests: abraflexi-server, multiflexi, abraflexi-client-config
 Description: It generates an invoice from the hours worked in Redmine
  Commandline tool that generates an invoice in AbraFlexi from the 

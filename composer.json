@@ -1,34 +1,32 @@
 {
-    "name": "vitexsoftware/redmine-to-abraflexi",
-    "description": "Ve AbraFlexi vytvoří fakturu z Hodn odpracovaných ve AbraFlexi",
-    "authors": [
-        {
-            "name": "Vitex",
-            "email": "info@vitexsoftware.cz"
-        }
-    ],
-    "minimum-stability": "stable",
-    "autoload": {
-        "psr-4": {
-            "Redmine2AbraFlexi\\": "src/Redmine2AbraFlexi/",
-            "Test\\Redmine2AbraFlexi\\": "testing/src/Redmine2AbraFlexi/"
-        }
-    },
-
-    "require": {
-        "spojenet/flexibee": "^3.7"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*",
-        "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.92",
-        "ergebnis/composer-normalize": "^2.48",
-        "ergebnis/php-cs-fixer-config": "^6.58"
-    },
-    "config": {
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true
-        }
+  "name": "vitexsoftware/redmine-to-abraflexi",
+  "description": "Ve AbraFlexi vytvoří fakturu z Hodn odpracovaných ve AbraFlexi",
+  "authors": [
+    {
+      "name": "Vitex",
+      "email": "info@vitexsoftware.cz"
     }
-
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "Redmine2AbraFlexi\\": "src/Redmine2AbraFlexi/",
+      "Test\\Redmine2AbraFlexi\\": "testing/src/Redmine2AbraFlexi/"
+    }
+  },
+  "require": {
+    "spojenet/flexibee": "^3.7"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "phpstan/phpstan": "*",
+    "friendsofphp/php-cs-fixer": "^3.92",
+    "ergebnis/composer-normalize": "^2.48",
+    "ergebnis/php-cs-fixer-config": "^6.58"
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
+  }
 }

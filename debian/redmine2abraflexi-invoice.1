@@ -1,0 +1,21 @@
+.TH REDMINE2ABRAFLEXI-INVOICE 1 "2026-05-01" "Redmine2AbraFlexi 2.0" "User Commands"
+.SH NAME
+redmine2abraflexi-invoice \- Generate AbraFlexi invoice from Redmine workhours
+.SH SYNOPSIS
+.B redmine2abraflexi-invoice
+[\fB\-o\fR \fIfilename\fR | \fB\-\-output\fR=\fIfilename\fR]
+[\fB\-e\fR \fIfilename\fR | \fB\-\-environment\fR=\fIfilename\fR]
+.SH DESCRIPTION
+.B redmine2abraflexi-invoice
+is a command-line tool that generates an invoice in AbraFlexi from the hours worked in Redmine.
+.SH OPTIONS
+.TP
+\fB\-o\fR \fIfilename\fR, \fB\-\-output\fR=\fIfilename\fR
+Write the result to the specified file (or stdout if omitted).
+.TP
+\fB\-e\fR \fIfilename\fR, \fB\-\-environment\fR=\fIfilename\fR
+Load environment configuration from the specified file. Defaults to \fB.env\fR.
+.SH SEE ALSO
+The source code and documentation are available at <https://github.com/VitexSoftware/Redmine2AbraFlexi>.
+.SH AUTHOR
+Vítězslav Dvořák <info@vitexsoftware.cz>

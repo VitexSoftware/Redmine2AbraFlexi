@@ -13,11 +13,18 @@
       Commandline tool that generates an invoice in AbraFlexi from the hours worked in Redmine.
     </p>
   </description>
+
+  <url type="homepage">https://github.com/VitexSoftware/Redmine2AbraFlexi</url>
+  
+  <developer id="cz.vitexsoftware">
+    <name>Vitex Software</name>
+  </developer>
+  
+  <content_rating type="oars-1.1"/>
   
   <icon type="stock">redmine2abraflexi</icon>
   <categories>
     <category>Office</category>
-    <category>Adult</category>
   </categories>
   
   <provides>

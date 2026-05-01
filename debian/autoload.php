@@ -7,7 +7,7 @@ require_once '/usr/share/php/AbraFlexi/autoload.php';
 // PSR-4 autoloader for application classes
 spl_autoload_register(function (string $class): void {
     $prefixes = [
-        'Redmine2AbraFlexi\\' => '/usr/share/redmine2abraflexi/src/Redmine2AbraFlexi/',
+        'Redmine2AbraFlexi\\' => '/usr/lib/redmine2abraflexi/Redmine2AbraFlexi/',
     ];
     foreach ($prefixes as $prefix => $baseDir) {
         $len = strlen($prefix);

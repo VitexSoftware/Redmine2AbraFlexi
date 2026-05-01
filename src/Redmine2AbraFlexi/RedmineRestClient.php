@@ -25,6 +25,10 @@ class RedmineRestClient extends \AbraFlexi\RO
     use \Ease\datescope;
     public \DateTime $redmineSince;
     public \DateTime $redmineUntil;
+
+    /**
+     * @var array<string, mixed>
+     */
     public array $defaultUrlParams = ['limit' => 500];
 
     /**
@@ -185,6 +189,7 @@ class RedmineRestClient extends \AbraFlexi\RO
      */
     public function getUserTimeEntries(int $userId, \DateTime $start, \DateTime $end): array
     {
+        $response = [];
         $timeEntriesRaw = $this->performRequest(
             'time_entries.json?spent_on='.urlencode('><'.$start->format('Y-m-d').'|'.$end->format('Y-m-d')).'&user_id='.$userId,
             'GET',

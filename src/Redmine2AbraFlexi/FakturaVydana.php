@@ -30,13 +30,6 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
     public $myTable;
 
     /**
-     * List of itemsIncluded.
-     *
-     * @var array<int>
-     */
-    private array $itemsIncluded = [];
-
-    /**
      * List of projectsIncluded.
      *
      * @var array<int>
@@ -118,6 +111,10 @@ class FakturaVydana extends \AbraFlexi\FakturaVydana
         return substr($string, 1, -1);
     }
 
+    /**
+     * @param array<string, array<int|string, float>> $timeEntries
+     * @param array<string, float>                    $projectHours
+     */
     public function takeItemsFromArray(array $timeEntries, array $projectHours): void
     {
         $itemsData = [];

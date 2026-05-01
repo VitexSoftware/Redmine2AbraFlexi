@@ -88,6 +88,10 @@ if (null === $workerID) {
 $redminer->setScope(Shared::cfg('REDMINE_SCOPE'));
 $projects = $redminer->getProjects(['limit' => 1000]); // since redmine 3.4.0
 
+$invoicer = null;
+$invoiceData = [];
+$projectHours = [];
+
 if (empty($projects)) {
     $report['message'] = _('No projects found');
     $redminer->addStatusMessage($report['message'], 'error');
@@ -148,7 +152,7 @@ if (empty($projects)) {
     $invoicer->takeItemsFromArray($invoiceData, $projectHours);
 }
 
-if ($invoicer->getSubItems()) {
+if ($invoicer !== null && $invoicer->getSubItems()) {
     $report['issues'] = $invoiceData;
     $report['projects'] = $projectHours;
     $invoiceInfo = ' ⏱️ '.$totalHours.' '._('hours');

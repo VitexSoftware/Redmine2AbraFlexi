@@ -1,8 +1,9 @@
-redmine2abraflexi (2.0.0) UNRELEASED; urgency=medium
+redmine2abraflexi (2.0.1) UNRELEASED; urgency=medium
 
   * Redmine Querying simplified
+  * Bump version
 
- -- vitex <info@vitexsoftware.cz>  Thu, 09 Oct 2025 20:13:18 +0200
+ -- vitex <info@vitexsoftware.cz>  Fri, 01 May 2026 18:41:06 +0200
 
 redmine2abraflexi (1.3.0) unstable; urgency=medium
 

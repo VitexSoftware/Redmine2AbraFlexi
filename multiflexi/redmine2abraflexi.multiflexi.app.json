@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
   "schemaVersion": "3.2.1",
+  "uuid": "0f667a75-6c60-46c0-a1a8-9bc35b21a396",
   "name": {
     "en": "Redmine2AbraFlexi",
     "cs": "Redmine na AbraFlexi"

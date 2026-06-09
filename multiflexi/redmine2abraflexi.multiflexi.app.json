@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-  "schemaVersion": "3.2.1",
+  "schemaVersion": "3.4.0",
   "uuid": "0f667a75-6c60-46c0-a1a8-9bc35b21a396",
   "name": {
     "en": "Redmine2AbraFlexi",
@@ -11,6 +11,15 @@
     "cs": "Převod pracovních hodin z Redmine do faktury AbraFlexi"
   },
   "executable": "redmine2abraflexi-invoice",
+  "events": {
+    "emits": {
+      "invoice.issued": {
+        "description": "An issued invoice was created",
+        "evidence": "faktura-vydana",
+        "operation": "create"
+      }
+    }
+  },
   "environment": {
     "APP_DEBUG": {
       "type": "bool",

@@ -96,12 +96,25 @@ if (empty($projects)) {
     $report['message'] = _('No projects found');
     $redminer->addStatusMessage($report['message'], 'error');
 } else {
-    $invoicer = new FakturaVydana([
+    $invoiceInit = [
         'typDokl' => \AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_TYP_FAKTURY', 'FAKTURA')),
         'firma' => \AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_CUSTOMER')),
         'popis' => sprintf(_('Work from %s to %s'), $redminer->getSince()->format('Y-m-d'), $redminer->getUntil()->format('Y-m-d')),
         'uvodTxt' => sprintf(_('Work from %s to %s'), $redminer->getSince()->format('Y-m-d'), $redminer->getUntil()->format('Y-m-d')),
-    ]);
+    ];
+
+    $invoiceCurrency = Shared::cfg('ABRAFLEXI_CURRENCY', '');
+
+    if ($invoiceCurrency !== '') {
+        $invoiceInit['mena'] = \AbraFlexi\Code::ensure($invoiceCurrency);
+        $invoiceRate = Shared::cfg('ABRAFLEXI_RATE', '');
+
+        if ($invoiceRate !== '') {
+            $invoiceInit['kurz'] = (float) $invoiceRate;
+        }
+    }
+
+    $invoicer = new FakturaVydana($invoiceInit);
 
     if (strtolower(Shared::cfg('ABRAFLEXI_SEND', 'false')) === 'true') {
         $invoicer->setDataValue('stavMailK', 'stavMail.odeslat');

@@ -41,6 +41,26 @@
       "defval": "WORK",
       "required": true
     },
+    "ABRAFLEXI_CURRENCY": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "Invoice currency code (empty = company default)",
+        "cs": "Měna faktury (prázdné = výchozí měna společnosti)"
+      },
+      "defval": "",
+      "required": false
+    },
+    "ABRAFLEXI_RATE": {
+      "type": "string",
+      "category": "API",
+      "description": {
+        "en": "Manual exchange rate for ABRAFLEXI_CURRENCY (empty = use AbraFlexi's current rate)",
+        "cs": "Ruční kurz pro ABRAFLEXI_CURRENCY (prázdné = použije se aktuální kurz AbraFlexi)"
+      },
+      "defval": "",
+      "required": false
+    },
     "ABRAFLEXI_COMPANY": {
       "type": "string",
       "category": "API",

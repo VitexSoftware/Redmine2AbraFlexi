@@ -4,13 +4,17 @@
   
   <name>Redmine to Abraflexi</name>
   <summary>It generates an invoice from the hours worked in Redmine</summary>
-  
+  <summary xml:lang="cs">Generuje fakturu z odpracovaných hodin v Redmine</summary>
+
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
-  
+
   <description>
     <p>
       Commandline tool that generates an invoice in AbraFlexi from the hours worked in Redmine.
+    </p>
+    <p xml:lang="cs">
+      Nástroj pro příkazovou řádku, který vygeneruje fakturu v AbraFlexi z odpracovaných hodin v Redmine.
     </p>
   </description>
 

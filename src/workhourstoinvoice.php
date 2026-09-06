@@ -63,7 +63,9 @@ $report = [
 ];
 $totalHours = 0.0;
 $exitcode = 0;
-$workerID = null;
+
+$workerMails = array_filter(array_map('trim', explode(',', Shared::cfg('REDMINE_WORKER_MAIL'))));
+$workerIDs = [];
 
 foreach ($redminer->getUsers() as $user) {
     if ($user === 404) {
@@ -72,15 +74,15 @@ foreach ($redminer->getUsers() as $user) {
         exit(1);
     }
 
-    if (\array_key_exists('mail', $user) && $user['mail'] === Shared::cfg('REDMINE_WORKER_MAIL')) {
-        $workerID = (int) $user['id'];
-
-        break;
+    if (\array_key_exists('mail', $user) && \in_array($user['mail'], $workerMails, true)) {
+        $workerIDs[$user['mail']] = (int) $user['id'];
     }
 }
 
-if (null === $workerID) {
-    $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), Shared::cfg('REDMINE_WORKER_MAIL')), 'error');
+$missingWorkerMails = array_diff($workerMails, array_keys($workerIDs));
+
+if (\count($missingWorkerMails)) {
+    $redminer->addStatusMessage(sprintf(_('Worker email %s not found in redmine'), implode(', ', $missingWorkerMails)), 'error');
 
     exit(1);
 }
@@ -122,44 +124,46 @@ if (empty($projects)) {
 
     $pricelister = new Cenik(\AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_CENIK')));
 
-    $timeEntries = $redminer->getUserTimeEntries($workerID, $redminer->getSince(), $redminer->getUntil());
-
     $invoiceData = [];
     $projectHours = [];
 
-    foreach ($timeEntries as $timeEntry) {
-        $projectName = $timeEntry['project'];
-        $projectSlug = $timeEntry['project_slug'];
-        $issueName = $timeEntry['issue'];
-        $hours = $timeEntry['hours'];
+    foreach ($workerIDs as $workerID) {
+        $timeEntries = $redminer->getUserTimeEntries($workerID, $redminer->getSince(), $redminer->getUntil());
 
-        if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projectSlug !== Shared::cfg('REDMINE_PROJECT')) {
-            continue;
+        foreach ($timeEntries as $timeEntry) {
+            $projectName = $timeEntry['project'];
+            $projectSlug = $timeEntry['project_slug'];
+            $issueName = $timeEntry['issue'];
+            $hours = $timeEntry['hours'];
+
+            if (\strlen(Shared::cfg('REDMINE_PROJECT', '')) && $projectSlug !== Shared::cfg('REDMINE_PROJECT')) {
+                continue;
+            }
+
+            if (strstr(Shared::cfg('REDMINE_SKIPLIST', ''), $projectSlug)) {
+                $redminer->addStatusMessage(sprintf(_('Skipping project in REDMINE_SKIPLIST: %s'), $projectSlug));
+
+                continue;
+            }
+
+            if (\array_key_exists($projectName, $invoiceData) === false) {
+                $invoiceData[$projectName] = [];
+            }
+
+            if (\array_key_exists($issueName, $invoiceData[$projectName]) === false) {
+                $invoiceData[$projectName][$issueName] = 0.0;
+            }
+
+            $invoiceData[$projectName][$issueName] += $hours;
+
+            if (\array_key_exists($projectName, $projectHours) === false) {
+                $projectHours[$projectName] = 0.0;
+            }
+
+            $projectHours[$projectName] += (float) $hours;
+
+            $totalHours += (float) $hours;
         }
-
-        if (strstr(Shared::cfg('REDMINE_SKIPLIST', ''), $projectSlug)) {
-            $redminer->addStatusMessage(sprintf(_('Skipping project in REDMINE_SKIPLIST: %s'), $projectSlug));
-
-            continue;
-        }
-
-        if (\array_key_exists($projectName, $invoiceData) === false) {
-            $invoiceData[$projectName] = [];
-        }
-
-        if (\array_key_exists($issueName, $invoiceData[$projectName]) === false) {
-            $invoiceData[$projectName][$issueName] = 0.0;
-        }
-
-        $invoiceData[$projectName][$issueName] += $hours;
-
-        if (\array_key_exists($projectName, $projectHours) === false) {
-            $projectHours[$projectName] = 0.0;
-        }
-
-        $projectHours[$projectName] += (float) $hours;
-
-        $totalHours += (float) $hours;
     }
 
     $invoicer->takeItemsFromArray($invoiceData, $projectHours);

@@ -172,11 +172,11 @@
       "required": true
     },
     "REDMINE_WORKER_MAIL": {
-      "type": "email",
+      "type": "string",
       "category": "API",
       "description": {
-        "en": "Identify user who performed the work",
-        "cs": "Identifikace uživatele, který práci provedl"
+        "en": "Email(s) of the user(s) who performed the work; comma-separated for multiple users (their hours are summed into one invoice)",
+        "cs": "E-mail(y) uživatele(ů), kteří práci provedli; při více uživatelích oddělte čárkou (jejich hodiny se sečtou do jedné faktury)"
       },
       "defval": "",
       "required": true

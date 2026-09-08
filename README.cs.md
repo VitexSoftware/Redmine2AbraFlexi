@@ -5,6 +5,11 @@ Redmine to AbraFlexi importer
 
 Z odpracovaných hodin v Redmine vygeneruje fakturu ve AbraFlexi.
 
+[![wakatime](https://wakatime.com/badge/github/VitexSoftware/Redmine2AbraFlexi.svg)](https://wakatime.com/badge/github/VitexSoftware/Redmine2AbraFlexi)
+[![Docker](https://github.com/VitexSoftware/Redmine2AbraFlexi/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/VitexSoftware/Redmine2AbraFlexi/actions/workflows/docker-publish.yml)
+![Packaging: deb](https://img.shields.io/badge/packaging-.deb-red?logo=debian&logoColor=white)
+
+
 Nastavení
 ---------
 

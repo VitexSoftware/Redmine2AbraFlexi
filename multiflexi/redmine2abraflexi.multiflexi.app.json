@@ -11,6 +11,13 @@
     "cs": "Převod pracovních hodin z Redmine do faktury AbraFlexi"
   },
   "executable": "redmine2abraflexi-invoice",
+  "tags": [
+    "Redmine",
+    "AbraFlexi",
+    "Importer",
+    "Invoice",
+    "Generator"
+  ],
   "events": {
     "emits": {
       "invoice.issued": {
